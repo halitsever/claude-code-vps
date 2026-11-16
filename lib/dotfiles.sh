@@ -6,12 +6,27 @@ STORE=$REPO_DIR/dotfiles/home
 SEED=$REPO_DIR/dotfiles/seed
 # Present on machines that publish config. apply would roll their live settings back.
 SOURCE_MARK=$HOME/.config/claude-vps/source
+# Per-machine list of home paths that apply never touches, for settings that must not reach the public repo.
+LOCAL_ONLY=$HOME/.config/claude-vps/local-only
 PLUGINS=$REPO_DIR/dotfiles/plugins.txt
 INSTALLED_PLUGINS=$HOME/.claude/plugins/installed_plugins.json
 # Skills you wrote yourself live in other marketplaces or sync from claude.ai, so they stay out.
 PUBLIC_MARKETPLACES='anthropic-plugin-directory|claude-plugins-official'
 
 is_text() { [[ ! -s $1 ]] || grep -Iq . "$1"; }
+
+# A listed path matches itself, and with a trailing slash everything under it.
+is_local_only() {
+  local rel=$1 entry
+  [[ -f $LOCAL_ONLY ]] || return 1
+  while IFS= read -r entry; do
+    entry=${entry%%#*}
+    entry=${entry//[[:space:]]/}
+    [[ -n $entry ]] || continue
+    [[ $rel == "$entry" || ($entry == */ && $rel == "$entry"*) ]] && return 0
+  done <"$LOCAL_ONLY"
+  return 1
+}
 
 manifest_paths() {
   grep -vE '^\s*(#|$)' "$MANIFEST" | sed 's/[[:space:]]*$//'
@@ -143,6 +158,10 @@ cmd_apply() {
   while IFS= read -r -d '' f; do
     rel=${f#"$STORE"/}
     target=$HOME/$rel
+    if is_local_only "$rel"; then
+      info "kept local $rel"
+      continue
+    fi
     render "$f" >"$tmp"
     [[ -f $target ]] && cmp -s "$tmp" "$target" && continue
     if [[ -f $target ]]; then
