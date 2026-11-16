@@ -6,7 +6,7 @@ declare -A STEP_DESC=(
   [base]="System update, core packages, swap, unattended upgrades"
   [user]="Sudo user with your SSH keys"
   [ssh]="Key-only SSH, no root password login"
-  [firewall]="ufw with SSH and RDP open"
+  [firewall]="ufw with SSH and RDP open, or Tailscale only"
   [desktop]="KDE Plasma (X11 session), no display manager"
   [rdp]="xrdp on a custom port, starting Plasma"
   [apps]="Docker, Google Chrome, GitHub CLI"
@@ -168,6 +168,13 @@ step_ssh() {
 
 step_firewall() {
   apt_install ufw
+  # `update` re-runs this step, so a server moved to Tailscale must not get its public ports back.
+  if [[ $FIREWALL == tailscale ]]; then
+    run ufw allow in on tailscale0
+    run ufw --force enable
+    ok "firewall on, SSH and RDP over Tailscale only"
+    return
+  fi
   run ufw allow OpenSSH
   if [[ $RDP_PUBLIC == 1 ]]; then
     run ufw allow "$RDP_PORT/tcp" comment 'xrdp'
