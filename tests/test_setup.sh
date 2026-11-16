@@ -26,3 +26,17 @@ test_conf_roundtrip_keeps_firewall() {
   . "$SETUP_CONF"
   assert_eq "$FIREWALL" tailscale
 }
+
+test_summary_shows_tailnet_ip_when_locked_down() {
+  stub curl 'echo 188.132.232.187'
+  stub tailscale '[[ $1 == ip ]] && echo 100.121.162.28'
+  FIREWALL=tailscale TARGET_USER=dev RDP_PORT=53389
+  assert_ok grep -q 'ssh dev@100.121.162.28' <(summary)
+  assert_fail grep -q 188.132.232.187 <(summary)
+}
+
+test_summary_shows_public_ip_by_default() {
+  stub curl 'echo 188.132.232.187'
+  FIREWALL=public TARGET_USER=dev RDP_PORT=53389
+  assert_ok grep -q 'ssh dev@188.132.232.187' <(summary)
+}

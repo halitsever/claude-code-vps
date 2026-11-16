@@ -321,7 +321,11 @@ step_dotfiles() {
 
 summary() {
   local ip
-  ip=$(curl -fsS -m 4 https://api.ipify.org 2>/dev/null || hostname -I | awk '{print $1}')
+  if [[ $FIREWALL == tailscale ]]; then
+    ip=$(tailscale ip -4 2>/dev/null | head -n1)
+  else
+    ip=$(curl -fsS -m 4 https://api.ipify.org 2>/dev/null || hostname -I | awk '{print $1}')
+  fi
   printf '\n%s%s  Done.%s\n\n' "$C_BOLD" "$C_ACCENT" "$C_RESET"
   printf '  SSH        ssh %s@%s\n' "$TARGET_USER" "$ip"
   printf '  Desktop    RDP to %s:%s as %s\n' "$ip" "$RDP_PORT" "$TARGET_USER"
@@ -381,6 +385,7 @@ Usage: sudo claude-vps setup [options]
   -u, --user NAME        workstation user (default: \$SUDO_USER or asks)
       --rdp-port PORT    xrdp port (default: 53389)
       --rdp-private      keep the RDP port closed, use an SSH tunnel
+                         (Tailscale is offered at the end, or later: sudo claude-vps tailscale)
       --ntfy-topic NAME  ntfy.sh topic for "Claude is waiting" pushes
       --timezone TZ      e.g. Europe/Istanbul
       --no-desktop       skip KDE and xrdp, terminal only

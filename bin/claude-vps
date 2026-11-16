@@ -35,6 +35,11 @@ cmd_doctor() {
   check "xrdp running" systemctl is-active --quiet xrdp
   check "plasma X11 session" has startplasma-x11
   check "ufw active" bash -c 'systemctl is-active --quiet ufw'
+  check "tailscale up" tailscale status
+  local firewall=public
+  # shellcheck disable=SC1090
+  [[ -r $SETUP_CONF ]] && firewall=$(. "$SETUP_CONF" && echo "${FIREWALL:-public}")
+  [[ $firewall == tailscale ]] && info "SSH and RDP: Tailscale only, closed to the internet"
   check "~/.xsession starts Plasma" grep -q startplasma "$HOME/.xsession"
   check "ntfy topic set" test -s "$HOME/.claude/ntfy-topic"
   check "autosync timer" systemctl --user is-active --quiet claude-vps-sync.timer
