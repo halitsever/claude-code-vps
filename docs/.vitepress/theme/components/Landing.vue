@@ -295,7 +295,7 @@ onBeforeUnmount(() => {
 </script>
 
 <template>
-  <div class="lx" :class="{ 'is-light': !isDark }">
+  <div class="lx">
     <!-- Hero -->
     <section class="lx-hero">
       <AuroraCanvas class="lx-aurora" :dark="isDark" />
