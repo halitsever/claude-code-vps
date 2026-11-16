@@ -1,30 +1,30 @@
 ---
-title: "Claude Code'u VPS'te çalıştırma rehberi"
-description: "Claude Code'u Ubuntu VPS'te adım adım kurma rehberi. Güvenli SSH, hiç kapanmayan tmux oturumları, telefon bildirimleri ve RDP ile KDE Plasma masaüstü."
+title: "Claude Code VPS'te nasıl çalıştırılır"
+description: "Claude Code'u Ubuntu VPS'te adım adım çalıştırma rehberi: güvenli SSH, kapanmayan tmux oturumları, telefon bildirimleri ve RDP ile KDE Plasma masaüstü."
 ---
 
-# Claude Code'u VPS'te çalıştırma rehberi
+# Claude Code VPS'te nasıl çalıştırılır
 
-Bu, kendi kurulumumun elle yapılan tam hali: Claude Code'u 7/24 çalıştıran ucuz bir Ubuntu sunucu. Her yerden SSH ile bağlanıyorum, gerçek bir ekran istediğimde de RDP üzerinden KDE Plasma masaüstüne giriyorum.
+Bu sayfa kendi kurulumumun elle yapılan hali. Ucuz bir Ubuntu sunucusunda Claude Code gece gündüz çalışıyor. Her yerden SSH ile bağlanıyorum. Ekran gerektiğinde de RDP ile KDE Plasma masaüstüne giriyorum.
 
-Aşağıdaki her komut, [`claude-vps setup`](/tr/guide/getting-started) komutunun senin yerine çalıştırdığı şeyler. Bu sayfayı ne olup bittiğini anlamak ya da her şeyi elle yapmak için oku.
+Aşağıdaki komutların hepsini [`claude-vps setup`](/tr/guide/getting-started) senin için çalıştırır. Bu sayfayı, kurulumun ne yaptığını anlamak ya da her şeyi elle yapmak için okuyabilirsin.
 
 ## Claude Code'u neden VPS'te çalıştırmalı
 
-- **Laptopun uyusa da çalışmaya devam eder.** Uzun refactor'lar, test koşuları ve migration'lar sen yokken biter.
-- **Kendi makinen temiz kalır.** Ajanlar paket kurar, Docker çalıştırır, dev sunucuları ayağa kaldırır. Hepsi on dakikada silip yeniden kurabileceğin bir makinede olur.
-- **Her yerde aynı ortam.** Laptop, masaüstü, tablet ya da telefon: hepsinden aynı tmux oturumuna ve aynı masaüstüne bağlanırsın.
-- **Hızlı ağ**, git sunucuna ve paket depolarına yakın.
+- **Laptop uyku moduna geçse de iş devam eder.** Uzun refactor'lar, testler ve migration'lar sen başında değilken biter.
+- **Kendi bilgisayarın temiz kalır.** Claude paket kurar, Docker çalıştırır, geliştirme sunucuları açar. Bunların hepsi on dakikada silip yeniden kurabileceğin bir sunucuda olur.
+- **Her cihazdan aynı ortam.** Laptop, masaüstü, tablet ya da telefon fark etmez. Hepsinden aynı tmux oturumuna ve aynı masaüstüne bağlanırsın.
+- **İnternet hızlıdır.** Sunucu, GitHub'a ve paket depolarına senin evinden daha yakındır.
 
-## Sunucu seç
+## Sunucu seçimi
 
 | Kullanım | vCPU | RAM | Disk |
 | --- | --- | --- | --- |
 | Sadece terminal | 2 | 4 GB | 40 GB |
 | KDE masaüstüyle | 4 | 8 GB | 80 GB |
-| Birden fazla ajan artı Docker | 8 | 16 GB | 160 GB |
+| Birden fazla Claude ve Docker | 8 | 16 GB | 160 GB |
 
-Ubuntu 24.04 LTS veya daha yenisini sunan her sağlayıcı olur: Hetzner, DigitalOcean, OVH, Vultr, Linode, AWS Lightsail ya da evdeki boş bir makine. RDP daha akıcı olsun diye sana yakın bir bölge seç. Sunucuyu oluştururken SSH public key'ini ekle, böylece hiç root parolasına ihtiyacın olmaz.
+Ubuntu 24.04 LTS veya daha yenisini sunan her sağlayıcı olur: Hetzner, DigitalOcean, OVH, Vultr, Linode, AWS Lightsail ya da evde boşta duran bir bilgisayar. RDP'nin akıcı olması için sana yakın bir bölge seç. Sunucuyu oluştururken SSH public key'ini ekle, böylece root parolasına hiç ihtiyacın olmaz.
 
 ## 1. İlk giriş ve güncellemeler
 
@@ -35,9 +35,9 @@ apt install -y git curl jq ripgrep fd-find tmux htop unzip build-essential nodej
 systemctl enable --now unattended-upgrades
 ```
 
-`unattended-upgrades` güvenlik yamalarını kendisi kurar. Sürekli internete açık bir makinede bu önemli.
+`unattended-upgrades` güvenlik yamalarını kendisi kurar. Sürekli internete açık bir sunucuda bu önemli.
 
-Küçük sunuculara swap ekle ki yoğun çalışan bir ajan OOM killer'ı tetiklemesin:
+Küçük sunuculara swap ekle. Böylece Claude yoğun çalışırken bellek dolup OOM killer süreçleri öldürmez:
 
 ```bash
 fallocate -l 4G /swapfile && chmod 600 /swapfile
@@ -45,9 +45,9 @@ mkswap /swapfile && swapon /swapfile
 echo '/swapfile none swap sw 0 0' >> /etc/fstab
 ```
 
-## 2. Kullanıcını oluştur
+## 2. Kullanıcı oluştur
 
-Claude Code'u root olarak çalıştırma. Sudo yetkisi olan normal bir kullanıcı aç:
+Claude Code'u root olarak çalıştırma. Ona sudo yetkili normal bir kullanıcı aç:
 
 ```bash
 adduser dev
@@ -57,9 +57,9 @@ cp /root/.ssh/authorized_keys /home/dev/.ssh/
 chown -R dev:dev /home/dev/.ssh && chmod 700 /home/dev/.ssh && chmod 600 /home/dev/.ssh/authorized_keys
 ```
 
-Devam etmeden önce ikinci bir terminal aç ve `ssh dev@<server-ip>` komutunun çalıştığından emin ol.
+Devam etmeden önce ikinci bir terminal aç ve `ssh dev@<server-ip>` ile girebildiğini kontrol et.
 
-## 3. SSH'ı kilitle
+## 3. SSH'ı güvenli hale getir
 
 ```bash
 cat > /etc/ssh/sshd_config.d/10-hardening.conf <<'EOF'
@@ -70,27 +70,27 @@ EOF
 sshd -t && systemctl reload ssh
 ```
 
-sshd okuduğu ilk değeri kullanır ve dosyalar isim sırasıyla yüklenir. Dosya adının `10-` ile başlamasının sebebi bu: birçok cloud imajının `PasswordAuthentication yes` ile gelen `50-cloud-init.conf` dosyasından önce okunması gerekiyor.
+sshd bir ayar için okuduğu ilk değeri kullanır ve dosyaları isim sırasına göre yükler. Dosya adının `10-` ile başlaması bu yüzden. Birçok bulut imajında `PasswordAuthentication yes` içeren bir `50-cloud-init.conf` gelir, bizim dosyamızın ondan önce okunması gerekir.
 
-## 4. Firewall
+## 4. Güvenlik duvarı
 
 ```bash
 apt install -y ufw
 ufw allow OpenSSH
-ufw allow 53389/tcp   # sadece internetten RDP istiyorsan, aşağıya bak
+ufw allow 53389/tcp   # RDP'ye internetten bağlanacaksan gerekli, aşağıya bak
 ufw --force enable
 ```
 
 ## 5. Claude Code'u kur
 
-Kendi kullanıcınla giriş yap ve native installer'ı kullan. Node.js gerektirmez ve kendini günceller:
+Kendi kullanıcınla giriş yap ve resmi kurulum script'ini kullan. Node.js gerektirmez ve kendini otomatik günceller:
 
 ```bash
 ssh dev@<server-ip>
 curl -fsSL https://claude.ai/install.sh | bash
 ```
 
-`~/.local/bin/claude` konumuna kurulur. O klasörün `PATH`'e girmesi için bir kez çıkış yapıp tekrar gir, sonra kontrol et:
+Claude `~/.local/bin/claude` konumuna kurulur. Bu klasörün `PATH`'e eklenmesi için bir kere çıkıp tekrar gir, sonra kontrol et:
 
 ```bash
 claude --version
@@ -98,32 +98,32 @@ claude --version
 
 ## 6. Ekransız sunucuda giriş yapmak
 
-Sunucuda tarayıcı yok, olmasına da gerek yok:
+Sunucuda tarayıcı yok, zaten gerek de yok:
 
 ```bash
 claude
 ```
 
-Claude Code bir URL yazdırır. Onu kendi bilgisayarında ya da telefonunda aç, onayla ve kodu terminale geri yapıştır. Oturum sunucuda `~/.claude` altında saklanır.
+Claude Code bir link verir. Bu linki kendi bilgisayarında ya da telefonunda aç, onay ver ve çıkan kodu terminale yapıştır. Oturum bilgisi sunucuda `~/.claude` içinde saklanır.
 
-Pro veya Max planı yerine Anthropic API key'i kullanıyorsan shell profiline ekle:
+Pro veya Max planı yerine Anthropic API anahtarı kullanıyorsan anahtarı shell profiline ekle:
 
 ```bash
 echo 'export ANTHROPIC_API_KEY=sk-ant-...' >> ~/.bashrc
 ```
 
-## 7. Oturumları tmux ile canlı tut
+## 7. tmux ile oturumu açık tut
 
-Claude doğrudan SSH oturumunda çalışıyorsa laptopun kapağını kapatmak onu öldürür. tmux içinde çalıştır:
+Claude doğrudan SSH oturumunda çalışırsa laptopun kapağını kapattığında o da kapanır. Bu yüzden tmux içinde çalıştır:
 
 ```bash
 tmux new -s claude
 claude
-# Ctrl-b, sonra d ile ayrıl, ajan çalışmaya devam eder
-tmux attach -t claude   # sonra, herhangi bir cihazdan
+# Ctrl-b, ardından d ile oturumdan ayrıl, Claude çalışmaya devam eder
+tmux attach -t claude   # sonra istediğin cihazdan geri bağlan
 ```
 
-Küçük bir `~/.tmux.conf` işi kolaylaştırır:
+Kısa bir `~/.tmux.conf` kullanımı rahatlatır:
 
 ```bash
 set -g mouse on
@@ -131,23 +131,23 @@ set -g history-limit 50000
 set -g default-terminal "tmux-256color"
 ```
 
-## 8. Claude seni beklediğinde haber al
+## 8. Claude seni beklediğinde bildirim al
 
-Claude Code senden girdi beklerken bir `Notification` hook'u tetikler. Bunu [ntfy.sh](https://ntfy.sh) ile telefonuna yolla:
+Claude Code bir girdi beklediğinde `Notification` hook'unu tetikler. Bu bildirimi [ntfy.sh](https://ntfy.sh) ile telefonuna gönderebilirsin:
 
 ```bash
 mkdir -p ~/.claude/hooks
 cat > ~/.claude/hooks/notify.sh <<'EOF'
 #!/usr/bin/env bash
 topic=$(cat ~/.claude/ntfy-topic 2>/dev/null) || exit 0
-msg=$(jq -r '.message // "Claude seni bekliyor"')
+msg=$(jq -r '.message // "Claude cevabını bekliyor"')
 curl -s -m 5 -H "Title: Claude Code" -d "$msg" "https://ntfy.sh/$topic" >/dev/null || true
 EOF
 chmod +x ~/.claude/hooks/notify.sh
 echo my-hard-to-guess-topic > ~/.claude/ntfy-topic && chmod 600 ~/.claude/ntfy-topic
 ```
 
-`~/.claude/settings.json` içine kaydet:
+Hook'u `~/.claude/settings.json` dosyasına ekle:
 
 ```json
 {
@@ -159,11 +159,11 @@ echo my-hard-to-guess-topic > ~/.claude/ntfy-topic && chmod 600 ~/.claude/ntfy-t
 }
 ```
 
-ntfy uygulamasında aynı topic'e abone ol. Topic'e parola gibi davran.
+Telefondaki ntfy uygulamasında aynı topic'e abone ol. Topic adını parola gibi sakla, bilen herkes bildirimlerini okuyabilir.
 
 ## 9. İsteğe bağlı: RDP ile KDE Plasma masaüstü
 
-İşin çoğunu terminal karşılar. Masaüstü, ajanın yanında Chrome açmak, bir dosya yöneticisi kullanmak ya da büyük ekranda birkaç Konsole penceresi görmek istediğinde işe yarar.
+İşin çoğu terminalde biter. Masaüstü ise Claude'un yanında Chrome açmak, dosya yöneticisi kullanmak ya da büyük ekranda birkaç Konsole penceresiyle çalışmak istediğinde işe yarar.
 
 ```bash
 sudo apt install -y kde-plasma-desktop plasma-session-x11 kwin-x11 xrdp xorgxrdp
@@ -173,9 +173,9 @@ sudo adduser xrdp ssl-cert
 sudo sed -i '0,/^port=/s/^port=.*/port=53389/' /etc/xrdp/xrdp.ini
 ```
 
-Ubuntu 24.04'te `plasma-session-x11` ve `kwin-x11` ayrı paket olarak yok. Onları çıkar.
+Ubuntu 24.04'te `plasma-session-x11` ve `kwin-x11` ayrı paket olarak yok. Bu sürümdeysen ikisini komuttan çıkar.
 
-xrdp'ye kullanıcın için Plasma'yı başlatmasını söyle:
+xrdp'ye senin kullanıcın için Plasma'yı başlatmasını söyle:
 
 ```bash
 cat > ~/.xsession <<'EOF'
@@ -187,7 +187,7 @@ EOF
 sudo systemctl restart xrdp
 ```
 
-Sonra her girişte çıkan renk profili parola sorusunu kapat:
+Sonra renk profilleri için her girişte çıkan parola sorusunu kapat:
 
 ```bash
 sudo tee /etc/polkit-1/rules.d/45-colord.rules >/dev/null <<'EOF'
@@ -200,9 +200,9 @@ EOF
 sudo usermod -aG users dev
 ```
 
-Herhangi bir RDP istemcisiyle `<server-ip>:53389` adresine bağlan. Portu kapalı tutup SSH tüneliyle bağlanmak dahil ayrıntılar [Uzak masaüstü](/tr/guide/remote-desktop) sayfasında.
+Herhangi bir RDP istemcisiyle `<server-ip>:53389` adresine bağlan. Portu kapalı tutup SSH tüneli üzerinden bağlanmak dahil, detaylar [Uzak masaüstü](/tr/guide/remote-desktop) sayfasında.
 
-## 10. Geliştirici araçları
+## 10. Geliştirme araçları
 
 ```bash
 sudo apt install -y docker.io docker-compose-v2 gh
@@ -212,41 +212,41 @@ gh auth login
 
 ## Güvenlik kontrol listesi
 
-- SSH sadece anahtarla, root'a parola ile giriş kapalı
-- Firewall açık, sadece ihtiyacın olan portlar
-- Claude Code root olarak değil, normal kullanıcıyla çalışıyor
-- `--dangerously-skip-permissions` sadece atılabilir container'larda, token'larının ve SSH anahtarlarının olduğu bir makinede asla
-- Secret'lar (`~/.claude/.credentials.json`, API key'ler, ntfy topic'i) asla public bir repoya girmiyor
-- Unattended upgrades açık
+- SSH'a sadece anahtarla girilir, root'a parolayla giriş kapalı
+- Güvenlik duvarı açık, sadece gereken portlara izin var
+- Claude Code root değil, normal bir kullanıcıyla çalışıyor
+- `--dangerously-skip-permissions` sadece silinip atılacak container'larda kullanılır. Token'larının ve SSH anahtarlarının durduğu bir makinede asla
+- Gizli bilgiler (`~/.claude/.credentials.json`, API anahtarları, ntfy topic'i) hiçbir zaman açık bir repoya girmez
+- Otomatik güvenlik güncellemeleri açık
 
 ## Hepsini tek komutla yap
 
-Yukarıdaki her şeyi, artı kendi KDE ve Claude ayarlarını uygulamayı claude-vps otomatikleştiriyor:
+Yukarıdaki her şeyi ve kendi KDE ve Claude ayarlarını uygulamayı claude-vps otomatik yapar:
 
 ```bash
 curl -fsSL https://raw.githubusercontent.com/halitsever/claude-code-vps/main/install.sh | sudo bash
 ```
 
-[Başlarken](/tr/guide/getting-started) sayfasına bak.
+Detaylar için [Başlarken](/tr/guide/getting-started) sayfasına bak.
 
-## SSS
+## Sık sorulanlar
 
-### Claude Code arayüzü olmayan bir sunucuda çalışır mı?
+### Claude Code ekranı olmayan bir sunucuda çalışır mı?
 
-Evet. Terminal uygulaması. Giriş, başka herhangi bir cihazda açtığın bir link üzerinden yapılıyor.
+Evet, çünkü Claude Code bir terminal uygulaması. Giriş için başka bir cihazda açtığın bir link yeterli.
 
 ### Hangi Claude planı gerekiyor?
 
-Claude Code içeren herhangi bir plan (Pro veya Max) ya da kullanım başına ücretlendirilen bir Anthropic API key'i.
+Claude Code içeren bir plan (Pro ya da Max) veya kullandıkça ödediğin bir Anthropic API anahtarı.
 
-### Claude Code VPS'i ne kadara mal olur?
+### Claude Code için VPS'e ne kadar ödenir?
 
-Uygun fiyatlı sağlayıcılarda 4 ila 8 GB RAM'li bir sunucu genelde ayda 5 ila 20 USD. Claude kullanımı planına ya da API key'ine göre ayrıca ücretlendirilir.
+Uygun fiyatlı sağlayıcılarda 4 ile 8 GB RAM'li bir sunucu genelde ayda 5 ile 20 USD arası. Claude kullanımı planından ya da API anahtarından ayrıca ücretlendirilir.
 
-### SSH'ı kapatınca Claude çalışmaya devam eder mi?
+### SSH bağlantısını kapatınca Claude çalışmaya devam eder mi?
 
-Sadece tmux (ya da screen) içindeyse. `tmux new -s claude` ile başlat, `Ctrl-b d` ile ayrıl.
+Sadece tmux (ya da screen) içinde çalışıyorsa. `tmux new -s claude` ile başlat, `Ctrl-b d` ile oturumdan ayrıl.
 
 ### Güvenli mi?
 
-Kendi yönettiğin herhangi bir sunucu kadar güvenli. Yukarıdaki kontrol listesini uygula ve ajanı ihtiyacı olmayan kimlik bilgilerinden uzak tut.
+Kendi yönettiğin her sunucu kadar güvenli. Yukarıdaki kontrol listesini uygula ve Claude'u ihtiyacı olmayan gizli bilgilerden uzak tut.

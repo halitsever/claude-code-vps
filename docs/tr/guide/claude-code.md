@@ -1,5 +1,5 @@
 ---
-description: "Ekransız bir sunucuda Claude Code'a giriş yap, SSH kopsa da ajanları tmux'ta çalışır tut ve ntfy.sh ile telefonuna bildirim al."
+description: "Ekransız bir sunucuda Claude Code'a giriş yap, SSH bağlantısı kopsa da tmux içinde çalışmaya devam etsin ve ntfy.sh ile telefonuna bildirim gelsin."
 ---
 
 # Claude Code'u çalıştırmak
@@ -12,57 +12,57 @@ tmux new -s claude
 claude
 ```
 
-Claude Code bir giriş linki yazar. Linki kendi tarayıcında aç, onayla ve kodu geri yapıştır. Kimlik bilgileri sunucuda `~/.claude` altında kalır.
+Claude Code bir giriş linki verir. Linki kendi tarayıcında aç, onay ver ve çıkan kodu terminale yapıştır. Giriş bilgileri sunucuda `~/.claude` içinde saklanır.
 
-API anahtarı mı tercih ediyorsun? Başlatmadan önce export et:
+API anahtarı mı kullanmak istiyorsun? Claude'u başlatmadan önce anahtarı tanımla:
 
 ```bash
 echo 'export ANTHROPIC_API_KEY=sk-ant-...' >> ~/.bashrc
 ```
 
-## tmux ile açık tut
+## tmux ile çalışır halde tut
 
-Bir saat boyunca çalışan bir ajan, laptopun uykuya geçti diye ölmemeli. tmux içinde çalıştır ve detach et:
+Bir saattir çalışan Claude, laptopun uyku moduna geçti diye kapanmamalı. Claude'u tmux içinde çalıştır ve oturumdan ayrıl:
 
 | | |
 | --- | --- |
-| Detach | `Ctrl-b` sonra `d` |
-| Tekrar bağlan | `tmux attach -t claude` |
-| Yeni pencere | `Ctrl-b` sonra `c` |
+| Oturumdan ayrıl | `Ctrl-b`, ardından `d` |
+| Geri bağlan | `tmux attach -t claude` |
+| Yeni pencere | `Ctrl-b`, ardından `c` |
 | Oturumları listele | `tmux ls` |
 
-Gelen `.tmux.conf` mouse desteğini, 50 bin satırlık scrollback'i ve 256 rengi açar.
+Kurulumla gelen `.tmux.conf` fare desteğini, 50 bin satırlık geçmişi ve 256 rengi açar.
 
-Masaüstünde Konsole'u açıp orada da `tmux attach -t claude` çalıştırabilirsin. Aynı oturum, daha büyük ekran.
+Masaüstünde Konsole açıp `tmux attach -t claude` da çalıştırabilirsin. Aynı oturumu bu kez büyük ekranda görürsün.
 
 ## Telefon bildirimleri
 
-`~/.claude/settings.json` bir `Notification` hook'u kaydeder: `~/.claude/hooks/notify.sh`. Claude seni beklediğinde [ntfy.sh](https://ntfy.sh)'e mesaj atar.
+`~/.claude/settings.json` bir `Notification` hook'u tanımlar: `~/.claude/hooks/notify.sh`. Claude senden bir cevap beklediğinde bu hook [ntfy.sh](https://ntfy.sh) üzerinden bildirim gönderir.
 
-1. Telefonuna ntfy uygulamasını kur ve kimsenin tahmin edemeyeceği bir topic'e abone ol, örn. `claude-7f3k9q2m`.
+1. Telefonuna ntfy uygulamasını kur ve kimsenin tahmin edemeyeceği bir topic'e abone ol, örneğin `claude-7f3k9q2m`.
 2. Aynı topic'i sunucuya yaz:
 
    ```bash
    echo claude-7f3k9q2m > ~/.claude/ntfy-topic && chmod 600 ~/.claude/ntfy-topic
    ```
 
-   Ya da kurulum sırasında `--ntfy-topic` ver.
+   Ya da kurulum sırasında `--ntfy-topic` ile ver.
 
-Topic bir sır: bilen herkes bildirimlerini okuyabilir. Bu yüzden ayrı bir dosyada duruyor ve hiçbir zaman repoya alınmıyor.
+Topic adı gizli kalmalı, çünkü onu bilen herkes bildirimlerini okuyabilir. Bu yüzden ayrı bir dosyada durur ve hiçbir zaman repoya alınmaz.
 
 ## Hazır gelen ayarlar
 
-`dotfiles/home/.claude` içinden:
+`dotfiles/home/.claude` içinden gelenler:
 
-- **`settings.json`**: koyu tema, tam ekran TUI, model, klasör, git branch ve context kullanımını gösteren bir status line, kullandığım plugin'ler ve notify hook'u
-- **`CLAUDE.md`**: kendi global talimatların için boş bir dosya. Sadece yoksa oluşturulur, içine yazdıkların asla ezilmez
+- **`settings.json`**: koyu tema, tam ekran arayüz, model, klasör, git branch'i ve context kullanımını gösteren bir durum çubuğu, benim kullandığım eklentiler ve bildirim hook'u
+- **`CLAUDE.md`**: kendi genel talimatların için boş bir dosya. Sadece dosya yoksa oluşturulur, yani buraya yazdıkların hiçbir zaman silinmez
 - **`hooks/notify.sh`**: yukarıdaki ntfy hook'u
 
-Bunlardan herhangi birini kendi makinende değiştir ve `claude-vps publish` çalıştır. Bkz. [Config senkronizasyonu](/tr/guide/sync).
+Bunlardan birini kendi bilgisayarında değiştirip `claude-vps publish` çalıştırman yeterli. Detaylar [Ayarları senkron tutmak](/tr/guide/sync) sayfasında.
 
 ## Claude Code'u güncellemek
 
-Native kurulum arka planda kendini günceller. Elle tetiklemek için:
+Resmi kurulum kendini arka planda günceller. Hemen güncellemek istersen:
 
 ```bash
 claude update

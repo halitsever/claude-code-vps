@@ -1,5 +1,5 @@
 import { defineConfig, type DefaultTheme, type HeadConfig } from "vitepress";
-import { FAQ, type Lang } from "./theme/faq";
+import { LOCALES as I18N } from "./theme/i18n";
 
 const repo = "https://github.com/halitsever/claude-code-vps";
 const hostname = "https://halitsever.github.io";
@@ -9,12 +9,10 @@ const siteName = "Claude Code VPS";
 
 type Labels = { guide: string; ref: string; pages: string[] };
 
-const LOCALES = {
-  root: { prefix: "", lang: "en-US", og: "en_US" },
-  fr: { prefix: "/fr", lang: "fr-FR", og: "fr_FR" },
-  it: { prefix: "/it", lang: "it-IT", og: "it_IT" },
-  tr: { prefix: "/tr", lang: "tr-TR", og: "tr_TR" },
-} as const;
+const LOCALES = Object.fromEntries(
+  Object.entries(I18N).map(([key, l]) => [key, { prefix: l.meta.prefix, lang: l.meta.lang, og: l.meta.og }]),
+) as Record<string, { prefix: string; lang: string; og: string }>;
+type LocaleKey = string;
 
 const PAGES = [
   "guide/claude-code-vps",
@@ -44,13 +42,14 @@ function nav(prefix: string, guide: string, vps: string): DefaultTheme.NavItem[]
 }
 
 /** Page path without locale prefix, e.g. "guide/sync" or "" for a home page. */
-function barePath(relativePath: string): { locale: keyof typeof LOCALES; path: string } {
+function barePath(relativePath: string): { locale: LocaleKey; path: string } {
   const clean = relativePath.replace(/(^|\/)index\.md$/, "$1").replace(/\.md$/, "");
-  const m = clean.match(/^(fr|it|tr)(?:\/|$)(.*)$/);
-  return m ? { locale: m[1] as keyof typeof LOCALES, path: m[2] } : { locale: "root", path: clean };
+  const first = clean.split("/")[0];
+  if (first && first !== "root" && first in LOCALES) return { locale: first, path: clean.slice(first.length + 1) };
+  return { locale: "root", path: clean };
 }
 
-const urlFor = (locale: keyof typeof LOCALES, path: string) =>
+const urlFor = (locale: LocaleKey, path: string) =>
   siteUrl + (LOCALES[locale].prefix ? LOCALES[locale].prefix.slice(1) + "/" : "") + path;
 
 export default defineConfig({
@@ -110,8 +109,8 @@ export default defineConfig({
       ["meta", { name: "twitter:title", content: fullTitle }],
       ["meta", { name: "twitter:description", content: desc }],
     ];
-    for (const key of Object.keys(LOCALES) as (keyof typeof LOCALES)[]) {
-      head.push(["link", { rel: "alternate", hreflang: LOCALES[key].lang.slice(0, 2), href: urlFor(key, path) }]);
+    for (const key of Object.keys(LOCALES)) {
+      head.push(["link", { rel: "alternate", hreflang: LOCALES[key].lang.startsWith("zh") ? "zh-Hans" : LOCALES[key].lang.slice(0, 2), href: urlFor(key, path) }]);
     }
     head.push(["link", { rel: "alternate", hreflang: "x-default", href: urlFor("root", path) }]);
 
@@ -133,7 +132,7 @@ export default defineConfig({
         },
         {
           "@type": "FAQPage",
-          mainEntity: FAQ[(locale === "root" ? "en" : locale) as Lang].items.map((f) => ({
+          mainEntity: I18N[locale].faq.items.map((f) => ({
             "@type": "Question",
             name: f.q,
             acceptedAnswer: { "@type": "Answer", text: f.a },
@@ -157,88 +156,33 @@ export default defineConfig({
     pageData.frontmatter.head.push(...head);
   },
 
-  locales: {
-    root: {
-      label: "English",
-      lang: "en-US",
-      description: "Run Claude Code on a VPS. One command turns a blank Ubuntu server into a remote Claude Code workstation with KDE Plasma, RDP and your own config.",
-      themeConfig: {
-        nav: nav("", "Docs", "VPS guide"),
-        sidebar: sidebar("", {
-          guide: "Guide",
-          ref: "Reference",
-          pages: ["Claude Code on a VPS", "Getting started", "What gets installed", "Remote desktop", "Running Claude Code", "Keeping config in sync", "CLI", "Troubleshooting"],
-        }),
-        editLink: { pattern: `${repo}/edit/main/docs/:path`, text: "Edit this page on GitHub" },
-      },
-    },
-    fr: {
-      label: "Français",
-      lang: "fr-FR",
-      link: "/fr/",
-      description: "Faire tourner Claude Code sur un VPS. Une seule commande transforme un serveur Ubuntu vierge en poste Claude Code distant, avec KDE Plasma et RDP.",
-      themeConfig: {
-        nav: nav("/fr", "Docs", "Guide VPS"),
-        sidebar: sidebar("/fr", {
-          guide: "Guide",
-          ref: "Référence",
-          pages: ["Claude Code sur un VPS", "Bien démarrer", "Ce qui est installé", "Bureau à distance", "Utiliser Claude Code", "Synchroniser la config", "CLI", "Dépannage"],
-        }),
-        editLink: { pattern: `${repo}/edit/main/docs/:path`, text: "Modifier cette page sur GitHub" },
-        outline: { label: "Sur cette page" },
-        docFooter: { prev: "Précédent", next: "Suivant" },
-        lastUpdated: { text: "Dernière mise à jour" },
-        darkModeSwitchLabel: "Apparence",
-        sidebarMenuLabel: "Menu",
-        returnToTopLabel: "Retour en haut",
-        langMenuLabel: "Langue",
-      },
-    },
-    it: {
-      label: "Italiano",
-      lang: "it-IT",
-      link: "/it/",
-      description: "Eseguire Claude Code su un VPS. Un solo comando trasforma un server Ubuntu vuoto in una postazione Claude Code remota, con KDE Plasma e RDP.",
-      themeConfig: {
-        nav: nav("/it", "Docs", "Guida VPS"),
-        sidebar: sidebar("/it", {
-          guide: "Guida",
-          ref: "Riferimento",
-          pages: ["Claude Code su un VPS", "Per iniziare", "Cosa viene installato", "Desktop remoto", "Usare Claude Code", "Sincronizzare la config", "CLI", "Risoluzione problemi"],
-        }),
-        editLink: { pattern: `${repo}/edit/main/docs/:path`, text: "Modifica questa pagina su GitHub" },
-        outline: { label: "In questa pagina" },
-        docFooter: { prev: "Precedente", next: "Successivo" },
-        lastUpdated: { text: "Ultimo aggiornamento" },
-        darkModeSwitchLabel: "Aspetto",
-        sidebarMenuLabel: "Menu",
-        returnToTopLabel: "Torna su",
-        langMenuLabel: "Lingua",
-      },
-    },
-    tr: {
-      label: "Türkçe",
-      lang: "tr-TR",
-      link: "/tr/",
-      description: "Claude Code'u VPS'te çalıştır. Tek komutla boş bir Ubuntu sunucuyu KDE Plasma, RDP ve kendi ayarlarınla uzaktan Claude Code iş istasyonuna çevir.",
-      themeConfig: {
-        nav: nav("/tr", "Doküman", "VPS rehberi"),
-        sidebar: sidebar("/tr", {
-          guide: "Rehber",
-          ref: "Referans",
-          pages: ["VPS'te Claude Code", "Başlarken", "Neler kuruluyor", "Uzak masaüstü", "Claude Code'u çalıştırmak", "Config senkronizasyonu", "CLI", "Sorun giderme"],
-        }),
-        editLink: { pattern: `${repo}/edit/main/docs/:path`, text: "Bu sayfayı GitHub'da düzenle" },
-        outline: { label: "Bu sayfada" },
-        docFooter: { prev: "Önceki", next: "Sonraki" },
-        lastUpdated: { text: "Son güncelleme" },
-        darkModeSwitchLabel: "Görünüm",
-        sidebarMenuLabel: "Menü",
-        returnToTopLabel: "Başa dön",
-        langMenuLabel: "Dil",
-      },
-    },
-  },
+  locales: Object.fromEntries(
+    Object.entries(I18N).map(([key, l]) => {
+      const p = l.meta.prefix;
+      const u = l.meta.ui;
+      return [
+        key,
+        {
+          label: l.meta.label,
+          lang: l.meta.lang,
+          ...(p ? { link: `${p}/` } : {}),
+          description: l.meta.description,
+          themeConfig: {
+            nav: nav(p, l.meta.nav.docs, l.meta.nav.vps),
+            sidebar: sidebar(p, l.meta.sidebar),
+            editLink: { pattern: `${repo}/edit/main/docs/:path`, text: u.editLink },
+            outline: { label: u.outline },
+            docFooter: { prev: u.prev, next: u.next },
+            lastUpdated: { text: u.lastUpdated },
+            darkModeSwitchLabel: u.darkMode,
+            sidebarMenuLabel: u.menu,
+            returnToTopLabel: u.top,
+            langMenuLabel: u.langMenu,
+          },
+        },
+      ];
+    }),
+  ),
 
   themeConfig: {
     logo: "/logo.svg",

@@ -1,30 +1,30 @@
 ---
-title: "Come installare Claude Code su un VPS, guida completa"
-description: "Guida passo passo per usare Claude Code su un VPS Ubuntu. SSH sicuro, sessioni tmux che non muoiono, notifiche sul telefono e desktop KDE Plasma via RDP."
+title: "Installare Claude Code su un VPS: la guida completa"
+description: "Guida passo passo per installare Claude Code su un VPS Ubuntu: SSH sicuro, sessioni tmux che restano attive, notifiche sul telefono e desktop KDE in RDP."
 ---
 
-# Come usare Claude Code su un VPS
+# Installare Claude Code su un VPS
 
-Questa è la versione completa e manuale del mio setup: un server Ubuntu economico che fa girare Claude Code giorno e notte. Mi ci collego via SSH da ovunque e, quando mi serve uno schermo vero, tramite un desktop KDE Plasma in RDP.
+Questa pagina descrive la mia installazione completa, passo per passo, a mano. Uso un server Ubuntu economico che fa girare Claude Code giorno e notte. Mi collego in SSH da qualsiasi posto. Quando mi serve uno schermo vero, apro un desktop KDE Plasma in RDP.
 
-Ogni comando qui sotto è quello che [`claude-vps setup`](/it/guide/getting-started) esegue al posto tuo. Leggi questa pagina per capire cosa succede, o per fare tutto a mano.
+Tutti i comandi qui sotto sono quelli che [`claude-vps setup`](/it/guide/getting-started) esegue per te. Leggi questa pagina per capire cosa succede, oppure per fare tutto da solo.
 
 ## Perché usare Claude Code su un VPS
 
-- **Continua a lavorare quando il portatile va in standby.** Refactoring lunghi, test e migrazioni finiscono mentre sei via.
-- **La tua macchina resta pulita.** Gli agenti installano pacchetti, avviano Docker e tirano su server di sviluppo su una macchina che puoi cancellare e ricostruire in dieci minuti.
-- **Lo stesso ambiente ovunque.** Portatile, fisso, tablet o telefono: ti colleghi alla stessa sessione tmux e allo stesso desktop.
-- **Rete veloce**, vicina al tuo host git e ai registri dei pacchetti.
+- **Il lavoro va avanti anche quando il portatile è in standby.** Refactoring lunghi, test e migrazioni finiscono mentre sei via.
+- **Il tuo computer resta pulito.** Gli agenti installano pacchetti, avviano Docker e server di sviluppo su una macchina che puoi cancellare e reinstallare in dieci minuti.
+- **Lo stesso ambiente ovunque.** Da portatile, PC, tablet o telefono ritrovi la stessa sessione tmux e lo stesso desktop.
+- **Una rete veloce**, vicina al tuo hosting git e ai registri dei pacchetti.
 
-## Scegli un server
+## Scegliere un server
 
 | Uso | vCPU | RAM | Disco |
 | --- | --- | --- | --- |
 | Solo terminale | 2 | 4 GB | 40 GB |
-| Con desktop KDE | 4 | 8 GB | 80 GB |
-| Più agenti più Docker | 8 | 16 GB | 160 GB |
+| Con il desktop KDE | 4 | 8 GB | 80 GB |
+| Più agenti e Docker | 8 | 16 GB | 160 GB |
 
-Va bene qualsiasi provider che offra Ubuntu 24.04 LTS o successivo: Hetzner, DigitalOcean, OVH, Vultr, Linode, AWS Lightsail, oppure una macchina inutilizzata a casa. Scegli una regione vicina a te per un RDP più reattivo. Aggiungi la tua chiave SSH pubblica quando crei il server, così non ti servirà mai la password di root.
+Va bene qualsiasi provider che offre Ubuntu 24.04 LTS o successivo: Hetzner, DigitalOcean, OVH, Vultr, Linode, AWS Lightsail, oppure un computer inutilizzato a casa. Scegli una regione vicina a te, così il desktop RDP risponde più in fretta. Aggiungi la tua chiave SSH pubblica quando crei il server: non ti servirà mai la password di root.
 
 ## 1. Primo accesso e aggiornamenti
 
@@ -35,9 +35,9 @@ apt install -y git curl jq ripgrep fd-find tmux htop unzip build-essential nodej
 systemctl enable --now unattended-upgrades
 ```
 
-`unattended-upgrades` installa da solo le patch di sicurezza, cosa importante su una macchina sempre online.
+`unattended-upgrades` installa da solo le patch di sicurezza. È importante su una macchina sempre online.
 
-Sui server piccoli aggiungi lo swap, così un agente impegnato non fa scattare l'OOM killer:
+Su un server piccolo aggiungi lo swap. Altrimenti un agente che usa molta memoria può far scattare l'OOM killer:
 
 ```bash
 fallocate -l 4G /swapfile && chmod 600 /swapfile
@@ -45,9 +45,9 @@ mkswap /swapfile && swapon /swapfile
 echo '/swapfile none swap sw 0 0' >> /etc/fstab
 ```
 
-## 2. Crea il tuo utente
+## 2. Creare il tuo utente
 
-Non far girare Claude Code come root. Dagli un utente normale con sudo:
+Non eseguire Claude Code come root. Crea un utente normale con sudo:
 
 ```bash
 adduser dev
@@ -57,9 +57,9 @@ cp /root/.ssh/authorized_keys /home/dev/.ssh/
 chown -R dev:dev /home/dev/.ssh && chmod 700 /home/dev/.ssh && chmod 600 /home/dev/.ssh/authorized_keys
 ```
 
-Apri un secondo terminale e verifica che `ssh dev@<server-ip>` funzioni prima di proseguire.
+Prima di andare avanti, apri un secondo terminale e controlla che `ssh dev@<server-ip>` funzioni.
 
-## 3. Blinda SSH
+## 3. Mettere in sicurezza SSH
 
 ```bash
 cat > /etc/ssh/sshd_config.d/10-hardening.conf <<'EOF'
@@ -70,60 +70,60 @@ EOF
 sshd -t && systemctl reload ssh
 ```
 
-sshd usa il primo valore che legge, e i file vengono caricati in ordine di nome. Per questo il nome inizia con `10-`: deve venire prima del `50-cloud-init.conf` che molte immagini cloud includono con `PasswordAuthentication yes`.
+sshd usa il primo valore che legge, e legge i file in ordine alfabetico. Per questo il nome inizia con `10-`: deve venire prima di `50-cloud-init.conf`. Molte immagini cloud includono quel file con `PasswordAuthentication yes`.
 
 ## 4. Firewall
 
 ```bash
 apt install -y ufw
 ufw allow OpenSSH
-ufw allow 53389/tcp   # solo se vuoi l'RDP da internet, vedi sotto
+ufw allow 53389/tcp   # solo se vuoi RDP da internet, vedi sotto
 ufw --force enable
 ```
 
-## 5. Installa Claude Code
+## 5. Installare Claude Code
 
-Accedi con il tuo utente e usa l'installer nativo. Non richiede Node.js e si aggiorna da solo:
+Accedi con il tuo utente e usa l'installer ufficiale. Non richiede Node.js e si aggiorna da solo:
 
 ```bash
 ssh dev@<server-ip>
 curl -fsSL https://claude.ai/install.sh | bash
 ```
 
-Finisce in `~/.local/bin/claude`. Esci e rientra una volta perché quella cartella sia nel `PATH`, poi verifica:
+Il programma viene installato in `~/.local/bin/claude`. Esci e rientra una volta, così quella cartella finisce nel tuo `PATH`. Poi controlla:
 
 ```bash
 claude --version
 ```
 
-## 6. Accedere su un server senza schermo
+## 6. Accedere da un server senza schermo
 
-Sul server non c'è un browser, e non serve:
+Sul server non c'è un browser, e non ti serve:
 
 ```bash
 claude
 ```
 
-Claude Code stampa un URL. Aprilo sul tuo computer o sul telefono, approva e incolla il codice nel terminale. La sessione viene salvata in `~/.claude` sul server.
+Claude Code mostra un URL. Aprilo sul tuo computer o sul telefono, conferma e incolla il codice nel terminale. La sessione viene salvata in `~/.claude` sul server.
 
-Se usi una chiave API Anthropic invece di un piano Pro o Max, mettila nel profilo della shell:
+Se usi una chiave API Anthropic invece di un piano Pro o Max, aggiungila al profilo della shell:
 
 ```bash
 echo 'export ANTHROPIC_API_KEY=sk-ant-...' >> ~/.bashrc
 ```
 
-## 7. Tieni vive le sessioni con tmux
+## 7. Tenere attive le sessioni con tmux
 
-Se Claude gira direttamente nella sessione SSH, chiudere il portatile lo uccide. Avvialo dentro tmux:
+Se Claude gira direttamente nella sessione SSH, si ferma quando chiudi il portatile. Avvialo dentro tmux:
 
 ```bash
 tmux new -s claude
 claude
-# Ctrl-b poi d per staccarti, l'agente continua
+# Ctrl-b e poi d per staccarti, l'agente continua a lavorare
 tmux attach -t claude   # più tardi, da qualsiasi dispositivo
 ```
 
-Un piccolo `~/.tmux.conf` lo rende più comodo:
+Un piccolo `~/.tmux.conf` rende tmux più comodo:
 
 ```bash
 set -g mouse on
@@ -131,16 +131,16 @@ set -g history-limit 50000
 set -g default-terminal "tmux-256color"
 ```
 
-## 8. Ricevi un avviso quando Claude ha bisogno di te
+## 8. Ricevere un avviso quando Claude ha bisogno di te
 
-Claude Code lancia un hook `Notification` quando aspetta un tuo input. Mandalo al telefono con [ntfy.sh](https://ntfy.sh):
+Quando Claude Code aspetta una risposta, attiva un hook `Notification`. Mandalo al telefono con [ntfy.sh](https://ntfy.sh):
 
 ```bash
 mkdir -p ~/.claude/hooks
 cat > ~/.claude/hooks/notify.sh <<'EOF'
 #!/usr/bin/env bash
 topic=$(cat ~/.claude/ntfy-topic 2>/dev/null) || exit 0
-msg=$(jq -r '.message // "Claude ti sta aspettando"')
+msg=$(jq -r '.message // "Claude aspetta una tua risposta"')
 curl -s -m 5 -H "Title: Claude Code" -d "$msg" "https://ntfy.sh/$topic" >/dev/null || true
 EOF
 chmod +x ~/.claude/hooks/notify.sh
@@ -159,11 +159,11 @@ Registralo in `~/.claude/settings.json`:
 }
 ```
 
-Iscriviti allo stesso topic nell'app ntfy. Tratta il topic come una password.
+Iscriviti allo stesso topic nell'app ntfy. Tieni segreto il nome del topic, come una password.
 
-## 9. Facoltativo: un desktop KDE Plasma via RDP
+## 9. Facoltativo: un desktop KDE Plasma in RDP
 
-Il terminale copre quasi tutto il lavoro. Un desktop aiuta quando vuoi Chrome accanto all'agente, un file manager o più finestre di Konsole su uno schermo grande.
+Per quasi tutto basta il terminale. Un desktop è comodo quando vuoi Chrome accanto all'agente, un file manager o più finestre di Konsole su uno schermo grande.
 
 ```bash
 sudo apt install -y kde-plasma-desktop plasma-session-x11 kwin-x11 xrdp xorgxrdp
@@ -173,7 +173,7 @@ sudo adduser xrdp ssl-cert
 sudo sed -i '0,/^port=/s/^port=.*/port=53389/' /etc/xrdp/xrdp.ini
 ```
 
-Su Ubuntu 24.04 `plasma-session-x11` e `kwin-x11` non esistono come pacchetti separati. Toglili dal comando.
+Su Ubuntu 24.04, `plasma-session-x11` e `kwin-x11` non esistono come pacchetti separati. Toglili dal comando.
 
 Di' a xrdp di avviare Plasma per il tuo utente:
 
@@ -187,7 +187,7 @@ EOF
 sudo systemctl restart xrdp
 ```
 
-Poi elimina la richiesta di password sui profili colore, che altrimenti compare a ogni accesso:
+Poi elimina la richiesta di password per i profili colore. Senza questo passaggio, compare a ogni accesso:
 
 ```bash
 sudo tee /etc/polkit-1/rules.d/45-colord.rules >/dev/null <<'EOF'
@@ -200,7 +200,7 @@ EOF
 sudo usermod -aG users dev
 ```
 
-Collega qualsiasi client RDP a `<server-ip>:53389`. Trovi di più in [Desktop remoto](/it/guide/remote-desktop), compreso come tenere chiusa la porta e passare da un tunnel SSH.
+Collega qualsiasi client RDP a `<server-ip>:53389`. Nella pagina [Desktop remoto](/it/guide/remote-desktop) trovi altri dettagli, anche su come tenere chiusa la porta e passare da un tunnel SSH.
 
 ## 10. Strumenti di sviluppo
 
@@ -212,16 +212,16 @@ gh auth login
 
 ## Checklist di sicurezza
 
-- SSH solo con chiave, login root con password disattivato
-- Firewall attivo, solo le porte che servono
-- Claude Code gira con un utente normale, non root
+- SSH solo con chiave, accesso root con password disattivato
+- Firewall attivo, solo con le porte che servono
+- Claude Code gira con un utente normale, non come root
 - `--dangerously-skip-permissions` solo in container usa e getta, mai su una macchina con i tuoi token e le tue chiavi SSH
 - I segreti (`~/.claude/.credentials.json`, chiavi API, topic ntfy) non finiscono mai in un repository pubblico
 - Aggiornamenti automatici attivi
 
-## Fai tutto con un comando
+## Tutto con un solo comando
 
-Tutto quanto sopra, più l'applicazione della tua configurazione KDE e Claude, è ciò che claude-vps automatizza:
+claude-vps automatizza tutto quello che hai letto sopra e applica anche le tue impostazioni di KDE e Claude:
 
 ```bash
 curl -fsSL https://raw.githubusercontent.com/halitsever/claude-code-vps/main/install.sh | sudo bash
@@ -229,24 +229,24 @@ curl -fsSL https://raw.githubusercontent.com/halitsever/claude-code-vps/main/ins
 
 Vedi [Per iniziare](/it/guide/getting-started).
 
-## FAQ
+## Domande frequenti
 
-### Claude Code può girare su un server senza interfaccia grafica?
+### Claude Code funziona su un server senza interfaccia grafica?
 
-Sì. È un'app da terminale. L'accesso passa da un link che apri su qualsiasi altro dispositivo.
+Sì. È un programma da terminale. Per l'accesso apri un link su un qualsiasi altro dispositivo.
 
 ### Quale piano Claude serve?
 
-Qualsiasi piano che includa Claude Code (Pro o Max), oppure una chiave API Anthropic a consumo.
+Un piano che includa Claude Code (Pro o Max), oppure una chiave API Anthropic pagata a consumo.
 
 ### Quanto costa un VPS per Claude Code?
 
-Il server costa di solito da 5 a 20 USD al mese per 4 o 8 GB di RAM presso i provider economici. L'uso di Claude si paga a parte, in base al piano o alla chiave API.
+Dai provider economici, un server con 4-8 GB di RAM costa di solito tra 5 e 20 USD al mese. L'uso di Claude si paga a parte, con il tuo piano o la tua chiave API.
 
-### Claude continua a girare se chiudo SSH?
+### Claude continua a girare dopo che chiudo SSH?
 
-Solo dentro tmux (o screen). Avvialo con `tmux new -s claude`, staccati con `Ctrl-b d`.
+Solo dentro tmux (o screen). Avvialo con `tmux new -s claude` e staccati con `Ctrl-b d`.
 
 ### È sicuro?
 
-Quanto qualsiasi server che gestisci da solo. Segui la checklist qui sopra e tieni l'agente lontano dalle credenziali che non gli servono.
+Quanto qualsiasi altro server che gestisci da solo. Segui la checklist qui sopra e non dare all'agente accessi che non gli servono.

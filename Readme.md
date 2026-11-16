@@ -13,8 +13,15 @@ KDE Plasma over RDP, hardened SSH, tmux, Docker, Chrome and your own KDE + Claud
 <p align="center">
 <a align="center" href="https://halitsever.github.io/claude-code-vps/">Documentation</a> ·
 <a href="https://halitsever.github.io/claude-code-vps/guide/claude-code-vps">VPS guide</a> ·
+<a href="https://halitsever.github.io/claude-code-vps/es/">Español</a> ·
+<a href="https://halitsever.github.io/claude-code-vps/de/">Deutsch</a> ·
 <a href="https://halitsever.github.io/claude-code-vps/fr/">Français</a> ·
+<a href="https://halitsever.github.io/claude-code-vps/pt/">Português</a> ·
 <a href="https://halitsever.github.io/claude-code-vps/it/">Italiano</a> ·
+<a href="https://halitsever.github.io/claude-code-vps/ru/">Русский</a> ·
+<a href="https://halitsever.github.io/claude-code-vps/zh/">简体中文</a> ·
+<a href="https://halitsever.github.io/claude-code-vps/ja/">日本語</a> ·
+<a href="https://halitsever.github.io/claude-code-vps/ko/">한국어</a> ·
 <a href="https://halitsever.github.io/claude-code-vps/tr/">Türkçe</a>
   </p>
 </p>

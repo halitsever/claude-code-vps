@@ -3,9 +3,9 @@ import { computed, onBeforeUnmount, onMounted, ref } from "vue";
 import { useData, withBase } from "vitepress";
 import AuroraCanvas from "./AuroraCanvas.vue";
 import BootScreen from "./BootScreen.vue";
-import { FAQ, type Lang } from "../faq";
+import { LOCALES } from "../i18n";
 
-const props = defineProps<{ lang?: Lang }>();
+const props = defineProps<{ lang?: string }>();
 const { isDark } = useData();
 
 const INSTALL = "curl -fsSL https://raw.githubusercontent.com/halitsever/claude-code-vps/main/install.sh | sudo bash";
@@ -24,196 +24,16 @@ const STEP_OUT = [
 ];
 const STACK = ["Ubuntu 26.04", "KDE Plasma 6", "xrdp", "tmux", "Claude Code", "Docker", "GitHub CLI", "Chrome", "ntfy.sh", "ufw", "systemd timers", "VitePress"];
 
-const STRINGS = {
-  en: {
-    title1: "A blank server in.",
-    title2: "Your Claude workstation out.",
-    lead: "One command installs Claude Code, a full KDE Plasma desktop over RDP, hardened SSH and the exact config I use every day. Change your setup at home, and the server follows.",
-    start: "Read the VPS guide",
-    github: "Star on GitHub",
-    copy: "Copy",
-    copied: "Copied",
-    stats: [["1", "command"], ["9", "setup steps"], ["~10", "minutes"], ["4", "languages"]],
-    toast: "Claude is waiting for your input",
-    stepsKicker: "Under the hood",
-    stepsTitle: "Nine steps. All readable bash.",
-    stepDesc: [
-      "apt upgrade, core tools, swap and unattended security updates.",
-      "A sudo user with your SSH keys copied over.",
-      "Key-only login, no root passwords. Written so it wins over cloud-init.",
-      "ufw with only SSH and RDP open.",
-      "KDE Plasma with the X11 session. No login screen on a headless box.",
-      "xrdp on port 53389, starting Plasma, without the colord prompts.",
-      "Docker, GitHub CLI and Chrome.",
-      "Claude Code native install, plus your ntfy topic.",
-      "Your KDE layout, Claude settings, hooks and tmux config.",
-    ],
-    stepsLink: "Read every step in detail",
-    bentoKicker: "What you get",
-    bentoTitle: "Everything a long-running agent needs.",
-    bento: [
-      { t: "Claude Code, always on", d: "tmux sessions that survive a dropped SSH, with your settings, hooks and status line already in place.", tag: "claude" },
-      { t: "Your KDE, not a default one", d: "Panels, shortcuts, tiling and Konsole profiles, captured at home and replayed on the server.", tag: "plasma" },
-      { t: "Locked down", d: "Key-only SSH, no root password login, ufw, unattended upgrades.", tag: "security" },
-      { t: "Pings your phone", d: "A Notification hook sends Claude's questions to ntfy.sh. Walk away.", tag: "ntfy" },
-      { t: "Dev stack", d: "Docker, GitHub CLI, Node, ripgrep, build tools and Chrome.", tag: "tools" },
-      { t: "Re-runnable", d: "Every step checks what is there first. Run it again any time, or just --only what you need.", tag: "idempotent" },
-    ],
-    flowKicker: "Stay in sync",
-    flowTitle: "Tweak at home. It shows up on the server.",
-    flowText: "The repo is the source of truth. Publish from your machine, the server pulls on a timer.",
-    flow: [
-      { cmd: "claude-vps publish", t: "Your machine", d: "Captures KDE and Claude config, scrubs home paths, commits and pushes." },
-      { cmd: "git push", t: "GitHub", d: "Plain files in dotfiles/home. Easy to diff, easy to review." },
-      { cmd: "claude-vps sync", t: "Server", d: "Pulls and applies, backing up what it replaces. Or autosync every 30 minutes." },
-    ],
-    ctaTitle: "Your next server is ten minutes away.",
-    ctaText: "Hetzner, DigitalOcean, a spare box at home: anything on Ubuntu 24.04 or newer.",
-    base: "",
-  },
-  fr: {
-    title1: "Un serveur vide en entrée.",
-    title2: "Votre poste Claude en sortie.",
-    lead: "Une seule commande installe Claude Code, un bureau KDE Plasma complet via RDP, un SSH durci et exactement la configuration que j'utilise au quotidien. Modifiez votre setup chez vous, le serveur suit.",
-    start: "Lire le guide VPS",
-    github: "Étoile sur GitHub",
-    copy: "Copier",
-    copied: "Copié",
-    stats: [["1", "commande"], ["9", "étapes"], ["~10", "minutes"], ["4", "langues"]],
-    toast: "Claude attend votre réponse",
-    stepsKicker: "Sous le capot",
-    stepsTitle: "Neuf étapes. Tout en bash lisible.",
-    stepDesc: [
-      "apt upgrade, outils de base, swap et mises à jour de sécurité automatiques.",
-      "Un utilisateur sudo avec vos clés SSH.",
-      "Connexion par clé uniquement, pas de mot de passe root. Prioritaire sur cloud-init.",
-      "ufw avec seulement SSH et RDP ouverts.",
-      "KDE Plasma en session X11. Pas d'écran de connexion sur un serveur.",
-      "xrdp sur le port 53389, qui lance Plasma, sans les invites colord.",
-      "Docker, GitHub CLI et Chrome.",
-      "Installation native de Claude Code et votre sujet ntfy.",
-      "Votre disposition KDE, vos réglages Claude, hooks et config tmux.",
-    ],
-    stepsLink: "Lire chaque étape en détail",
-    bentoKicker: "Ce que vous obtenez",
-    bentoTitle: "Tout ce dont un agent qui tourne longtemps a besoin.",
-    bento: [
-      { t: "Claude Code, toujours actif", d: "Des sessions tmux qui survivent à une coupure SSH, avec vos réglages, vos hooks et votre barre d'état.", tag: "claude" },
-      { t: "Votre KDE, pas celui par défaut", d: "Panneaux, raccourcis, tiling et profils Konsole, capturés chez vous et rejoués sur le serveur.", tag: "plasma" },
-      { t: "Verrouillé", d: "SSH par clé, pas de connexion root par mot de passe, ufw, mises à jour automatiques.", tag: "security" },
-      { t: "Prévient votre téléphone", d: "Un hook Notification envoie les questions de Claude sur ntfy.sh. Éloignez-vous.", tag: "ntfy" },
-      { t: "Outils de dev", d: "Docker, GitHub CLI, Node, ripgrep, outils de compilation et Chrome.", tag: "tools" },
-      { t: "Relançable", d: "Chaque étape vérifie d'abord l'existant. Relancez quand vous voulez, ou seulement --only ce qu'il faut.", tag: "idempotent" },
-    ],
-    flowKicker: "Restez synchronisé",
-    flowTitle: "Réglez chez vous. Ça apparaît sur le serveur.",
-    flowText: "Le dépôt fait foi. Publiez depuis votre machine, le serveur récupère à intervalles réguliers.",
-    flow: [
-      { cmd: "claude-vps publish", t: "Votre machine", d: "Capture la config KDE et Claude, nettoie les chemins personnels, commit et push." },
-      { cmd: "git push", t: "GitHub", d: "Des fichiers simples dans dotfiles/home. Faciles à comparer et à relire." },
-      { cmd: "claude-vps sync", t: "Serveur", d: "Récupère et applique, avec sauvegarde. Ou autosync toutes les 30 minutes." },
-    ],
-    ctaTitle: "Votre prochain serveur est à dix minutes.",
-    ctaText: "Hetzner, DigitalOcean, une machine qui traîne à la maison : tout ce qui tourne sous Ubuntu 24.04 ou plus récent.",
-    base: "/fr",
-  },
-  it: {
-    title1: "Entra un server vuoto.",
-    title2: "Esce la tua postazione Claude.",
-    lead: "Un solo comando installa Claude Code, un desktop KDE Plasma completo via RDP, un SSH blindato ed esattamente la configurazione che uso ogni giorno. Cambi il setup a casa, il server si adegua.",
-    start: "Leggi la guida VPS",
-    github: "Stella su GitHub",
-    copy: "Copia",
-    copied: "Copiato",
-    stats: [["1", "comando"], ["9", "passaggi"], ["~10", "minuti"], ["4", "lingue"]],
-    toast: "Claude sta aspettando una tua risposta",
-    stepsKicker: "Sotto il cofano",
-    stepsTitle: "Nove passaggi. Tutto bash leggibile.",
-    stepDesc: [
-      "apt upgrade, strumenti di base, swap e aggiornamenti di sicurezza automatici.",
-      "Un utente sudo con le tue chiavi SSH.",
-      "Accesso solo con chiave, niente password per root. Ha la precedenza su cloud-init.",
-      "ufw con solo SSH e RDP aperti.",
-      "KDE Plasma con sessione X11. Nessuna schermata di login su un server.",
-      "xrdp sulla porta 53389 che avvia Plasma, senza le richieste di colord.",
-      "Docker, GitHub CLI e Chrome.",
-      "Installazione nativa di Claude Code e il tuo topic ntfy.",
-      "Il tuo layout KDE, le impostazioni di Claude, gli hook e la config di tmux.",
-    ],
-    stepsLink: "Leggi ogni passaggio nel dettaglio",
-    bentoKicker: "Cosa ottieni",
-    bentoTitle: "Tutto ciò che serve a un agente che lavora a lungo.",
-    bento: [
-      { t: "Claude Code, sempre acceso", d: "Sessioni tmux che sopravvivono a un SSH caduto, con le tue impostazioni, gli hook e la status line già pronti.", tag: "claude" },
-      { t: "Il tuo KDE, non quello di default", d: "Pannelli, scorciatoie, tiling e profili Konsole, catturati a casa e riapplicati sul server.", tag: "plasma" },
-      { t: "Blindato", d: "SSH solo con chiave, niente login root con password, ufw, aggiornamenti automatici.", tag: "security" },
-      { t: "Avvisa il tuo telefono", d: "Un hook Notification manda le domande di Claude a ntfy.sh. Puoi allontanarti.", tag: "ntfy" },
-      { t: "Strumenti di sviluppo", d: "Docker, GitHub CLI, Node, ripgrep, strumenti di build e Chrome.", tag: "tools" },
-      { t: "Rieseguibile", d: "Ogni passaggio controlla prima cosa c'è già. Rilancialo quando vuoi, o solo --only quello che serve.", tag: "idempotent" },
-    ],
-    flowKicker: "Resta sincronizzato",
-    flowTitle: "Modifica a casa. Compare sul server.",
-    flowText: "Il repository è la fonte di verità. Pubblica dalla tua macchina, il server scarica a intervalli regolari.",
-    flow: [
-      { cmd: "claude-vps publish", t: "La tua macchina", d: "Cattura la config di KDE e Claude, ripulisce i percorsi personali, fa commit e push." },
-      { cmd: "git push", t: "GitHub", d: "File semplici in dotfiles/home. Facili da confrontare e da rivedere." },
-      { cmd: "claude-vps sync", t: "Server", d: "Scarica e applica, con backup. Oppure autosync ogni 30 minuti." },
-    ],
-    ctaTitle: "Il tuo prossimo server è a dieci minuti.",
-    ctaText: "Hetzner, DigitalOcean, una macchina inutilizzata a casa: qualsiasi cosa con Ubuntu 24.04 o successivo.",
-    base: "/it",
-  },
-  tr: {
-    title1: "Boş bir sunucu girer.",
-    title2: "Claude iş istasyonun çıkar.",
-    lead: "Tek komut Claude Code'u, RDP üzerinden tam bir KDE Plasma masaüstünü, sıkılaştırılmış SSH'ı ve her gün kullandığım ayarların birebir aynısını kurar. Evde ayarını değiştir, sunucu da takip etsin.",
-    start: "VPS rehberini oku",
-    github: "GitHub'da yıldızla",
-    copy: "Kopyala",
-    copied: "Kopyalandı",
-    stats: [["1", "komut"], ["9", "kurulum adımı"], ["~10", "dakika"], ["4", "dil"]],
-    toast: "Claude senden yanıt bekliyor",
-    stepsKicker: "Kaputun altı",
-    stepsTitle: "Dokuz adım. Hepsi okunabilir bash.",
-    stepDesc: [
-      "apt upgrade, temel araçlar, swap ve otomatik güvenlik güncellemeleri.",
-      "SSH anahtarların kopyalanmış bir sudo kullanıcısı.",
-      "Sadece anahtarla giriş, root'a parola yok. cloud-init ayarlarını ezecek şekilde yazılır.",
-      "Sadece SSH ve RDP açık bir ufw.",
-      "X11 oturumuyla KDE Plasma. Ekransız sunucuda giriş ekranı yok.",
-      "53389 portunda Plasma başlatan xrdp, colord parola soruları olmadan.",
-      "Docker, GitHub CLI ve Chrome.",
-      "Claude Code native kurulum ve ntfy topic'in.",
-      "KDE düzenin, Claude ayarların, hook'ların ve tmux config'in.",
-    ],
-    stepsLink: "Her adımı detaylı oku",
-    bentoKicker: "Neler geliyor",
-    bentoTitle: "Uzun süre çalışan bir ajanın ihtiyacı olan her şey.",
-    bento: [
-      { t: "Claude Code, hep açık", d: "SSH kopsa da yaşayan tmux oturumları; ayarların, hook'lar ve status line hazır.", tag: "claude" },
-      { t: "Varsayılan değil, senin KDE'n", d: "Paneller, kısayollar, tiling ve Konsole profilleri evden alınıp sunucuda aynen kurulur.", tag: "plasma" },
-      { t: "Kilitli", d: "Sadece anahtarla SSH, root'a parolayla giriş yok, ufw, otomatik güncellemeler.", tag: "security" },
-      { t: "Telefonuna haber verir", d: "Bir Notification hook'u Claude'un sorularını ntfy.sh'e yollar. Başından kalkabilirsin.", tag: "ntfy" },
-      { t: "Geliştirici araçları", d: "Docker, GitHub CLI, Node, ripgrep, derleme araçları ve Chrome.", tag: "tools" },
-      { t: "Tekrar çalıştırılabilir", d: "Her adım önce neyin kurulu olduğuna bakar. İstediğin zaman tekrar çalıştır ya da --only ile sadece gerekeni.", tag: "idempotent" },
-    ],
-    flowKicker: "Senkron kal",
-    flowTitle: "Evde ayarla, sunucuda görün.",
-    flowText: "Doğruluğun kaynağı repo. Kendi makinenden yayınla, sunucu belli aralıklarla çeksin.",
-    flow: [
-      { cmd: "claude-vps publish", t: "Senin makinen", d: "KDE ve Claude ayarlarını toplar, ev dizini yollarını temizler, commit edip push'lar." },
-      { cmd: "git push", t: "GitHub", d: "dotfiles/home altında düz dosyalar. Diff'i de incelemesi de kolay." },
-      { cmd: "claude-vps sync", t: "Sunucu", d: "Çeker ve yedek alarak uygular. İstersen autosync 30 dakikada bir yapar." },
-    ],
-    ctaTitle: "Bir sonraki sunucun on dakika uzağında.",
-    ctaText: "Hetzner, DigitalOcean, evdeki boş bir makine: Ubuntu 24.04 ve üstünü çalıştıran her şey.",
-    base: "/tr",
-  },
-} as const;
 
-const s = computed(() => STRINGS[props.lang ?? "en"]);
-const faq = computed(() => FAQ[props.lang ?? "en"]);
-const link = (p: string) => withBase(s.value.base + p);
+const locale = computed(() => LOCALES[!props.lang || props.lang === "en" ? "root" : props.lang] ?? LOCALES.root);
+const languageCount = String(Object.keys(LOCALES).length);
+const s = computed(() => {
+  const l = locale.value.landing;
+  const stats = l.stats.map((row, i) => (i === l.stats.length - 1 ? [languageCount, row[1]] : row));
+  return { ...l, stats };
+});
+const faq = computed(() => locale.value.faq);
+const link = (p: string) => withBase(locale.value.meta.prefix + p);
 
 const copied = ref(false);
 async function copy() {

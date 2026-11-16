@@ -1,5 +1,5 @@
 ---
-description: "Connectez Claude Code sur un serveur sans écran, gardez vos agents actifs dans tmux après une coupure SSH et recevez des notifications via ntfy.sh."
+description: "Connectez Claude Code sur un serveur sans écran, gardez vos agents actifs dans tmux après une coupure SSH et recevez des notifications sur mobile avec ntfy.sh."
 ---
 
 # Utiliser Claude Code
@@ -12,17 +12,17 @@ tmux new -s claude
 claude
 ```
 
-Claude Code affiche un lien de connexion. Ouvrez-le dans votre propre navigateur, validez, puis recollez le code. Les identifiants restent dans `~/.claude` sur le serveur.
+Claude Code affiche un lien de connexion. Ouvrez-le dans le navigateur de votre ordinateur, validez, puis collez le code dans le terminal. Les identifiants restent dans `~/.claude` sur le serveur.
 
-Vous préférez une clé API ? Exportez-la avant de lancer :
+Vous préférez une clé API ? Exportez-la avant de lancer Claude :
 
 ```bash
 echo 'export ANTHROPIC_API_KEY=sk-ant-...' >> ~/.bashrc
 ```
 
-## Le garder en vie avec tmux
+## Garder Claude actif avec tmux
 
-Un agent qui travaille pendant une heure ne doit pas mourir parce que votre portable s'est mis en veille. Lancez-le dans tmux et détachez-vous :
+Un agent qui travaille depuis une heure ne doit pas s'arrêter parce que votre portable s'est mis en veille. Lancez-le dans tmux, puis détachez-vous :
 
 | | |
 | --- | --- |
@@ -33,36 +33,36 @@ Un agent qui travaille pendant une heure ne doit pas mourir parce que votre port
 
 Le `.tmux.conf` fourni active la souris, un historique de 50 000 lignes et les 256 couleurs.
 
-Vous pouvez aussi ouvrir Konsole sur le bureau et y lancer `tmux attach -t claude`. Même session, écran plus grand.
+Vous pouvez aussi ouvrir Konsole sur le bureau et lancer `tmux attach -t claude`. Vous retrouvez la même session, sur un plus grand écran.
 
 ## Notifications sur le téléphone
 
-`~/.claude/settings.json` enregistre un hook `Notification`, `~/.claude/hooks/notify.sh`, qui publie sur [ntfy.sh](https://ntfy.sh) dès que Claude vous attend.
+`~/.claude/settings.json` déclare un hook `Notification`, `~/.claude/hooks/notify.sh`. Il envoie un message sur [ntfy.sh](https://ntfy.sh) chaque fois que Claude attend votre réponse.
 
-1. Installez l'appli ntfy sur votre téléphone et abonnez-vous à un topic que personne ne devinera, par exemple `claude-7f3k9q2m`.
-2. Mettez le même topic sur le serveur :
+1. Installez l'application ntfy sur votre téléphone et abonnez-vous à un sujet que personne ne devinera, par exemple `claude-7f3k9q2m`.
+2. Enregistrez le même sujet sur le serveur :
 
    ```bash
    echo claude-7f3k9q2m > ~/.claude/ntfy-topic && chmod 600 ~/.claude/ntfy-topic
    ```
 
-   Ou passez `--ntfy-topic` pendant l'installation.
+   Vous pouvez aussi passer `--ntfy-topic` pendant l'installation.
 
-Le topic est un secret : quiconque le connaît peut lire vos notifications. C'est pour ça qu'il vit dans son propre fichier et n'est jamais capturé dans le dépôt.
+Le sujet est un secret : toute personne qui le connaît peut lire vos notifications. C'est pour ça qu'il est dans un fichier à part et qu'il n'est jamais copié dans le dépôt.
 
 ## Ce qui est déjà configuré
 
 Depuis `dotfiles/home/.claude` :
 
-- **`settings.json`** : thème sombre, TUI plein écran, une barre d'état avec le modèle, le dossier, la branche git et l'usage du contexte, les plugins que j'utilise et le hook de notification
-- **`CLAUDE.md`** : un fichier vide pour vos propres instructions globales. Il n'est créé que s'il manque, ce que vous y écrivez n'est donc jamais écrasé
+- **`settings.json`** : thème sombre, interface en plein écran, une barre d'état avec le modèle, le dossier, la branche git et l'utilisation du contexte, les plugins que j'utilise et le hook de notification
+- **`CLAUDE.md`** : un fichier vide pour vos propres instructions globales. Il n'est créé que s'il n'existe pas, donc ce que vous y écrivez n'est jamais écrasé
 - **`hooks/notify.sh`** : le hook ntfy décrit plus haut
 
-Modifiez-les sur votre propre machine puis lancez `claude-vps publish`. Voir [Synchroniser la config](/fr/guide/sync).
+Modifiez l'un de ces fichiers sur votre ordinateur, puis lancez `claude-vps publish`. Voir [Synchroniser la config](/fr/guide/sync).
 
 ## Mettre à jour Claude Code
 
-L'installation native se met à jour toute seule en arrière-plan. Pour forcer :
+L'installation officielle se met à jour toute seule en arrière-plan. Pour forcer une mise à jour :
 
 ```bash
 claude update

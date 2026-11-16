@@ -1,31 +1,31 @@
 ---
-description: "Collegati al desktop KDE Plasma del tuo VPS Claude Code via RDP da Windows, macOS, Linux, iOS o Android, direttamente o con un tunnel SSH."
+description: "Collegati in RDP al desktop KDE Plasma del tuo VPS con Claude Code da Windows, macOS, Linux, iOS o Android, direttamente o tramite un tunnel SSH."
 ---
 
 # Desktop remoto
 
-Il server esegue una sessione KDE Plasma completa via RDP. Parte quando ti colleghi e resta attiva quando ti scolleghi, così la volta dopo trovi le finestre dove le avevi lasciate.
+Il server fa girare una sessione KDE Plasma completa, a cui accedi in RDP. Parte quando ti colleghi e continua a girare quando ti scolleghi. Al prossimo accesso trovi le finestre dove le avevi lasciate.
 
 ## Client
 
 | Piattaforma | Client |
 | --- | --- |
 | Windows | Connessione Desktop remoto (`mstsc`), già incluso |
-| macOS, iOS, iPadOS | Windows App (prima Microsoft Remote Desktop) |
+| macOS, iOS, iPadOS | Windows App (il vecchio Microsoft Remote Desktop) |
 | Android | Windows App o aRDP |
-| Linux | Remmina, o KRDC su KDE |
+| Linux | Remmina, oppure KRDC su KDE |
 
-Collegati a `<server-ip>:53389`, scegli **Xorg** se xrdp ti chiede il tipo di sessione e fai il login con utente e password della workstation.
+Collegati a `<server-ip>:53389`. Se xrdp chiede il tipo di sessione, scegli **Xorg**. Poi inserisci nome utente e password del tuo utente.
 
 ## Tramite un tunnel SSH
 
-RDP è cifrato, ma una porta aperta su internet viene comunque scansionata. Se hai installato con `--rdp-private`, o semplicemente preferisci così, usa un tunnel:
+RDP è cifrato, ma una porta aperta su internet viene comunque scansionata di continuo. Se hai installato con `--rdp-private`, o se semplicemente preferisci, usa un tunnel:
 
 ```bash
 ssh -N -L 3389:localhost:53389 dev@<server-ip>
 ```
 
-Poi collega il client RDP a `localhost:3389`. All'esterno resta esposto solo SSH.
+Poi collega il client RDP a `localhost:3389`. Su internet resta esposto solo SSH.
 
 Per chiudere una porta RDP già aperta:
 
@@ -33,13 +33,13 @@ Per chiudere una porta RDP già aperta:
 sudo ufw delete allow 53389/tcp
 ```
 
-## Consigli per lo schermo
+## Consigli sullo schermo
 
-- **La risoluzione** segue la finestra del client. Ridimensiona, ricollegati, fatto.
-- **HiDPI**: imposta la scala in Impostazioni di sistema, Schermo. Resta salvata per utente.
+- **Risoluzione**: segue la dimensione della finestra del client. Ridimensiona, ricollegati e basta.
+- **Schermi ad alta risoluzione**: imposta la scala in Impostazioni di sistema, Schermo. L'impostazione resta salvata per ogni utente.
 - **Connessione lenta**: abbassa la profondità colore a 16 bit nel client e disattiva le animazioni in Impostazioni di sistema, Comportamento dello spazio di lavoro.
-- **Gli appunti** funzionano in entrambe le direzioni per il testo, senza configurare nulla.
+- **Appunti**: il copia e incolla del testo funziona in entrambe le direzioni, senza configurare niente.
 
 ## Una sessione per utente
 
-xrdp ti ricollega alla sessione già in esecuzione. Con Plasma non puoi fare il login in locale e via RDP con lo stesso utente nello stesso momento. Su un server non succede mai, perché non c'è un display locale.
+xrdp ti ricollega alla sessione già aperta. Con Plasma lo stesso utente non può essere collegato in locale e in RDP nello stesso momento. Su un server non succede, perché non c'è uno schermo locale.

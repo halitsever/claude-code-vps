@@ -4,28 +4,28 @@ description: "Claude Code VPS'indeki KDE Plasma masaüstüne Windows, macOS, Lin
 
 # Uzak masaüstü
 
-Sunucu RDP üzerinden tam bir KDE Plasma oturumu çalıştırır. Bağlandığında başlar, bağlantıyı kestiğinde çalışmaya devam eder; bir sonraki sefere pencereler bıraktığın yerde durur.
+Sunucuda RDP ile bağlanılan tam bir KDE Plasma oturumu çalışır. Oturum sen bağlandığında başlar, bağlantıyı kestiğinde kapanmaz. Bir sonraki bağlantında pencereler bıraktığın yerde durur.
 
 ## İstemciler
 
 | Platform | İstemci |
 | --- | --- |
-| Windows | Remote Desktop Connection (`mstsc`), sistemle gelir |
+| Windows | Uzak Masaüstü Bağlantısı (`mstsc`), sistemle gelir |
 | macOS, iOS, iPadOS | Windows App (eski adıyla Microsoft Remote Desktop) |
-| Android | Windows App veya aRDP |
-| Linux | Remmina, KDE'de KRDC |
+| Android | Windows App ya da aRDP |
+| Linux | Remmina, KDE kullanıyorsan KRDC |
 
-`<server-ip>:53389` adresine bağlan, xrdp oturum türü sorarsa **Xorg** seç ve iş istasyonu kullanıcınla parolanla giriş yap.
+`<server-ip>:53389` adresine bağlan. xrdp oturum türü sorarsa **Xorg** seç ve kurulumda oluşturduğun kullanıcı adı ve parolayla giriş yap.
 
-## SSH tüneliyle
+## SSH tüneliyle bağlanmak
 
-RDP şifreli, ama internete açık bir port yine de taranır. `--rdp-private` ile kurduysan ya da sadece böyle tercih ediyorsan tünelle:
+RDP bağlantısı şifrelidir. Ama internete açık bir port yine de sürekli taranır. `--rdp-private` ile kurduysan ya da portu açık bırakmak istemiyorsan SSH tüneli kullan:
 
 ```bash
 ssh -N -L 3389:localhost:53389 dev@<server-ip>
 ```
 
-Sonra RDP istemcini `localhost:3389` adresine bağla. Dışarıya SSH dışında hiçbir şey açık kalmaz.
+Sonra RDP istemcini `localhost:3389` adresine bağla. Bu şekilde dışarıya sadece SSH açık kalır.
 
 Daha önce açtığın RDP portunu kapatmak için:
 
@@ -33,13 +33,13 @@ Daha önce açtığın RDP portunu kapatmak için:
 sudo ufw delete allow 53389/tcp
 ```
 
-## Ekran ipuçları
+## Görüntü ipuçları
 
-- **Çözünürlük** istemci penceresini takip eder. Boyutlandır, yeniden bağlan, tamam.
-- **HiDPI**: ölçeği Sistem Ayarları, Ekran bölümünden ayarla. Kullanıcı bazında kalıcıdır.
-- **Yavaş bağlantı**: istemcide renk derinliğini 16 bit'e düşür ve Sistem Ayarları, Çalışma Alanı Davranışı'ndan animasyonları kapat.
-- **Pano**, metin için iki yönde de hazır çalışır.
+- **Çözünürlük** istemci penceresine göre ayarlanır. Pencereyi büyüt ya da küçült, sonra yeniden bağlan.
+- **Yüksek DPI ekranlar**: Sistem Ayarları, Ekran bölümünden ölçeği ayarla. Ayar kullanıcıya özel kaydedilir.
+- **Yavaş bağlantı**: İstemcinde renk derinliğini 16 bit'e düşür. Sistem Ayarları, Çalışma Alanı Davranışı bölümünden animasyonları kapat.
+- **Pano** metin için iki yönde de kurulumdan hemen sonra çalışır.
 
-## Kullanıcı başına tek oturum
+## Kullanıcı başına bir oturum
 
-xrdp seni çalışan oturumuna geri bağlar. Aynı kullanıcıyla hem yerelde hem RDP üzerinden aynı anda giriş yapmak Plasma'da çalışmaz. Yerel ekranı olmayan bir sunucuda bu zaten hiç olmaz.
+xrdp seni çalışan oturumuna geri bağlar. Plasma'da aynı kullanıcıyla hem fiziksel ekrandan hem RDP'den aynı anda giriş yapılamaz. Sunucuda fiziksel ekran olmadığı için bu durumla zaten karşılaşmazsın.

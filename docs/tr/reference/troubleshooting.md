@@ -1,10 +1,10 @@
 ---
-description: "Claude Code VPS'inde sık görülen sorunları çöz: siyah RDP ekranı, colord parola sorusu, SSH'tan kilitlenme, claude bulunamadı ve sync hataları."
+description: "Claude Code VPS'inde sık görülen sorunların çözümü: RDP'de siyah ekran, xrdp renk profili sorusu, SSH'a girememek, claude bulunamadı ve sync hataları."
 ---
 
 # Sorun giderme
 
-İlk olarak:
+İlk olarak şunu çalıştır:
 
 ```bash
 claude-vps doctor
@@ -12,32 +12,32 @@ claude-vps doctor
 
 ## RDP siyah ekran gösterip bağlantıyı kesiyor
 
-Genelde `~/.xsession` eksiktir ya da o kullanıcı için Plasma zaten çalışıyordur.
+Genelde ya `~/.xsession` dosyası yoktur ya da o kullanıcı için Plasma zaten çalışıyordur.
 
 ```bash
-cat ~/.xsession                      # şununla bitmeli: exec startplasma-x11
-loginctl list-sessions               # kullanıcının eski bir oturumu mu var? sonlandır:
+cat ~/.xsession                      # son satır şu olmalı: exec startplasma-x11
+loginctl list-sessions               # kullanıcının eski bir oturumu var mı? varsa kapat:
 loginctl terminate-user $USER
 ```
 
-Loglar `~/.xsession-errors` ve `/var/log/xrdp-sesman.log` içinde.
+Loglar `~/.xsession-errors` ve `/var/log/xrdp-sesman.log` dosyalarında.
 
 ## "Authentication is required to create a color managed device"
 
-Bunu `rdp` adımındaki polkit kuralı halleder. Kullanıcının `users` grubunda olduğundan emin ol (`id`), sonra tekrar bağlan.
+Bu soruyu `rdp` adımındaki polkit kuralı engeller. Kullanıcının `users` grubunda olduğunu kontrol et (`id`), sonra yeniden bağlan.
 
 ## RDP'ye hiç bağlanamıyorum
 
 ```bash
-sudo ss -tlnp | grep xrdp      # 53389'u dinliyor mu?
-sudo ufw status                # port açık mı?
+sudo ss -tlnp | grep xrdp      # 53389 portunu dinliyor mu?
+sudo ufw status                # porta izin verilmiş mi?
 ```
 
-Cloud sağlayıcının da sunucunun önünde kendi firewall'u olabilir.
+Bulut sağlayıcının sunucunun önünde ayrı bir güvenlik duvarı da olabilir. Onun ayarlarına da bak.
 
-## SSH'tan dışarıda kaldım
+## SSH'a giremiyorum
 
-`ssh` adımı parola ile girişi sadece kullanıcının anahtarı varsa kapatır, ama yine de olduysa sağlayıcının web konsolunu kullan, sonra:
+`ssh` adımı parolayla girişi sadece kullanıcının bir anahtarı varsa kapatır. Yine de dışarıda kaldıysan sağlayıcının web konsolundan gir ve şunu çalıştır:
 
 ```bash
 sudo rm /etc/ssh/sshd_config.d/10-claude-vps.conf && sudo systemctl reload ssh
@@ -45,20 +45,20 @@ sudo rm /etc/ssh/sshd_config.d/10-claude-vps.conf && sudo systemctl reload ssh
 
 ## `claude: command not found`
 
-Native installer onu `~/.local/bin` altına koyar. Ubuntu bu klasörü, klasör var olduğu sürece girişte `PATH`'e ekler; çıkış yapıp tekrar gir ya da `source ~/.profile` çalıştır.
+Resmi kurulum Claude'u `~/.local/bin` içine koyar. Ubuntu bu klasörü, klasör varsa girişte `PATH`'e ekler. Çıkıp tekrar gir ya da `source ~/.profile` çalıştır.
 
 ## `claude-vps sync` "Not possible to fast-forward" diyor
 
-Sunucudaki klonda yerel değişiklikler var. Sunucunun sadece pull yapması gerekiyor:
+Sunucudaki repoda yerel değişiklikler var. Sunucu sadece çekmeli, kendisi değişiklik yapmamalı:
 
 ```bash
 git -C /opt/claude-vps status
 git -C /opt/claude-vps reset --hard origin/main
 ```
 
-## Eski bir dosyayı geri yüklemek
+## Eski bir dosyayı geri almak
 
-Her `apply` üzerine yazdığı dosyaların yedeğini alır:
+Her `apply` üzerine yazdığı dosyaları yedekler:
 
 ```bash
 ls ~/.local/state/claude-vps/

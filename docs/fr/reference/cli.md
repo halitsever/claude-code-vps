@@ -1,5 +1,5 @@
 ---
-description: "Référence de toutes les commandes et options de claude-vps : setup, sync, autosync, doctor, capture, publish, apply et variables d'install.sh."
+description: "Toutes les commandes et options de claude-vps : setup, sync, autosync, doctor, capture, publish et apply, avec les variables d'install.sh."
 ---
 
 # CLI
@@ -14,9 +14,9 @@ claude-vps <command> [options]
 | `sync` | serveur | `git pull`, puis `apply` |
 | `autosync on\|off` | serveur | Timer systemd utilisateur qui lance `sync` toutes les 30 minutes |
 | `doctor` | serveur | Vérifie Claude, tmux, Docker, xrdp, Plasma, ufw, ntfy et autosync |
-| `capture` | votre machine | Copie les fichiers listés dans `dotfiles/manifest.txt` vers `dotfiles/home` |
-| `publish` | votre machine | `capture`, commit et push |
-| `apply` | partout | Écrit `dotfiles/home` dans `$HOME`, en sauvegardant ce qu'elle remplace |
+| `capture` | votre ordinateur | Copie les fichiers listés dans `dotfiles/manifest.txt` vers `dotfiles/home` |
+| `publish` | votre ordinateur | `capture`, puis commit et push |
+| `apply` | partout | Copie `dotfiles/home` dans `$HOME`, en gardant une copie de ce qu'il remplace |
 | `version` | partout | Affiche la version |
 
 ## setup
@@ -25,26 +25,26 @@ claude-vps <command> [options]
 sudo claude-vps setup [options]
 ```
 
-| Option | Défaut | |
+| Option | Par défaut | |
 | --- | --- | --- |
-| `-u, --user NAME` | `$SUDO_USER`, ou demandé | Utilisateur du poste de travail, créé s'il n'existe pas |
-| `--rdp-port PORT` | `53389` | Port xrdp |
+| `-u, --user NAME` | `$SUDO_USER`, sinon demandé | Votre utilisateur, créé s'il n'existe pas |
+| `--rdp-port PORT` | `53389` | Port de xrdp |
 | `--rdp-private` | désactivé | N'ouvre pas le port RDP dans ufw |
-| `--ntfy-topic NAME` | demandé | Topic ntfy.sh pour les notifications |
-| `--timezone TZ` | inchangé | par ex. `Europe/Istanbul` |
+| `--ntfy-topic NAME` | demandé | Sujet ntfy.sh pour les notifications |
+| `--timezone TZ` | inchangé | Par exemple `Europe/Istanbul` |
 | `--no-desktop` | désactivé | Équivaut à `--skip desktop,rdp` |
 | `--skip a,b` | | Étapes à sauter |
-| `--only a,b` | | Ne lance que ces étapes |
-| `-y, --yes` | désactivé | Aucune question. L'utilisateur par défaut est `dev`, le mot de passe est généré |
-| `-n, --dry-run` | désactivé | Affiche les commandes au lieu de les exécuter |
+| `--only a,b` | | Lance seulement ces étapes |
+| `-y, --yes` | désactivé | Aucune question. L'utilisateur est `dev` et le mot de passe est généré |
+| `-n, --dry-run` | désactivé | Affiche les commandes au lieu de les lancer |
 
-Étapes, dans l'ordre : `base user ssh firewall desktop rdp apps claude dotfiles`.
+Les étapes, dans l'ordre : `base user ssh firewall desktop rdp apps claude dotfiles`.
 
 ## install.sh
 
-Le script d'amorçage lit trois variables d'environnement :
+Le script d'installation lit trois variables d'environnement :
 
-| Variable | Défaut |
+| Variable | Par défaut |
 | --- | --- |
 | `CLAUDE_VPS_REPO` | `https://github.com/halitsever/claude-code-vps.git` |
 | `CLAUDE_VPS_DIR` | `/opt/claude-vps` |

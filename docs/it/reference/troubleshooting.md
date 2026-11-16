@@ -1,22 +1,22 @@
 ---
-description: "Risolvi i problemi comuni di un VPS Claude Code: schermo RDP nero, richieste colord, blocco SSH, claude non trovato ed errori di sync."
+description: "Risolvi i problemi più comuni di un VPS con Claude Code: schermo RDP nero, richiesta di colord, SSH bloccato, claude non trovato ed errori di sincronizzazione."
 ---
 
-# Risoluzione dei problemi
+# Risoluzione problemi
 
-Parti da qui:
+Inizia con:
 
 ```bash
 claude-vps doctor
 ```
 
-## RDP mostra uno schermo nero e si disconnette
+## RDP mostra uno schermo nero e si scollega
 
 Di solito manca `~/.xsession`, oppure Plasma è già in esecuzione per quell'utente.
 
 ```bash
-cat ~/.xsession                      # should end with: exec startplasma-x11
-loginctl list-sessions               # an old session for your user? terminate it:
+cat ~/.xsession                      # deve finire con: exec startplasma-x11
+loginctl list-sessions               # c'è una vecchia sessione del tuo utente? chiudila:
 loginctl terminate-user $USER
 ```
 
@@ -24,20 +24,20 @@ I log sono in `~/.xsession-errors` e `/var/log/xrdp-sesman.log`.
 
 ## "Authentication is required to create a color managed device"
 
-Ci pensa la regola polkit del passaggio `rdp`. Controlla che il tuo utente sia nel gruppo `users` (`id`), poi ricollegati.
+La regola polkit del passaggio `rdp` risolve questo problema. Controlla che il tuo utente sia nel gruppo `users` (con `id`), poi ricollegati.
 
-## Non riesco proprio a collegarmi via RDP
+## Non riesco a collegarmi in RDP
 
 ```bash
-sudo ss -tlnp | grep xrdp      # listening on 53389?
-sudo ufw status                # port allowed?
+sudo ss -tlnp | grep xrdp      # in ascolto sulla 53389?
+sudo ufw status                # porta permessa?
 ```
 
-Anche il tuo provider cloud potrebbe avere un suo firewall davanti al server.
+Anche il tuo provider potrebbe avere un suo firewall davanti al server.
 
-## Sono rimasto chiuso fuori da SSH
+## Non riesco più ad accedere in SSH
 
-Il passaggio `ssh` disattiva il login con password solo se il tuo utente ha una chiave, ma se succede comunque, usa la console web del provider e poi:
+Il passaggio `ssh` disattiva l'accesso con password solo se il tuo utente ha una chiave. Se resti comunque chiuso fuori, usa la console web del provider ed esegui:
 
 ```bash
 sudo rm /etc/ssh/sshd_config.d/10-claude-vps.conf && sudo systemctl reload ssh
@@ -45,20 +45,20 @@ sudo rm /etc/ssh/sshd_config.d/10-claude-vps.conf && sudo systemctl reload ssh
 
 ## `claude: command not found`
 
-L'installer nativo lo mette in `~/.local/bin`. Ubuntu aggiunge quella cartella al `PATH` al login, se esiste, quindi esci e rientra oppure lancia `source ~/.profile`.
+L'installer ufficiale mette `claude` in `~/.local/bin`. Ubuntu aggiunge quella cartella al `PATH` all'accesso, se esiste. Esci e rientra, oppure esegui `source ~/.profile`.
 
-## `claude-vps sync` dice "Not possible to fast-forward"
+## `claude-vps sync` mostra "Not possible to fast-forward"
 
-Il clone sul server ha modifiche locali. Il server dovrebbe solo fare pull:
+La copia del repository sul server ha modifiche locali. Il server deve solo scaricare le modifiche, non crearne:
 
 ```bash
 git -C /opt/claude-vps status
 git -C /opt/claude-vps reset --hard origin/main
 ```
 
-## Ripristinare un vecchio file
+## Recuperare un vecchio file
 
-Ogni `apply` fa il backup di ciò che sovrascrive:
+Ogni `apply` salva una copia di quello che sovrascrive:
 
 ```bash
 ls ~/.local/state/claude-vps/

@@ -1,5 +1,5 @@
 ---
-description: "claude-vps'in tüm komut ve seçenekleri: setup, sync, autosync, doctor, capture, publish, apply ve install.sh değişkenleri."
+description: "Claude Code VPS kurulumu için claude-vps komutları ve seçenekleri: setup, sync, autosync, doctor, capture, publish, apply ve install.sh değişkenleri."
 ---
 
 # CLI
@@ -10,14 +10,14 @@ claude-vps <command> [options]
 
 | Komut | Nerede | Ne yapar |
 | --- | --- | --- |
-| `setup` | sunucu, root olarak | Kurulum adımlarını çalıştırır |
-| `sync` | sunucu | `git pull`, ardından `apply` |
-| `autosync on\|off` | sunucu | `sync` komutunu 30 dakikada bir çalıştıran systemd user timer |
-| `doctor` | sunucu | Claude, tmux, Docker, xrdp, Plasma, ufw, ntfy ve autosync durumunu kontrol eder |
-| `capture` | kendi makinen | `dotfiles/manifest.txt` içindeki dosyaları `dotfiles/home` altına kopyalar |
-| `publish` | kendi makinen | `capture`, commit ve push |
-| `apply` | her yerde | `dotfiles/home` içeriğini `$HOME` altına yazar, üzerine yazdıklarını yedekler |
-| `version` | her yerde | Sürümü yazar |
+| `setup` | sunucuda, root olarak | Kurulum adımlarını çalıştırır |
+| `sync` | sunucuda | `git pull`, ardından `apply` |
+| `autosync on\|off` | sunucuda | `sync` komutunu 30 dakikada bir çalıştıran systemd kullanıcı zamanlayıcısı |
+| `doctor` | sunucuda | Claude, tmux, Docker, xrdp, Plasma, ufw, ntfy ve autosync durumunu kontrol eder |
+| `capture` | senin bilgisayarında | `dotfiles/manifest.txt` içindeki dosyaları `dotfiles/home` klasörüne kopyalar |
+| `publish` | senin bilgisayarında | `capture`, commit ve push |
+| `apply` | her yerde | `dotfiles/home` içeriğini `$HOME` klasörüne yazar, üzerine yazdığı dosyaları yedekler |
+| `version` | her yerde | Sürümü gösterir |
 
 ## setup
 
@@ -27,22 +27,22 @@ sudo claude-vps setup [options]
 
 | Seçenek | Varsayılan | |
 | --- | --- | --- |
-| `-u, --user NAME` | `$SUDO_USER` ya da sorar | İş istasyonu kullanıcısı, yoksa oluşturulur |
+| `-u, --user NAME` | `$SUDO_USER`, yoksa sorar | Kullanıcı adı. Kullanıcı yoksa oluşturulur |
 | `--rdp-port PORT` | `53389` | xrdp portu |
-| `--rdp-private` | kapalı | RDP portunu ufw'de açma |
+| `--rdp-private` | kapalı | RDP portunu ufw'de açmaz |
 | `--ntfy-topic NAME` | sorar | Bildirimler için ntfy.sh topic'i |
-| `--timezone TZ` | değişmez | örn. `Europe/Istanbul` |
+| `--timezone TZ` | değişmez | örneğin `Europe/Istanbul` |
 | `--no-desktop` | kapalı | `--skip desktop,rdp` ile aynı |
 | `--skip a,b` | | Atlanacak adımlar |
-| `--only a,b` | | Sadece bu adımları çalıştır |
-| `-y, --yes` | kapalı | Soru sorma. Kullanıcı varsayılan olarak `dev`, parola üretilir |
-| `-n, --dry-run` | kapalı | Komutları çalıştırmak yerine yazdır |
+| `--only a,b` | | Sadece bu adımları çalıştırır |
+| `-y, --yes` | kapalı | Hiçbir şey sormaz. Kullanıcı adı `dev` olur, parola otomatik üretilir |
+| `-n, --dry-run` | kapalı | Komutları çalıştırmaz, sadece ekrana yazar |
 
-Adımlar, sırasıyla: `base user ssh firewall desktop rdp apps claude dotfiles`.
+Adımlar sırasıyla: `base user ssh firewall desktop rdp apps claude dotfiles`.
 
 ## install.sh
 
-Bootstrap script'i üç ortam değişkeni okur:
+Kurulum script'i üç ortam değişkenine bakar:
 
 | Değişken | Varsayılan |
 | --- | --- |
@@ -50,4 +50,4 @@ Bootstrap script'i üç ortam değişkeni okur:
 | `CLAUDE_VPS_DIR` | `/opt/claude-vps` |
 | `CLAUDE_VPS_BRANCH` | `main` |
 
-`bash -s --` sonrasındaki her şey `setup` komutuna geçirilir.
+`bash -s --` sonrasına yazdığın her şey `setup` komutuna aktarılır.

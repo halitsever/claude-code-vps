@@ -1,32 +1,32 @@
 ---
-description: "claude-vps'i tek komutla temiz bir Ubuntu 24.04 veya 26.04 VPS'e kur. Yaklaşık on dakikada Claude Code, RDP üzerinden KDE Plasma ve güvenli SSH hazır."
+description: "claude-vps'i boş bir Ubuntu 24.04 veya 26.04 VPS'e tek komutla kur. Claude Code, RDP ile KDE Plasma ve güvenli SSH yaklaşık on dakikada hazır."
 ---
 
 # Başlarken
 
-claude-vps, temiz bir Ubuntu sunucuyu Claude Code'u çalıştırdığım makineye çevirir: sudo yetkili bir kullanıcı, sadece anahtarla SSH, firewall, RDP ile bağlandığın bir KDE Plasma masaüstü, Docker, Chrome ve ayarları, hook'ları ve KDE düzeniyle birlikte Claude Code'un kendisi.
+claude-vps boş bir Ubuntu sunucusunu benim Claude Code için kullandığım makineye çevirir. Kurulum sonunda şunlar hazır olur: sudo yetkili bir kullanıcı, sadece anahtarla girilen SSH, güvenlik duvarı, RDP ile bağlandığın bir KDE Plasma masaüstü, Docker, Chrome ve Claude Code. Claude Code benim ayarlarım, hook'larım ve KDE düzenimle birlikte gelir.
 
 ## Gerekenler
 
 | | |
 | --- | --- |
-| **İşletim sistemi** | Ubuntu 24.04 LTS veya üstü (ben 26.04 kullanıyorum) |
-| **CPU / RAM** | Plasma için en az 2 vCPU ve 4 GB. 4 vCPU / 8 GB gerçek bir masaüstü gibi hissettirir |
-| **Disk** | 25 GB veya fazlası |
-| **Erişim** | SSH ile root erişimi, tercihen SSH anahtarın sunucuda hazır |
-| **Mimari** | amd64'te her şey kurulur. arm64 çalışır ama Chrome atlanır |
+| **İşletim sistemi** | Ubuntu 24.04 LTS veya daha yenisi (ben 26.04 kullanıyorum) |
+| **CPU / RAM** | Plasma için en az 2 vCPU ve 4 GB. 4 vCPU / 8 GB ile gerçek bir masaüstü gibi hissettirir |
+| **Disk** | 25 GB veya daha fazla |
+| **Erişim** | SSH ile root erişimi. SSH anahtarının sunucuda önceden ekli olması en iyisi |
+| **Mimari** | amd64'te her şey kurulur. arm64'te de çalışır ama Chrome kurulmaz |
 
-Sonrasında Claude Code'a giriş yapmak için bir Claude Pro veya Max planı ya da Anthropic API anahtarı.
+Kurulumdan sonra Claude Code'a giriş yapmak için bir Claude Pro ya da Max planı veya bir Anthropic API anahtarı gerekir.
 
 ## Kurulum
 
-Sunucuya root (veya sudo yetkili bir kullanıcı) olarak SSH ile bağlan ve şunu çalıştır:
+Sunucuya root olarak (ya da sudo yetkili bir kullanıcıyla) SSH ile bağlan ve şunu çalıştır:
 
 ```bash
 curl -fsSL https://raw.githubusercontent.com/halitsever/claude-code-vps/main/install.sh | sudo bash
 ```
 
-Bu komut repoyu `/opt/claude-vps` altına klonlar ve `claude-vps setup` çalıştırır. Sana iki şey sorulur: iş istasyonu için kullanıcı adı ve bu kullanıcının parolası (sudo ve RDP girişi için). Parolayı boş bırakırsan bir tane üretilir ve sonda gösterilir.
+Script bu repoyu `/opt/claude-vps` klasörüne klonlar ve `claude-vps setup` komutunu çalıştırır. Sana iki şey sorulur: kullanıcı adı ve bu kullanıcının parolası. Parola hem sudo hem de RDP girişi için kullanılır. Parolayı boş bırakırsan bir tane üretilir ve kurulumun sonunda gösterilir.
 
 Soruları atlamak için seçenekleri `bash -s --` sonrasına yaz:
 
@@ -35,15 +35,15 @@ curl -fsSL https://raw.githubusercontent.com/halitsever/claude-code-vps/main/ins
   | sudo bash -s -- --user dev --timezone Europe/Istanbul --ntfy-topic my-secret-topic --yes
 ```
 
-Bütün seçenekler [CLI referansında](/tr/reference/cli).
+Bütün seçenekler [CLI referansında](/tr/reference/cli) var.
 
 ::: tip Önce dene
-`--dry-run` her komutu çalıştırmadan ekrana yazar.
+`--dry-run` hiçbir şey çalıştırmadan çalışacak komutları ekrana yazar.
 :::
 
-## Bittiğinde
+## Kurulum bitince
 
-Şöyle bir özet görürsün:
+Şuna benzer bir özet görürsün:
 
 ```text
   Done.
@@ -54,17 +54,17 @@ Bütün seçenekler [CLI referansında](/tr/reference/cli).
   Updates    claude-vps sync   (or: claude-vps autosync on)
 ```
 
-1. **Yeni kullanıcıyla SSH ile bağlan.** Root'un SSH anahtarları kopyalandı, aynı anahtar çalışır.
-2. **Claude Code'u tmux içinde başlat** ve giriş yap. Bkz. [Claude Code'u çalıştırmak](/tr/guide/claude-code).
-3. **Masaüstünü aç**, herhangi bir RDP istemcisiyle. Bkz. [Uzak masaüstü](/tr/guide/remote-desktop).
+1. **Yeni kullanıcıyla SSH'a gir.** Root'un SSH anahtarları bu kullanıcıya kopyalandı, aynı anahtar çalışır.
+2. **tmux içinde Claude Code'u başlat** ve giriş yap. Detaylar [Claude Code'u çalıştırmak](/tr/guide/claude-code) sayfasında.
+3. **Masaüstünü aç.** Herhangi bir RDP istemcisi olur. Detaylar [Uzak masaüstü](/tr/guide/remote-desktop) sayfasında.
 
 ## Kendi ayarlarını kullanmak
 
-Varsayılan olarak sunucu `dotfiles/home` altındaki benim KDE ve Claude ayarlarımı alır. Kendi ayarlarını kullanmak için repoyu fork'la, kendi makinende `claude-vps capture` çalıştır, push'la ve kurulumu fork'una yönlendir:
+Varsayılan kurulumda sunucuya `dotfiles/home` içindeki benim KDE ve Claude ayarlarım gelir. Kendi ayarlarını kullanmak için repoyu fork'la, kendi bilgisayarında `claude-vps capture` çalıştır, push'la ve kurulumu fork'una yönlendir:
 
 ```bash
 curl -fsSL https://raw.githubusercontent.com/<you>/claude-code-vps/main/install.sh \
   | sudo CLAUDE_VPS_REPO=https://github.com/<you>/claude-code-vps.git bash
 ```
 
-Döngünün tamamı [Config senkronizasyonu](/tr/guide/sync) sayfasında.
+Bütün süreç [Ayarları senkron tutmak](/tr/guide/sync) sayfasında anlatılıyor.

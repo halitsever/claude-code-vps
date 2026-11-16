@@ -1,34 +1,34 @@
 ---
-description: "Synchronisez vos réglages KDE Plasma et Claude Code entre votre machine et votre VPS avec claude-vps publish, sync et autosync."
+description: "Gardez vos réglages KDE Plasma et Claude Code identiques sur votre ordinateur et votre VPS avec claude-vps publish, sync et autosync."
 ---
 
 # Synchroniser la config
 
-Le dépôt est la source de vérité pour l'apparence et le comportement du serveur. Vous modifiez les choses sur votre propre machine, et le serveur suit.
+Tous les réglages du serveur sont stockés dans le dépôt. Vous faites vos changements sur votre propre ordinateur, puis le serveur les récupère.
 
 ```text
- votre machine                 GitHub                     serveur
- ─────────────                 ──────                     ───────
+ your machine                  GitHub                     server
+ ───────────                   ──────                     ──────
  claude-vps publish  ──push──▶  dotfiles/home  ──pull──▶  claude-vps sync
- (capture + commit)                                        (ou autosync, toutes les 30 min)
+ (capture + commit)                                        (or autosync, every 30 min)
 ```
 
-## Sur votre machine
+## Sur votre ordinateur
 
-Clonez le dépôt une fois et mettez la CLI dans votre PATH :
+Clonez le dépôt une fois et ajoutez la CLI à votre PATH :
 
 ```bash
 git clone https://github.com/halitsever/claude-code-vps.git ~/claude-code-vps
 ln -s ~/claude-code-vps/bin/claude-vps ~/.local/bin/claude-vps
 ```
 
-Après avoir modifié un panneau, un raccourci, votre profil Konsole ou `~/.claude/settings.json` :
+Après avoir modifié un panneau, un raccourci, votre profil Konsole ou `~/.claude/settings.json`, lancez :
 
 ```bash
 claude-vps publish
 ```
 
-La commande lance `capture`, commit `dotfiles/` et pousse. Si vous préférez d'abord regarder le diff :
+Cette commande lance `capture`, fait un commit de `dotfiles/` et le push. Si vous voulez d'abord voir ce qui a changé :
 
 ```bash
 claude-vps capture
@@ -41,34 +41,34 @@ git -C ~/claude-code-vps diff
 claude-vps sync
 ```
 
-Elle fait un pull puis lance `apply`. Chaque fichier sur le point d'être écrasé est d'abord copié dans `~/.local/state/claude-vps/backup-<timestamp>/`, et les fichiers inchangés ne sont pas touchés.
+Cette commande récupère les changements et lance `apply`. Avant d'écraser un fichier, elle en garde une copie dans `~/.local/state/claude-vps/backup-<timestamp>/`. Les fichiers qui n'ont pas changé ne sont pas touchés.
 
-Ou laissez faire tout seul :
+Vous pouvez aussi laisser le serveur le faire tout seul :
 
 ```bash
-claude-vps autosync on     # systemd user timer, every 30 minutes
-claude-vps autosync        # show when it runs next
+claude-vps autosync on     # timer systemd utilisateur, toutes les 30 minutes
+claude-vps autosync        # affiche la prochaine exécution
 claude-vps autosync off
 ```
 
 ::: warning Plasma et sessions ouvertes
-Plasma garde certains réglages en mémoire et les réécrit à la déconnexion. Si une synchro arrive pendant que vous êtes connecté en RDP, déconnectez-vous puis reconnectez-vous pour la voir, et évitez de modifier le même réglage sur le serveur entre-temps.
+Plasma garde certains réglages en mémoire et les réécrit quand vous vous déconnectez. Si une synchronisation arrive pendant que vous êtes connecté en RDP, déconnectez-vous puis reconnectez-vous pour voir les changements. En attendant, ne modifiez pas le même réglage sur le serveur.
 :::
 
-## Ce qui est capturé
+## Ce qui est copié
 
-La liste se trouve dans [`dotfiles/manifest.txt`](https://github.com/halitsever/claude-code-vps/blob/main/dotfiles/manifest.txt). Une barre oblique finale signifie le dossier entier.
+La liste se trouve dans [`dotfiles/manifest.txt`](https://github.com/halitsever/claude-code-vps/blob/main/dotfiles/manifest.txt). Une barre oblique à la fin d'un chemin veut dire « tout le dossier ».
 
 | Domaine | Fichiers |
 | --- | --- |
-| Plasma | `kdeglobals`, `kwinrc`, `kglobalshortcutsrc`, `plasmarc`, `plasmashellrc`, `plasma-org.kde.plasma.desktop-appletsrc`, `kdedefaults/`, réglages d'énergie et de notifications |
-| Applis | `dolphinrc`, `konsolerc`, `katerc`, `~/.local/share/konsole/`, réglages du thème GTK, `mimeapps.list` |
+| Plasma | `kdeglobals`, `kwinrc`, `kglobalshortcutsrc`, `plasmarc`, `plasmashellrc`, `plasma-org.kde.plasma.desktop-appletsrc`, `kdedefaults/`, réglages d'alimentation et de notifications |
+| Applications | `dolphinrc`, `konsolerc`, `katerc`, `~/.local/share/konsole/`, réglages du thème GTK, `mimeapps.list` |
 | Apparence | `~/.local/share/color-schemes/`, `plasma/`, `aurorae/`, `wallpapers/` s'ils existent |
 | Claude | `~/.claude/settings.json`, `hooks/` |
 | Shell | `.tmux.conf`, `.xsession` |
 
-Ajoutez une ligne au manifeste pour suivre autre chose. Les chemins absents de votre machine sont ignorés.
+Pour suivre un autre fichier, ajoutez une ligne au manifeste. Les chemins qui n'existent pas sur votre ordinateur sont ignorés.
 
-## Ce qui n'est jamais capturé
+## Ce qui n'est jamais copié
 
-Le chemin de votre répertoire personnel est remplacé par `@HOME@` pour que les fichiers marchent avec n'importe quel nom d'utilisateur, et les sections qui contiennent des fichiers récents ou un historique sont supprimées. Les identifiants ne sont tout simplement pas dans la liste : `~/.claude/.credentials.json`, `~/.claude/ntfy-topic`, clés SSH, `kwalletrc`, profils de navigateur. Gardez-le ainsi, le dépôt est public.
+Votre dossier personnel est remplacé par `@HOME@` dans les fichiers, pour qu'ils marchent avec n'importe quel nom d'utilisateur. Les sections qui contiennent les fichiers récents ou l'historique sont supprimées. Les identifiants ne sont tout simplement pas dans la liste : `~/.claude/.credentials.json`, `~/.claude/ntfy-topic`, les clés SSH, `kwalletrc`, les profils de navigateur. Ne les ajoutez pas : le dépôt est public.

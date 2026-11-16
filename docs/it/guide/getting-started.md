@@ -1,32 +1,32 @@
 ---
-description: "Installa claude-vps su un VPS Ubuntu 24.04 o 26.04 con un solo comando: Claude Code, KDE Plasma via RDP e SSH blindato in circa dieci minuti."
+description: "Installa claude-vps su un VPS Ubuntu 24.04 o 26.04 con un solo comando. Claude Code, KDE Plasma in RDP e SSH sicuro sono pronti in circa dieci minuti."
 ---
 
 # Per iniziare
 
-claude-vps trasforma un server Ubuntu appena installato nella macchina su cui faccio girare Claude Code: un utente sudo, SSH solo con chiave, un firewall, un desktop KDE Plasma raggiungibile via RDP, Docker, Chrome e Claude Code stesso, con le mie impostazioni, i miei hook e il mio layout KDE già applicati.
+claude-vps prende un server Ubuntu appena creato e lo trasforma nella macchina su cui uso Claude Code. Installa un utente con sudo, SSH solo con chiave, un firewall, un desktop KDE Plasma a cui ti colleghi in RDP, Docker, Chrome e Claude Code. Le mie impostazioni, i miei hook e il mio layout KDE sono già applicati.
 
-## Cosa serve
+## Cosa ti serve
 
 | | |
 | --- | --- |
-| **OS** | Ubuntu 24.04 LTS o successivo (io uso la 26.04) |
-| **CPU / RAM** | 2 vCPU e 4 GB sono il minimo per Plasma. Con 4 vCPU / 8 GB sembra un vero desktop |
+| **Sistema** | Ubuntu 24.04 LTS o successivo (io uso la 26.04) |
+| **CPU / RAM** | Almeno 2 vCPU e 4 GB per Plasma. Con 4 vCPU e 8 GB lavori come su un vero computer |
 | **Disco** | 25 GB o più |
-| **Accesso** | Root via SSH, meglio se la tua chiave SSH è già sul server |
-| **Architettura** | Su amd64 c'è tutto. arm64 funziona, ma senza Chrome |
+| **Accesso** | root via SSH, meglio se la tua chiave SSH è già sul server |
+| **Architettura** | Su amd64 viene installato tutto. Su arm64 funziona tutto tranne Chrome |
 
-Ti serve anche un piano Claude Pro o Max, oppure una API key di Anthropic, per fare il login in Claude Code alla fine.
+Ti serve anche un piano Claude Pro o Max, oppure una chiave API Anthropic, per accedere poi a Claude Code.
 
 ## Installazione
 
-Entra via SSH come root (o con un utente sudo) e lancia:
+Collegati in SSH come root (o con un utente che ha sudo) ed esegui:
 
 ```bash
 curl -fsSL https://raw.githubusercontent.com/halitsever/claude-code-vps/main/install.sh | sudo bash
 ```
 
-Lo script clona questo repo in `/opt/claude-vps` ed esegue `claude-vps setup`. Ti vengono chieste due cose: il nome utente della workstation e la sua password (serve per sudo e per il login RDP). Se lasci la password vuota, ne viene generata una e te la mostra alla fine.
+Lo script clona questo repository in `/opt/claude-vps` ed esegue `claude-vps setup`. Ti fa due domande: il nome del tuo utente e la sua password. La password serve per sudo e per l'accesso RDP. Se la lasci vuota, ne viene generata una che vedi alla fine.
 
 Per saltare le domande, passa le opzioni dopo `bash -s --`:
 
@@ -35,15 +35,15 @@ curl -fsSL https://raw.githubusercontent.com/halitsever/claude-code-vps/main/ins
   | sudo bash -s -- --user dev --timezone Europe/Istanbul --ntfy-topic my-secret-topic --yes
 ```
 
-Tutte le opzioni sono nel [riferimento della CLI](/it/reference/cli).
+Trovi tutte le opzioni nel [riferimento CLI](/it/reference/cli).
 
-::: tip Prima fai una prova
-`--dry-run` stampa tutti i comandi senza eseguirli.
+::: tip Prova prima
+`--dry-run` mostra ogni comando senza eseguirlo.
 :::
 
-## A fine installazione
+## Quando ha finito
 
-Ottieni un riepilogo come questo:
+Vedi un riepilogo come questo:
 
 ```text
   Done.
@@ -54,17 +54,17 @@ Ottieni un riepilogo come questo:
   Updates    claude-vps sync   (or: claude-vps autosync on)
 ```
 
-1. **Entra via SSH** con il nuovo utente. Le chiavi SSH di root sono state copiate, quindi funziona la stessa chiave.
-2. **Avvia Claude Code** dentro tmux e fai il login. Vedi [Usare Claude Code](/it/guide/claude-code).
+1. **Collegati in SSH** con il nuovo utente. Le chiavi SSH di root sono state copiate, quindi funziona la stessa chiave.
+2. **Avvia Claude Code** dentro tmux e fai l'accesso. Vedi [Usare Claude Code](/it/guide/claude-code).
 3. **Apri il desktop** con un qualsiasi client RDP. Vedi [Desktop remoto](/it/guide/remote-desktop).
 
-## Usare la tua configurazione
+## Usare le tue impostazioni
 
-Di default il server riceve la mia configurazione KDE e Claude da `dotfiles/home`. Per usare la tua, fai un fork del repo, lancia `claude-vps capture` sulla tua macchina, fai push e punta l'installer al tuo fork:
+Di base il server riceve la mia configurazione di KDE e Claude da `dotfiles/home`. Per usare la tua, fai un fork del repository, esegui `claude-vps capture` sul tuo computer, fai push e indica il tuo fork all'installazione:
 
 ```bash
 curl -fsSL https://raw.githubusercontent.com/<you>/claude-code-vps/main/install.sh \
   | sudo CLAUDE_VPS_REPO=https://github.com/<you>/claude-code-vps.git bash
 ```
 
-[Tenere la configurazione sincronizzata](/it/guide/sync) spiega tutto il giro.
+La pagina [Sincronizzare la config](/it/guide/sync) spiega tutto il processo.

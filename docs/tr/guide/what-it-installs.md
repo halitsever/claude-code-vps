@@ -1,22 +1,22 @@
 ---
-description: "claude-vps'in Ubuntu sunucunda çalıştırdığı her adım: paketler, swap, SSH sıkılaştırma, ufw, KDE Plasma, xrdp, Docker, Chrome, Claude Code ve dotfiles."
+description: "claude-vps'in Ubuntu sunucunda çalıştırdığı her adım: paketler, swap, SSH ayarları, ufw, KDE Plasma, xrdp, Docker, Chrome, Claude Code ve dotfiles."
 ---
 
 # Neler kuruluyor
 
-`claude-vps setup` dokuz adımı sırayla çalıştırır. Her biri [`lib/setup.sh`](https://github.com/halitsever/claude-code-vps/blob/main/lib/setup.sh) içinde düz bir bash fonksiyonu, yani sunucunda tam olarak neyin çalıştığını okuyabilirsin. İstediğini `--skip` ile atla ya da birkaçını `--only` ile çalıştır.
+`claude-vps setup` dokuz adımı sırayla çalıştırır. Her adım [`lib/setup.sh`](https://github.com/halitsever/claude-code-vps/blob/main/lib/setup.sh) içinde düz bir bash fonksiyonu. Sunucunda tam olarak neyin çalıştığını oradan okuyabilirsin. İstediğin adımı `--skip` ile atlayabilir, `--only` ile sadece bazılarını çalıştırabilirsin.
 
 ## 1. base
 
-- her şeye `apt upgrade`
-- `git curl jq ripgrep fd-find tmux htop build-essential nodejs npm python3` ve benzerleri
-- `unattended-upgrades` açık, güvenlik yamaları sen uğraşmadan gelir
-- sunucuda swap yoksa ve RAM 8 GB'tan azsa 4 GB'lık bir swapfile; Plasma ve birkaç ajan aynı anda çalışırken OOM killer'a takılmamak için
+- Bütün paketlere `apt upgrade`
+- `git curl jq ripgrep fd-find tmux htop build-essential nodejs npm python3` ve benzeri araçlar
+- `unattended-upgrades` açılır, güvenlik yamaları sen uğraşmadan kurulur
+- Sunucuda swap yoksa ve RAM 8 GB'tan azsa 4 GB'lık bir swap dosyası. Böylece Plasma ve birkaç Claude birlikte çalışırken bellek dolup OOM killer devreye girmez
 - `--timezone` verdiysen saat dilimi
 
 ## 2. user
 
-İş istasyonu kullanıcını oluşturur, `sudo` grubuna ekler ve hiç anahtarı yoksa `/root/.ssh/authorized_keys` dosyasını ona kopyalar. Seçtiğin parola, RDP giriş ekranında yazacağın paroladır.
+Kullanıcını oluşturur ve `sudo` grubuna ekler. Kullanıcının SSH anahtarı yoksa `/root/.ssh/authorized_keys` dosyasını ona kopyalar. Burada seçtiğin parolayı RDP giriş ekranında kullanırsın.
 
 ## 3. ssh
 
@@ -28,47 +28,47 @@ KbdInteractiveAuthentication no
 PermitRootLogin prohibit-password
 ```
 
-sshd okuduğu ilk değeri kullanır, dosya adının `10-` ile başlaması bu yüzden: çoğu cloud imajının getirdiği `50-cloud-init.conf` dosyasının önüne geçer. Kullanıcının henüz SSH anahtarı yoksa bu adım bir uyarıyla atlanır, böylece kendini dışarıda bırakmazsın.
+sshd bir ayar için okuduğu ilk değeri kullanır. Dosya adının `10-` ile başlaması bu yüzden: çoğu bulut imajıyla gelen `50-cloud-init.conf` dosyasından önce okunur. Kullanıcının henüz SSH anahtarı yoksa bu adım bir uyarıyla atlanır, böylece sunucuya erişimini kaybetmezsin.
 
 ## 4. firewall
 
-OpenSSH ve RDP portuna izin veren, geri kalan her şeyi kapatan `ufw`. RDP'yi kapalı tutup SSH tüneliyle erişmek istersen `--rdp-private` ver.
+`ufw` açılır. Sadece OpenSSH ve RDP portuna izin verilir, geri kalan her şey kapalıdır. RDP portunu kapalı tutup SSH tüneliyle bağlanmak istersen `--rdp-private` kullan.
 
 ## 5. desktop
 
-`kde-plasma-desktop` ile birlikte X11 oturumu (Ubuntu 25.10+ için `plasma-session-x11`, `kwin-x11`), Konsole, Dolphin, Kate, Spectacle, Noto ve JetBrains Mono fontları. SDDM kapatılır ve varsayılan hedef `multi-user` yapılır: sunucunun başında kimse oturmuyor, bu yüzden doğrudan konsola açılır ve Plasma sadece sen bağlandığında başlar.
+`kde-plasma-desktop` ve X11 oturumu (Ubuntu 25.10 ve üstünde `plasma-session-x11` ile `kwin-x11`), Konsole, Dolphin, Kate, Spectacle, Noto ve JetBrains Mono fontları kurulur. SDDM kapatılır ve varsayılan hedef `multi-user` yapılır. Sunucunun başında kimse oturmadığı için giriş ekranına gerek yok. Sunucu doğrudan konsola açılır, Plasma sadece sen bağlandığında başlar.
 
 ::: info Neden X11
-xrdp bir Xorg oturumu yönetir. Plasma 6, Ubuntu 24.04 ile 26.04 arasında hâlâ X11 oturumuyla geliyor ve RDP üzerinden her gün kullandığım da bu.
+xrdp bir Xorg oturumu çalıştırır. Plasma 6, Ubuntu 24.04 ile 26.04 arasında hâlâ X11 oturumuyla geliyor. Ben de RDP üzerinden her gün bunu kullanıyorum.
 :::
 
 ## 6. rdp
 
-- **53389** portunu dinleyen `xrdp` ve `xorgxrdp` (`--rdp-port` ile değiştirilebilir)
-- doğru `XDG_*` değişkenleriyle `startplasma-x11` başlatan bir `~/.xsession`
-- her girişte çıkan "authentication is required to create a color managed device" penceresini engelleyen bir polkit kuralı
+- `xrdp` ve `xorgxrdp`, **53389** portunda dinler (`--rdp-port` ile değiştirilebilir)
+- Doğru `XDG_*` değişkenleriyle `startplasma-x11` başlatan bir `~/.xsession`
+- Bir polkit kuralı. Bu kural olmadan her girişte "authentication is required to create a color managed device" diye parola soran bir pencere çıkar
 
 ## 7. apps
 
-- Docker (`docker.io`, compose v2, buildx), kullanıcın `docker` grubunda
+- Docker (`docker.io`, compose v2, buildx). Kullanıcın `docker` grubuna eklenir
 - GitHub CLI (`gh`)
-- Google'ın apt reposundan Google Chrome (sadece amd64), Claude'un gerçek bir tarayıcıya ihtiyaç duyduğu işler için
+- Google'ın apt deposundan Google Chrome (sadece amd64). Claude'un gerçek bir tarayıcıya ihtiyacı olduğunda işe yarar
 
 ## 8. claude
 
-- Resmi native installer ile `~/.local/bin/claude` altına Claude Code. Kendini kendisi günceller
-- ntfy.sh topic'i verdiysen `~/.claude/ntfy-topic` içinde; notify hook'u buradan okur
+- Claude Code, resmi kurulum script'iyle `~/.local/bin/claude` konumuna kurulur. Kendini otomatik günceller
+- ntfy.sh topic'i verdiysen `~/.claude/ntfy-topic` dosyasına yazılır. Bildirim hook'u topic'i buradan okur
 
 ## 9. dotfiles
 
-`/opt/claude-vps` klasörünü kullanıcına devreder, `claude-vps` komutunu `/usr/local/bin` altına linkler ve senin kullanıcınla `claude-vps apply` çalıştırır. Bu da `dotfiles/home` altındaki her şeyi ev dizinine yazar: KDE ayarları, Konsole profilleri, `~/.claude/settings.json`, `CLAUDE.md`, hook'lar, `.tmux.conf`.
+`/opt/claude-vps` klasörünün sahipliğini senin kullanıcına verir, `claude-vps` komutunu `/usr/local/bin` altına linkler ve `claude-vps apply` komutunu senin kullanıcınla çalıştırır. Bu komut `dotfiles/home` altındaki her şeyi ev klasörüne yazar: KDE ayarları, Konsole profilleri, `~/.claude/settings.json`, `CLAUDE.md`, hook'lar ve `.tmux.conf`.
 
 ## Adımları tekrar çalıştırmak
 
-Her adım önce neyin kurulu olduğuna bakar, tekrar çalıştırmak güvenli:
+Her adım önce neyin zaten kurulu olduğuna bakar. Bu yüzden tekrar çalıştırmak güvenli:
 
 ```bash
-sudo claude-vps setup --only desktop,rdp     # örn. sürüm yükseltmesinden sonra
+sudo claude-vps setup --only desktop,rdp     # örneğin Ubuntu sürüm yükseltmesinden sonra
 sudo claude-vps setup --skip apps            # Docker ve Chrome hariç her şey
-sudo claude-vps setup --no-desktop           # sadece terminal kullanılan sunucu
+sudo claude-vps setup --no-desktop           # sadece terminal kullanılacak sunucu
 ```

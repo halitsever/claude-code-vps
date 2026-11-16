@@ -1436,3 +1436,25 @@ html:not(.dark) .lx {
   pointer-events: none;
   background: radial-gradient(ellipse 48% 42% at 50% 42%, color-mix(in srgb, var(--bg) 70%, transparent), transparent 75%);
 }
+
+/* CJK glyphs are already square, the tight Latin tracking would make them collide. */
+html:lang(zh) .lx-title,
+html:lang(ja) .lx-title,
+html:lang(ko) .lx-title,
+html:lang(zh) .lx-h2,
+html:lang(ja) .lx-h2,
+html:lang(ko) .lx-h2,
+html:lang(zh) .lx-cta h2,
+html:lang(ja) .lx-cta h2,
+html:lang(ko) .lx-cta h2 {
+  letter-spacing: -0.01em !important;
+  line-height: 1.2 !important;
+}
+html:lang(ko) .lx {
+  word-break: keep-all;
+}
+html:lang(zh) .lx-title,
+html:lang(ja) .lx-title,
+html:lang(ko) .lx-title {
+  font-size: clamp(36px, 5.6vw, 76px);
+}
