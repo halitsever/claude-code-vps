@@ -242,7 +242,7 @@ export default defineConfig({
 
   themeConfig: {
     logo: "/logo.svg",
-    siteTitle: "claude-code-vps",
+    siteTitle: "Claude Code VPS",
     socialLinks: [{ icon: "github", link: repo }],
     search: { provider: "local" },
     footer: {
