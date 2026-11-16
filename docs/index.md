@@ -3,8 +3,7 @@ layout: page
 pageClass: lx-page
 sidebar: false
 aside: false
-title: claude-vps
-titleTemplate: Remote Claude Code workstation on Ubuntu
+title: "Run Claude Code on a VPS in one command"
 ---
 
 <Landing lang="en" />

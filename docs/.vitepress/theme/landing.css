@@ -656,3 +656,49 @@ html:not(.dark) .lx-orb.b { opacity: 0.18; }
 .lx-hero-visual {
   min-width: 0;
 }
+
+/* FAQ */
+.lx-faq {
+  max-width: 820px;
+  margin: 0 auto;
+  display: grid;
+  gap: 12px;
+}
+.lx-faq details {
+  border: 1px solid var(--lx-line);
+  border-radius: 16px;
+  background: var(--lx-surface);
+  transition: border-color 0.25s, background 0.25s;
+}
+.lx-faq details[open] {
+  border-color: var(--lx-line-strong);
+  background: var(--lx-surface-2);
+}
+.lx-faq summary {
+  list-style: none;
+  cursor: pointer;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 16px;
+  padding: 20px 24px;
+  font-size: 17px;
+  font-weight: 600;
+  color: var(--lx-text);
+}
+.lx-faq summary::-webkit-details-marker { display: none; }
+.lx-faq summary::after {
+  content: "+";
+  flex-shrink: 0;
+  font: 400 22px "JetBrains Mono", monospace;
+  color: var(--lx-acc);
+  transition: transform 0.25s;
+}
+.lx-faq details[open] summary::after { transform: rotate(45deg); }
+.lx-faq p {
+  margin: 0;
+  padding: 0 24px 22px;
+  font-size: 15.5px;
+  line-height: 1.65;
+  color: var(--lx-muted);
+}

@@ -1,3 +1,7 @@
+---
+description: "claude-vps'in tüm komut ve seçenekleri: setup, sync, autosync, doctor, capture, publish, apply ve install.sh değişkenleri."
+---
+
 # CLI
 
 ```text
@@ -42,7 +46,7 @@ Bootstrap script'i üç ortam değişkeni okur:
 
 | Değişken | Varsayılan |
 | --- | --- |
-| `CLAUDE_VPS_REPO` | `https://github.com/halitsever/claude-vps.git` |
+| `CLAUDE_VPS_REPO` | `https://github.com/halitsever/claude-code-vps.git` |
 | `CLAUDE_VPS_DIR` | `/opt/claude-vps` |
 | `CLAUDE_VPS_BRANCH` | `main` |
 

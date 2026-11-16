@@ -2,11 +2,12 @@
 import { computed, ref } from "vue";
 import { withBase } from "vitepress";
 import TerminalDemo from "./TerminalDemo.vue";
+import { FAQ } from "../faq";
 
 const props = defineProps<{ lang?: "en" | "fr" | "it" | "tr" }>();
 
-const INSTALL = "curl -fsSL https://raw.githubusercontent.com/halitsever/claude-vps/main/install.sh | sudo bash";
-const REPO = "https://github.com/halitsever/claude-vps";
+const INSTALL = "curl -fsSL https://raw.githubusercontent.com/halitsever/claude-code-vps/main/install.sh | sudo bash";
+const REPO = "https://github.com/halitsever/claude-code-vps";
 
 const STRINGS = {
   en: {
@@ -188,6 +189,7 @@ const STRINGS = {
 } as const;
 
 const s = computed(() => STRINGS[props.lang ?? "en"]);
+const faq = computed(() => FAQ[props.lang ?? "en"]);
 const copied = ref(false);
 
 async function copy() {
@@ -230,7 +232,7 @@ const link = (p: string) => withBase(s.value.base + p);
         </div>
 
         <div class="lx-actions">
-          <a class="lx-btn primary" :href="link('/guide/getting-started')">{{ s.start }} <span>→</span></a>
+          <a class="lx-btn primary" :href="link('/guide/claude-code-vps')">{{ s.start }} <span>→</span></a>
           <a class="lx-btn ghost" :href="REPO" target="_blank" rel="noreferrer">{{ s.github }}</a>
         </div>
 
@@ -328,6 +330,19 @@ const link = (p: string) => withBase(s.value.base + p);
         </li>
       </ol>
       <p class="lx-more"><a :href="link('/guide/what-it-installs')">{{ s.stepsLink }} →</a></p>
+    </section>
+
+    <section class="lx-section">
+      <div class="lx-head">
+        <span class="lx-kicker">FAQ</span>
+        <h2>{{ faq.title }}</h2>
+      </div>
+      <div class="lx-faq">
+        <details v-for="(f, i) in faq.items" :key="f.q" :open="i === 0">
+          <summary>{{ f.q }}</summary>
+          <p>{{ f.a }}</p>
+        </details>
+      </div>
     </section>
 
     <section class="lx-cta">

@@ -1,3 +1,7 @@
+---
+description: "Keep your KDE Plasma and Claude Code settings in sync between your own machine and your VPS with claude-vps publish, sync and autosync."
+---
+
 # Keeping config in sync
 
 The repo is the source of truth for how the server looks and behaves. You change things on your own machine, and the server catches up.
@@ -14,8 +18,8 @@ The repo is the source of truth for how the server looks and behaves. You change
 Clone the repo once and put the CLI on your PATH:
 
 ```bash
-git clone https://github.com/halitsever/claude-vps.git ~/claude-vps
-ln -s ~/claude-vps/bin/claude-vps ~/.local/bin/claude-vps
+git clone https://github.com/halitsever/claude-code-vps.git ~/claude-code-vps
+ln -s ~/claude-code-vps/bin/claude-vps ~/.local/bin/claude-vps
 ```
 
 After you change a panel, a shortcut, your Konsole profile or `~/.claude/settings.json`:
@@ -28,7 +32,7 @@ That runs `capture`, commits `dotfiles/` and pushes. If you would rather look at
 
 ```bash
 claude-vps capture
-git -C ~/claude-vps diff
+git -C ~/claude-code-vps diff
 ```
 
 ## On the server
@@ -53,7 +57,7 @@ Plasma keeps some settings in memory and writes them back when you log out. If a
 
 ## What gets captured
 
-The list lives in [`dotfiles/manifest.txt`](https://github.com/halitsever/claude-vps/blob/main/dotfiles/manifest.txt). A trailing slash means the whole folder.
+The list lives in [`dotfiles/manifest.txt`](https://github.com/halitsever/claude-code-vps/blob/main/dotfiles/manifest.txt). A trailing slash means the whole folder.
 
 | Area | Files |
 | --- | --- |

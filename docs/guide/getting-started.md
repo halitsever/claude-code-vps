@@ -1,3 +1,7 @@
+---
+description: "Install claude-vps on a fresh Ubuntu 24.04 or 26.04 VPS with one command and get Claude Code, KDE Plasma over RDP and hardened SSH in about ten minutes."
+---
+
 # Getting started
 
 claude-vps turns a fresh Ubuntu server into the machine I run Claude Code on: a sudo user, key-only SSH, a firewall, a KDE Plasma desktop you reach over RDP, Docker, Chrome, and Claude Code itself with my settings, hooks and KDE layout already applied.
@@ -19,7 +23,7 @@ A Claude Pro or Max plan, or an Anthropic API key, for logging in to Claude Code
 SSH in as root (or a user with sudo) and run:
 
 ```bash
-curl -fsSL https://raw.githubusercontent.com/halitsever/claude-vps/main/install.sh | sudo bash
+curl -fsSL https://raw.githubusercontent.com/halitsever/claude-code-vps/main/install.sh | sudo bash
 ```
 
 It clones this repo to `/opt/claude-vps` and runs `claude-vps setup`. You get asked two things: the username for your workstation and a password for it (used for sudo and the RDP login). Leave the password empty and one is generated and shown at the end.
@@ -27,7 +31,7 @@ It clones this repo to `/opt/claude-vps` and runs `claude-vps setup`. You get as
 To skip the questions, pass options after `bash -s --`:
 
 ```bash
-curl -fsSL https://raw.githubusercontent.com/halitsever/claude-vps/main/install.sh \
+curl -fsSL https://raw.githubusercontent.com/halitsever/claude-code-vps/main/install.sh \
   | sudo bash -s -- --user dev --timezone Europe/Istanbul --ntfy-topic my-secret-topic --yes
 ```
 
@@ -59,8 +63,8 @@ You get a summary like this:
 Out of the box the server gets my KDE and Claude config from `dotfiles/home`. To use yours, fork the repo, run `claude-vps capture` on your own machine, push, and point the installer at the fork:
 
 ```bash
-curl -fsSL https://raw.githubusercontent.com/<you>/claude-vps/main/install.sh \
-  | sudo CLAUDE_VPS_REPO=https://github.com/<you>/claude-vps.git bash
+curl -fsSL https://raw.githubusercontent.com/<you>/claude-code-vps/main/install.sh \
+  | sudo CLAUDE_VPS_REPO=https://github.com/<you>/claude-code-vps.git bash
 ```
 
 [Keeping config in sync](/guide/sync) covers the whole loop.

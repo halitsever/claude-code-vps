@@ -1,3 +1,7 @@
+---
+description: "Ekransız bir sunucuda Claude Code'a giriş yap, SSH kopsa da ajanları tmux'ta çalışır tut ve ntfy.sh ile telefonuna bildirim al."
+---
+
 # Claude Code'u çalıştırmak
 
 ## İlk giriş

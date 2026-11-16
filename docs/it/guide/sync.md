@@ -1,3 +1,7 @@
+---
+description: "Mantieni sincronizzate le impostazioni di KDE Plasma e Claude Code tra la tua macchina e il VPS con claude-vps publish, sync e autosync."
+---
+
 # Tenere la configurazione sincronizzata
 
 Il repo è l'unica fonte di verità su come il server appare e si comporta. Tu cambi le cose sulla tua macchina e il server si allinea.
@@ -14,8 +18,8 @@ Il repo è l'unica fonte di verità su come il server appare e si comporta. Tu c
 Clona il repo una volta e metti la CLI nel PATH:
 
 ```bash
-git clone https://github.com/halitsever/claude-vps.git ~/claude-vps
-ln -s ~/claude-vps/bin/claude-vps ~/.local/bin/claude-vps
+git clone https://github.com/halitsever/claude-code-vps.git ~/claude-code-vps
+ln -s ~/claude-code-vps/bin/claude-vps ~/.local/bin/claude-vps
 ```
 
 Dopo aver cambiato un pannello, una scorciatoia, il profilo di Konsole o `~/.claude/settings.json`:
@@ -28,7 +32,7 @@ Il comando esegue `capture`, fa il commit di `dotfiles/` e il push. Se preferisc
 
 ```bash
 claude-vps capture
-git -C ~/claude-vps diff
+git -C ~/claude-code-vps diff
 ```
 
 ## Sul server
@@ -53,7 +57,7 @@ Plasma tiene alcune impostazioni in memoria e le riscrive quando fai logout. Se 
 
 ## Cosa viene catturato
 
-L'elenco si trova in [`dotfiles/manifest.txt`](https://github.com/halitsever/claude-vps/blob/main/dotfiles/manifest.txt). Uno slash finale indica l'intera cartella.
+L'elenco si trova in [`dotfiles/manifest.txt`](https://github.com/halitsever/claude-code-vps/blob/main/dotfiles/manifest.txt). Uno slash finale indica l'intera cartella.
 
 | Area | File |
 | --- | --- |

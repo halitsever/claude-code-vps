@@ -1,9 +1,9 @@
 #!/usr/bin/env bash
-# Bootstrap: curl -fsSL https://raw.githubusercontent.com/halitsever/claude-vps/main/install.sh | sudo bash
+# Bootstrap: curl -fsSL https://raw.githubusercontent.com/halitsever/claude-code-vps/main/install.sh | sudo bash
 # Extra options go after `bash -s --`, e.g. `| sudo bash -s -- --user dev --yes`.
 set -Eeuo pipefail
 
-REPO_URL=${CLAUDE_VPS_REPO:-https://github.com/halitsever/claude-vps.git}
+REPO_URL=${CLAUDE_VPS_REPO:-https://github.com/halitsever/claude-code-vps.git}
 REPO_DIR=${CLAUDE_VPS_DIR:-/opt/claude-vps}
 BRANCH=${CLAUDE_VPS_BRANCH:-main}
 

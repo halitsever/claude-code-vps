@@ -1,3 +1,7 @@
+---
+description: "Synchronisez vos réglages KDE Plasma et Claude Code entre votre machine et votre VPS avec claude-vps publish, sync et autosync."
+---
+
 # Synchroniser la config
 
 Le dépôt est la source de vérité pour l'apparence et le comportement du serveur. Vous modifiez les choses sur votre propre machine, et le serveur suit.
@@ -14,8 +18,8 @@ Le dépôt est la source de vérité pour l'apparence et le comportement du serv
 Clonez le dépôt une fois et mettez la CLI dans votre PATH :
 
 ```bash
-git clone https://github.com/halitsever/claude-vps.git ~/claude-vps
-ln -s ~/claude-vps/bin/claude-vps ~/.local/bin/claude-vps
+git clone https://github.com/halitsever/claude-code-vps.git ~/claude-code-vps
+ln -s ~/claude-code-vps/bin/claude-vps ~/.local/bin/claude-vps
 ```
 
 Après avoir modifié un panneau, un raccourci, votre profil Konsole ou `~/.claude/settings.json` :
@@ -28,7 +32,7 @@ La commande lance `capture`, commit `dotfiles/` et pousse. Si vous préférez d'
 
 ```bash
 claude-vps capture
-git -C ~/claude-vps diff
+git -C ~/claude-code-vps diff
 ```
 
 ## Sur le serveur
@@ -53,7 +57,7 @@ Plasma garde certains réglages en mémoire et les réécrit à la déconnexion.
 
 ## Ce qui est capturé
 
-La liste se trouve dans [`dotfiles/manifest.txt`](https://github.com/halitsever/claude-vps/blob/main/dotfiles/manifest.txt). Une barre oblique finale signifie le dossier entier.
+La liste se trouve dans [`dotfiles/manifest.txt`](https://github.com/halitsever/claude-code-vps/blob/main/dotfiles/manifest.txt). Une barre oblique finale signifie le dossier entier.
 
 | Domaine | Fichiers |
 | --- | --- |

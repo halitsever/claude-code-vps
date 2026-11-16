@@ -1,6 +1,10 @@
+---
+description: "Chaque étape lancée par claude-vps sur votre serveur Ubuntu : paquets, swap, SSH durci, ufw, KDE Plasma, xrdp, Docker, Chrome, Claude Code et dotfiles."
+---
+
 # Ce qui est installé
 
-`claude-vps setup` exécute neuf étapes dans l'ordre. Chacune est une simple fonction bash dans [`lib/setup.sh`](https://github.com/halitsever/claude-vps/blob/main/lib/setup.sh) : vous pouvez lire exactement ce qui tourne sur votre machine. Sautez-en avec `--skip`, ou n'en lancez que certaines avec `--only`.
+`claude-vps setup` exécute neuf étapes dans l'ordre. Chacune est une simple fonction bash dans [`lib/setup.sh`](https://github.com/halitsever/claude-code-vps/blob/main/lib/setup.sh) : vous pouvez lire exactement ce qui tourne sur votre machine. Sautez-en avec `--skip`, ou n'en lancez que certaines avec `--only`.
 
 ## 1. base
 

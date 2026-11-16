@@ -1,3 +1,7 @@
+---
+description: "Log in to Claude Code on a headless server, keep agents running in tmux after SSH disconnects and get phone notifications through ntfy.sh."
+---
+
 # Running Claude Code
 
 ## First login

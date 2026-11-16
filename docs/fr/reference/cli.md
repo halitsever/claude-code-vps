@@ -1,3 +1,7 @@
+---
+description: "Référence de toutes les commandes et options de claude-vps : setup, sync, autosync, doctor, capture, publish, apply et variables d'install.sh."
+---
+
 # CLI
 
 ```text
@@ -42,7 +46,7 @@ Le script d'amorçage lit trois variables d'environnement :
 
 | Variable | Défaut |
 | --- | --- |
-| `CLAUDE_VPS_REPO` | `https://github.com/halitsever/claude-vps.git` |
+| `CLAUDE_VPS_REPO` | `https://github.com/halitsever/claude-code-vps.git` |
 | `CLAUDE_VPS_DIR` | `/opt/claude-vps` |
 | `CLAUDE_VPS_BRANCH` | `main` |
 

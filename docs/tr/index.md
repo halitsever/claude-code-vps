@@ -3,8 +3,7 @@ layout: page
 pageClass: lx-page
 sidebar: false
 aside: false
-title: claude-vps
-titleTemplate: Ubuntu'da uzaktan Claude Code iş istasyonu
+title: "Claude Code'u tek komutla VPS'te çalıştır"
 ---
 
 <Landing lang="tr" />

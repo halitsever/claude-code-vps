@@ -1,3 +1,7 @@
+---
+description: "Riferimento di tutti i comandi e le opzioni di claude-vps: setup, sync, autosync, doctor, capture, publish, apply e variabili di install.sh."
+---
+
 # CLI
 
 ```text
@@ -42,7 +46,7 @@ Lo script di bootstrap legge tre variabili d'ambiente:
 
 | Variabile | Default |
 | --- | --- |
-| `CLAUDE_VPS_REPO` | `https://github.com/halitsever/claude-vps.git` |
+| `CLAUDE_VPS_REPO` | `https://github.com/halitsever/claude-code-vps.git` |
 | `CLAUDE_VPS_DIR` | `/opt/claude-vps` |
 | `CLAUDE_VPS_BRANCH` | `main` |
 

@@ -1,3 +1,7 @@
+---
+description: "Résoudre les problèmes courants d'un VPS Claude Code : écran RDP noir, invites colord, blocage SSH, claude introuvable et erreurs de sync."
+---
+
 # Dépannage
 
 Commencez par :

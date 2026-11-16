@@ -3,8 +3,7 @@ layout: page
 pageClass: lx-page
 sidebar: false
 aside: false
-title: claude-vps
-titleTemplate: Poste Claude Code distant sur Ubuntu
+title: "Faire tourner Claude Code sur un VPS en une commande"
 ---
 
 <Landing lang="fr" />

@@ -1,3 +1,7 @@
+---
+description: "Connectez Claude Code sur un serveur sans écran, gardez vos agents actifs dans tmux après une coupure SSH et recevez des notifications via ntfy.sh."
+---
+
 # Utiliser Claude Code
 
 ## Première connexion

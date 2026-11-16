@@ -1,3 +1,7 @@
+---
+description: "Claude Code VPS'inde sık görülen sorunları çöz: siyah RDP ekranı, colord parola sorusu, SSH'tan kilitlenme, claude bulunamadı ve sync hataları."
+---
+
 # Sorun giderme
 
 İlk olarak:

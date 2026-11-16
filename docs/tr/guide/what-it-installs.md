@@ -1,6 +1,10 @@
+---
+description: "claude-vps'in Ubuntu sunucunda çalıştırdığı her adım: paketler, swap, SSH sıkılaştırma, ufw, KDE Plasma, xrdp, Docker, Chrome, Claude Code ve dotfiles."
+---
+
 # Neler kuruluyor
 
-`claude-vps setup` dokuz adımı sırayla çalıştırır. Her biri [`lib/setup.sh`](https://github.com/halitsever/claude-vps/blob/main/lib/setup.sh) içinde düz bir bash fonksiyonu, yani sunucunda tam olarak neyin çalıştığını okuyabilirsin. İstediğini `--skip` ile atla ya da birkaçını `--only` ile çalıştır.
+`claude-vps setup` dokuz adımı sırayla çalıştırır. Her biri [`lib/setup.sh`](https://github.com/halitsever/claude-code-vps/blob/main/lib/setup.sh) içinde düz bir bash fonksiyonu, yani sunucunda tam olarak neyin çalıştığını okuyabilirsin. İstediğini `--skip` ile atla ya da birkaçını `--only` ile çalıştır.
 
 ## 1. base
 

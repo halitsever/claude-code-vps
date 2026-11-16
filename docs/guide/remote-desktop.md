@@ -1,3 +1,7 @@
+---
+description: "Connect to a KDE Plasma desktop on your Claude Code VPS over RDP from Windows, macOS, Linux, iOS or Android, directly or through an SSH tunnel."
+---
+
 # Remote desktop
 
 The server runs a full KDE Plasma session over RDP. It starts when you connect and keeps running when you disconnect, so windows are still where you left them next time.

@@ -1,3 +1,7 @@
+---
+description: "KDE Plasma ve Claude Code ayarlarını claude-vps publish, sync ve autosync ile kendi makinen ve VPS'in arasında senkron tut."
+---
+
 # Config senkronizasyonu
 
 Sunucunun nasıl göründüğünün ve nasıl davrandığının tek doğru kaynağı repo. Sen kendi makinende değişiklik yaparsın, sunucu arkandan gelir.
@@ -14,8 +18,8 @@ Sunucunun nasıl göründüğünün ve nasıl davrandığının tek doğru kayna
 Repoyu bir kere klonla ve CLI'ı PATH'e ekle:
 
 ```bash
-git clone https://github.com/halitsever/claude-vps.git ~/claude-vps
-ln -s ~/claude-vps/bin/claude-vps ~/.local/bin/claude-vps
+git clone https://github.com/halitsever/claude-code-vps.git ~/claude-code-vps
+ln -s ~/claude-code-vps/bin/claude-vps ~/.local/bin/claude-vps
 ```
 
 Bir paneli, kısayolu, Konsole profilini ya da `~/.claude/settings.json` dosyasını değiştirdikten sonra:
@@ -28,7 +32,7 @@ Bu komut `capture` çalıştırır, `dotfiles/` klasörünü commit'ler ve push'
 
 ```bash
 claude-vps capture
-git -C ~/claude-vps diff
+git -C ~/claude-code-vps diff
 ```
 
 ## Sunucuda
@@ -53,7 +57,7 @@ Plasma bazı ayarları bellekte tutar ve çıkış yaparken geri yazar. RDP ile 
 
 ## Neler alınıyor
 
-Liste [`dotfiles/manifest.txt`](https://github.com/halitsever/claude-vps/blob/main/dotfiles/manifest.txt) içinde. Sonda eğik çizgi varsa klasörün tamamı alınır.
+Liste [`dotfiles/manifest.txt`](https://github.com/halitsever/claude-code-vps/blob/main/dotfiles/manifest.txt) içinde. Sonda eğik çizgi varsa klasörün tamamı alınır.
 
 | Alan | Dosyalar |
 | --- | --- |

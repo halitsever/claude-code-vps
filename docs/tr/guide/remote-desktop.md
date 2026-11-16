@@ -1,3 +1,7 @@
+---
+description: "Claude Code VPS'indeki KDE Plasma masaüstüne Windows, macOS, Linux, iOS veya Android'den RDP ile doğrudan ya da SSH tüneliyle bağlan."
+---
+
 # Uzak masaüstü
 
 Sunucu RDP üzerinden tam bir KDE Plasma oturumu çalıştırır. Bağlandığında başlar, bağlantıyı kestiğinde çalışmaya devam eder; bir sonraki sefere pencereler bıraktığın yerde durur.

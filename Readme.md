@@ -2,18 +2,19 @@
   <img src="docs/public/logo.svg" height="80" width="80"/>
 </p>
 
-<h1 align="center">claude-vps</h1>
+<h1 align="center">Claude Code VPS</h1>
 
 <p align="center">
-One command turns a blank Ubuntu server into a remote Claude Code workstation:<br/>
+Run Claude Code on a VPS. One command turns a blank Ubuntu server into a remote Claude Code workstation:<br/>
 KDE Plasma over RDP, hardened SSH, Docker, Chrome and my own KDE + Claude config.
 </p>
 
 <p align="center">
-<a href="https://halitsever.github.io/claude-vps/">Documentation</a> ·
-<a href="https://halitsever.github.io/claude-vps/fr/">Français</a> ·
-<a href="https://halitsever.github.io/claude-vps/it/">Italiano</a> ·
-<a href="https://halitsever.github.io/claude-vps/tr/">Türkçe</a>
+<a href="https://halitsever.github.io/claude-code-vps/guide/claude-code-vps">Step-by-step VPS guide</a> ·
+<a href="https://halitsever.github.io/claude-code-vps/">Documentation</a> ·
+<a href="https://halitsever.github.io/claude-code-vps/fr/">Français</a> ·
+<a href="https://halitsever.github.io/claude-code-vps/it/">Italiano</a> ·
+<a href="https://halitsever.github.io/claude-code-vps/tr/">Türkçe</a>
 </p>
 
 ## Install
@@ -21,8 +22,10 @@ KDE Plasma over RDP, hardened SSH, Docker, Chrome and my own KDE + Claude config
 On a fresh Ubuntu 24.04+ server, as root:
 
 ```bash
-curl -fsSL https://raw.githubusercontent.com/halitsever/claude-vps/main/install.sh | sudo bash
+curl -fsSL https://raw.githubusercontent.com/halitsever/claude-code-vps/main/install.sh | sudo bash
 ```
+
+Prefer to do it by hand? The [Claude Code on a VPS guide](https://halitsever.github.io/claude-code-vps/guide/claude-code-vps) walks through every step.
 
 Then SSH in as the new user, run `tmux` and `claude`, or connect to the desktop with any RDP client on port `53389`.
 

@@ -4,7 +4,7 @@ import { onBeforeUnmount, onMounted, ref } from "vue";
 type Line = { kind: "cmd" | "head" | "ok" | "dim" | "done" | "kv"; text: string; key?: string };
 
 const SCRIPT: Line[] = [
-  { kind: "cmd", text: "curl -fsSL https://raw.githubusercontent.com/halitsever/claude-vps/main/install.sh | sudo bash" },
+  { kind: "cmd", text: "curl -fsSL https://raw.githubusercontent.com/halitsever/claude-code-vps/main/install.sh | sudo bash" },
   { kind: "head", text: "Preflight" },
   { kind: "ok", text: "Ubuntu 26.04 on amd64" },
   { kind: "head", text: "System update, core packages, swap" },

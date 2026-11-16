@@ -1,3 +1,7 @@
+---
+description: "Accedi a Claude Code su un server senza schermo, tieni gli agenti attivi in tmux dopo la disconnessione SSH e ricevi notifiche con ntfy.sh."
+---
+
 # Usare Claude Code
 
 ## Primo login
