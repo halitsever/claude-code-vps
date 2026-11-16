@@ -21,3 +21,15 @@ tailnet_peer_seen() {
   done < <(ss -tnH state established 2>/dev/null)
   return 1
 }
+
+# Rules are deleted by spec, so a rule that was never added is not an error.
+lockdown_firewall() {
+  run ufw allow in on tailscale0
+  local rule
+  for rule in OpenSSH 22/tcp "$RDP_PORT/tcp"; do
+    run ufw delete allow "$rule" >/dev/null || true
+  done
+  FIREWALL=tailscale
+  save_setup_conf
+  ok "SSH and RDP now only answer over Tailscale"
+}

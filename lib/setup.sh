@@ -17,6 +17,7 @@ declare -A STEP_DESC=(
 TARGET_USER=${TARGET_USER:-}
 RDP_PORT=${RDP_PORT:-53389}
 RDP_PUBLIC=${RDP_PUBLIC:-1}
+FIREWALL=${FIREWALL:-public}
 NTFY_TOPIC=${NTFY_TOPIC:-}
 TIMEZONE=${TIMEZONE:-}
 ASSUME_YES=${ASSUME_YES:-0}
@@ -328,8 +329,8 @@ SETUP_CONF=/etc/claude-vps.conf
 
 save_setup_conf() {
   [[ $DRY_RUN == 1 ]] && return
-  printf 'TARGET_USER=%q\nRDP_PORT=%q\nRDP_PUBLIC=%q\nTIMEZONE=%q\nSKIP=%q\n' \
-    "$TARGET_USER" "$RDP_PORT" "$RDP_PUBLIC" "$TIMEZONE" "$SKIP" >"$SETUP_CONF"
+  printf 'TARGET_USER=%q\nRDP_PORT=%q\nRDP_PUBLIC=%q\nFIREWALL=%q\nTIMEZONE=%q\nSKIP=%q\n' \
+    "$TARGET_USER" "$RDP_PORT" "$RDP_PUBLIC" "$FIREWALL" "$TIMEZONE" "$SKIP" >"$SETUP_CONF"
 }
 
 cmd_setup() {
