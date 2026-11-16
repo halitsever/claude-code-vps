@@ -2,7 +2,7 @@
 
 Servers pick up a new version with `sudo claude-vps update`.
 
-## Unreleased
+## 0.3.0
 
 - [claudegrid](https://github.com/halitsever/claudegrid) comes preinstalled from its latest `.deb`, with its Konsole profile, app menu entry and `qdbus` for Konsole split panes.
 - Node.js 20+ on every supported release. Ubuntu 24.04 gets Node 22 from NodeSource, since its own nodejs is 18.
