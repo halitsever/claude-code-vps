@@ -4,6 +4,7 @@ Servers pick up a new version with `sudo claude-vps update`.
 
 ## Unreleased
 
+- `apply` runs the executables in `~/.config/claude-vps/post-apply.d/` after it changes files, so layers such as [HaltOS](https://github.com/halitsever/haltos) survive a sync.
 - `capture` records your public Claude Code plugins (Anthropic directory and official marketplace) in `dotfiles/plugins.txt`, and `apply` installs the ones a server is missing. Your own skills stay out.
 
 ## 0.3.0

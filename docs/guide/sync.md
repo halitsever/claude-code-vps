@@ -51,6 +51,10 @@ claude-vps autosync        # show when it runs next
 claude-vps autosync off
 ```
 
+### Hooks after apply
+
+When `apply` changes files, it then runs every executable in `~/.config/claude-vps/post-apply.d/`, in name order. Tools that layer their own settings on top of your config use this to put them back after a sync, for example [HaltOS](https://github.com/halitsever/haltos). A failing hook prints a warning and does not stop the sync.
+
 ::: warning Plasma and live sessions
 Plasma keeps some settings in memory and writes them back when you log out. If a sync lands while you are connected over RDP, log out and back in to see it, and avoid changing the same setting on the server in the meantime.
 :::

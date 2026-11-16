@@ -118,6 +118,17 @@ render() {
   fi
 }
 
+# Lets tools that layer on top of the synced config, such as a theme, put their settings back.
+run_post_apply_hooks() {
+  local dir=$HOME/.config/claude-vps/post-apply.d hook
+  [[ -d $dir ]] || return 0
+  for hook in "$dir"/*; do
+    [[ -f $hook && -x $hook ]] || continue
+    info "running hook $(basename "$hook")"
+    "$hook" || warn "hook $(basename "$hook") failed"
+  done
+}
+
 cmd_apply() {
   [[ -d $STORE ]] || die "no captured config in $STORE, run capture on your machine first"
   if [[ -e $SOURCE_MARK && ${1:-} != --force ]]; then
@@ -160,6 +171,7 @@ cmd_apply() {
   fi
   if ((changed)); then
     ok "$changed files updated, old copies in ${backup/#$HOME/\~}"
+    run_post_apply_hooks
     info "log out of the desktop and back in to see KDE changes"
   else
     ok "already up to date"
