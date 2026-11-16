@@ -30,7 +30,7 @@ KDE Plasma over RDP, hardened SSH, tmux, Docker, Chrome and your own KDE + Claud
 <img src="https://halitsever-api.vercel.app/api/details"/>
 </p>
 
-- [**One command setup**](https://halitsever.github.io/claude-code-vps/guide/getting-started) - base packages, sudo user, key-only SSH, ufw, KDE Plasma, xrdp, Docker, gh, Chrome and Claude Code
+- [**One command setup**](https://halitsever.github.io/claude-code-vps/guide/getting-started) - base packages, sudo user, key-only SSH, ufw, KDE Plasma, xrdp, Docker, gh, Chrome, Claude Code and [claudegrid](https://github.com/halitsever/claudegrid)
 - [**Step-by-step VPS guide**](https://halitsever.github.io/claude-code-vps/guide/claude-code-vps) - every step by hand, if you would rather not run a script
 - [**Config sync**](https://halitsever.github.io/claude-code-vps/guide/sync) - `claude-vps publish` at home, `claude-vps sync` or autosync on the server
 - [**Phone notifications**](https://halitsever.github.io/claude-code-vps/guide/claude-code) - a Notification hook that pushes "Claude is waiting" to ntfy.sh

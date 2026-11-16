@@ -9,7 +9,8 @@ description: "claude-vps가 Ubuntu 서버에서 실행하는 모든 단계를 �
 ## 1. base
 
 - 모든 패키지에 `apt upgrade` 실행
-- `git curl jq ripgrep fd-find tmux htop build-essential nodejs npm python3` 등 기본 도구 설치
+- `git curl jq ripgrep fd-find tmux htop build-essential python3` 등 기본 도구 설치
+- Node.js 20 이상. Ubuntu 24.04의 apt에는 18만 있어서 NodeSource 저장소에서 설치합니다
 - `unattended-upgrades`를 켜서 보안 패치가 자동으로 설치되도록 함
 - swap이 없고 RAM이 8 GB보다 작으면 4 GB swap 파일 생성. Plasma와 에이전트 여러 개가 함께 돌아도 OOM killer에 걸리지 않습니다
 - `--timezone`을 지정하면 시간대 설정
@@ -57,6 +58,7 @@ xrdp는 Xorg 세션을 사용합니다. Ubuntu 24.04부터 26.04까지 Plasma 6�
 ## 8. claude
 
 - 공식 설치 스크립트로 Claude Code를 `~/.local/bin/claude`에 설치합니다. 업데이트는 알아서 합니다
+- [claudegrid](https://github.com/halitsever/claudegrid)를 최신 `.deb` 릴리스로 설치합니다. 명령 하나로 Konsole이나 tmux에 Claude Code 에이전트 그리드를 띄웁니다. Konsole 프로필과 앱 메뉴 항목도 함께 추가됩니다
 - ntfy.sh 토픽을 지정했다면 `~/.claude/ntfy-topic`에 저장합니다. 알림 훅이 이 파일을 읽습니다
 
 ## 9. dotfiles

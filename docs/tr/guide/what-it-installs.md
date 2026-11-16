@@ -9,7 +9,8 @@ description: "claude-vps'in Ubuntu sunucunda çalıştırdığı her adım: pake
 ## 1. base
 
 - Bütün paketlere `apt upgrade`
-- `git curl jq ripgrep fd-find tmux htop build-essential nodejs npm python3` ve benzeri araçlar
+- `git curl jq ripgrep fd-find tmux htop build-essential python3` ve benzeri araçlar
+- Node.js 20 veya üstü. Ubuntu 24.04'te apt sadece 18 sürümünü verdiği için orada NodeSource deposundan kurulur
 - `unattended-upgrades` açılır, güvenlik yamaları sen uğraşmadan kurulur
 - Sunucuda swap yoksa ve RAM 8 GB'tan azsa 4 GB'lık bir swap dosyası. Böylece Plasma ve birkaç Claude birlikte çalışırken bellek dolup OOM killer devreye girmez
 - `--timezone` verdiysen saat dilimi
@@ -57,6 +58,7 @@ xrdp bir Xorg oturumu çalıştırır. Plasma 6, Ubuntu 24.04 ile 26.04 arasınd
 ## 8. claude
 
 - Claude Code, resmi kurulum script'iyle `~/.local/bin/claude` konumuna kurulur. Kendini otomatik günceller
+- [claudegrid](https://github.com/halitsever/claudegrid), son `.deb` sürümünden kurulur. Tek komutla Konsole ya da tmux içinde bir Claude Code ajanı ızgarası açar. Bir Konsole profili ve uygulama menüsü kaydı da ekler
 - ntfy.sh topic'i verdiysen `~/.claude/ntfy-topic` dosyasına yazılır. Bildirim hook'u topic'i buradan okur
 
 ## 9. dotfiles

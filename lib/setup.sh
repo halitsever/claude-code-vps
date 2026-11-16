@@ -10,7 +10,7 @@ declare -A STEP_DESC=(
   [desktop]="KDE Plasma (X11 session), no display manager"
   [rdp]="xrdp on a custom port, starting Plasma"
   [apps]="Docker, Google Chrome, GitHub CLI"
-  [claude]="Claude Code native install and ntfy notifications"
+  [claude]="Claude Code native install, claudegrid and ntfy notifications"
   [dotfiles]="Your KDE, Claude and shell config from this repo"
 )
 
@@ -62,8 +62,9 @@ step_base() {
   run apt-get update -q
   run env DEBIAN_FRONTEND=noninteractive apt-get upgrade -y -q
   apt_install ca-certificates curl wget git jq ripgrep fd-find tmux htop unzip zip \
-    build-essential nodejs npm python3 python3-pip software-properties-common \
+    build-essential python3 python3-pip software-properties-common \
     unattended-upgrades locales
+  install_node
   run systemctl enable --now unattended-upgrades
 
   [[ -n $TIMEZONE ]] && run timedatectl set-timezone "$TIMEZONE"
@@ -81,6 +82,36 @@ step_base() {
     fi
   fi
   ok "base system ready"
+}
+
+apt_candidate() { apt-cache policy "$1" | awk '/Candidate:/ {sub(/^[0-9]+:/, "", $2); print $2}'; }
+
+# claudegrid needs Node 20+, Ubuntu 24.04 ships 18, so older releases get NodeSource's Node 22.
+install_node() {
+  local candidate
+  candidate=$(apt_candidate nodejs)
+  if ((${candidate%%.*} < 20)); then
+    info "Ubuntu's Node.js $candidate is too old, adding the NodeSource repo for Node 22"
+    run install -d -m 755 /etc/apt/keyrings
+    run sh -c 'curl -fsSL https://deb.nodesource.com/gpgkey/nodesource-repo.gpg.key | gpg --dearmor --yes -o /etc/apt/keyrings/nodesource.gpg'
+    if [[ $DRY_RUN != 1 ]]; then
+      cat >/etc/apt/sources.list.d/nodesource.sources <<'EOF'
+Types: deb
+URIs: https://deb.nodesource.com/node_22.x
+Suites: nodistro
+Components: main
+Signed-By: /etc/apt/keyrings/nodesource.gpg
+EOF
+    fi
+    run apt-get update -q
+    candidate=$(apt_candidate nodejs)
+  fi
+  # NodeSource's nodejs bundles npm and conflicts with Ubuntu's npm package.
+  if [[ $candidate == *nodesource* ]]; then
+    apt_install nodejs
+  else
+    apt_install nodejs npm
+  fi
 }
 
 step_user() {
@@ -240,6 +271,7 @@ step_claude() {
     as_user 'curl -fsSL https://claude.ai/install.sh | bash'
     ok "Claude Code installed to ~/.local/bin/claude"
   fi
+  install_claudegrid
 
   local home
   home=$(user_home "$TARGET_USER")
@@ -253,6 +285,17 @@ step_claude() {
     chmod 600 "$home/.claude/ntfy-topic"
     ok "ntfy topic saved"
   fi
+}
+
+# The .deb ships the Konsole profile and app menu entry, so the KDE desktop picks it up without extra setup.
+install_claudegrid() {
+  local deb=/tmp/claudegrid.deb qdbus
+  run curl -fsSL -o "$deb" https://github.com/halitsever/claudegrid/releases/latest/download/claudegrid.deb
+  # Konsole splits panes over D-Bus, the package name differs between Ubuntu releases.
+  mapfile -t qdbus < <(apt_available qdbus-qt6 qt6-tools-dev-tools | head -n1)
+  apt_install "$deb" "${qdbus[@]}"
+  run rm -f "$deb"
+  ok "claudegrid installed, run it from Konsole or with: claudegrid"
 }
 
 step_dotfiles() {
@@ -275,6 +318,7 @@ summary() {
   printf '  Desktop    RDP to %s:%s as %s\n' "$ip" "$RDP_PORT" "$TARGET_USER"
   [[ -n $GENERATED_PASSWORD ]] && printf '  Password   %s%s%s  (change it with passwd)\n' "$C_BOLD" "$GENERATED_PASSWORD" "$C_RESET"
   printf '  Claude     ssh in, run tmux, then claude and follow the login link\n'
+  printf '  Grid       claudegrid in Konsole over RDP, or claudegrid -b tmux over SSH\n'
   printf '  Updates    claude-vps sync   (or: claude-vps autosync on)\n\n'
   return 0
 }

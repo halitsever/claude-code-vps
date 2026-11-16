@@ -9,7 +9,8 @@ description: "Cada paso que claude-vps ejecuta en tu servidor Ubuntu: paquetes, 
 ## 1. base
 
 - `apt upgrade` de todo el sistema
-- `git curl jq ripgrep fd-find tmux htop build-essential nodejs npm python3` y otras herramientas parecidas
+- `git curl jq ripgrep fd-find tmux htop build-essential python3` y otras herramientas parecidas
+- Node.js 20 o más reciente. En Ubuntu 24.04 apt solo tiene la 18, así que ahí se instala desde el repositorio de NodeSource
 - `unattended-upgrades` activado, para que los parches de seguridad se instalen sin que hagas nada
 - un archivo de swap de 4 GB si el servidor no tiene swap y tiene menos de 8 GB de RAM. Así Plasma y varios agentes no hacen saltar el OOM killer
 - la zona horaria, si pasas `--timezone`
@@ -57,6 +58,7 @@ xrdp funciona con una sesión de Xorg. Plasma 6 sigue incluyendo una sesión X11
 ## 8. claude
 
 - Claude Code con el instalador nativo oficial, en `~/.local/bin/claude`. Se actualiza solo
+- [claudegrid](https://github.com/halitsever/claudegrid) desde su último release `.deb`, para abrir una cuadrícula de agentes de Claude Code en Konsole o tmux con un solo comando. También añade un perfil de Konsole y una entrada en el menú de aplicaciones
 - tu tema de ntfy.sh en `~/.claude/ntfy-topic`, si lo indicas. El hook de notificaciones lo lee de ahí
 
 ## 9. dotfiles

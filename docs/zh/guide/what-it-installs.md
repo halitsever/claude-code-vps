@@ -9,7 +9,8 @@ description: "claude-vps 在你的 Ubuntu 服务器上执行的每一步：软�
 ## 1. base
 
 - 用 `apt upgrade` 升级所有软件包
-- 安装 `git curl jq ripgrep fd-find tmux htop build-essential nodejs npm python3` 等常用工具
+- 安装 `git curl jq ripgrep fd-find tmux htop build-essential python3` 等常用工具
+- Node.js 20 或更高版本。Ubuntu 24.04 的 apt 只有 18，所以会从 NodeSource 仓库安装
 - 开启 `unattended-upgrades`，安全补丁会自动安装
 - 如果服务器没有 swap 且内存小于 8 GB，就创建一个 4 GB 的 swap 文件。这样同时跑 Plasma 和几个 agent 时不容易被 OOM killer 杀掉
 - 如果传了 `--timezone`，设置时区
@@ -57,6 +58,7 @@ xrdp 驱动的是 Xorg 会话。在 Ubuntu 24.04 到 26.04 上，Plasma 6 仍然
 ## 8. claude
 
 - 用官方原生安装脚本把 Claude Code 装到 `~/.local/bin/claude`，之后会自动更新
+- 从最新的 `.deb` 发布安装 [claudegrid](https://github.com/halitsever/claudegrid)，一条命令就能在 Konsole 或 tmux 里打开一组 Claude Code 代理。它还会添加一个 Konsole 配置文件和一个应用菜单项
 - 如果提供了 ntfy.sh topic，就写入 `~/.claude/ntfy-topic`，通知 hook 会从这里读取
 
 ## 9. dotfiles

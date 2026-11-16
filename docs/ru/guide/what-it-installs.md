@@ -9,7 +9,8 @@ description: "Все шаги claude-vps на сервере Ubuntu: пакет�
 ## 1. base
 
 - `apt upgrade` для всех пакетов
-- `git curl jq ripgrep fd-find tmux htop build-essential nodejs npm python3` и ещё несколько пакетов
+- `git curl jq ripgrep fd-find tmux htop build-essential python3` и ещё несколько пакетов
+- Node.js 20 или новее. В apt на Ubuntu 24.04 есть только 18, поэтому там он ставится из репозитория NodeSource
 - включается `unattended-upgrades`, чтобы обновления безопасности ставились без вашего участия
 - swap-файл на 4 ГБ, если swap нет, а RAM меньше 8 ГБ. Так OOM killer не тронет Plasma и агентов
 - часовой пояс, если указан `--timezone`
@@ -57,6 +58,7 @@ xrdp работает с сессией Xorg. В Ubuntu с 24.04 по 26.04 у P
 ## 8. claude
 
 - Claude Code через официальный нативный установщик, в `~/.local/bin/claude`. Обновляется сам
+- [claudegrid](https://github.com/halitsever/claudegrid) из последнего релиза `.deb`: одной командой открывает сетку агентов Claude Code в Konsole или tmux. Заодно добавляет профиль Konsole и пункт в меню приложений
 - ваш топик ntfy.sh в `~/.claude/ntfy-topic`, если вы его указали. Оттуда его читает хук уведомлений
 
 ## 9. dotfiles
