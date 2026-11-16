@@ -103,42 +103,8 @@ html:not(.dark) .lx {
   text-align: center;
 }
 
-.lx-badge {
-  display: inline-flex;
-  align-items: center;
-  gap: 10px;
-  padding: 7px 16px 7px 12px;
-  border-radius: 999px;
-  font-size: 13.5px;
-  font-weight: 500;
-  color: var(--fg) !important;
-  background: color-mix(in srgb, var(--bg) 55%, transparent);
-  border: 1px solid var(--line-2);
-  backdrop-filter: blur(12px);
-  animation: lx-up 0.8s cubic-bezier(0.2, 0.8, 0.2, 1) both;
-  transition: border-color 0.25s, transform 0.25s;
-}
-.lx-badge:hover {
-  border-color: color-mix(in srgb, var(--acc) 60%, transparent);
-  transform: translateY(-1px);
-}
-.lx-badge .spark {
-  width: 8px;
-  height: 8px;
-  border-radius: 50%;
-  background: var(--acc);
-  box-shadow: 0 0 12px 2px color-mix(in srgb, var(--acc) 70%, transparent);
-}
-.lx-badge .arr {
-  color: var(--acc);
-  transition: transform 0.25s;
-}
-.lx-badge:hover .arr {
-  transform: translateX(3px);
-}
-
 .lx-title {
-  margin: 30px 0 0;
+  margin: 24px 0 0;
   font-size: clamp(46px, 8.4vw, 112px);
   line-height: 0.95;
   letter-spacing: -0.055em;

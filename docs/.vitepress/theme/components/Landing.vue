@@ -26,7 +26,6 @@ const STACK = ["Ubuntu 26.04", "KDE Plasma 6", "xrdp", "tmux", "Claude Code", "D
 
 const STRINGS = {
   en: {
-    badge: "New: the step-by-step Claude Code VPS guide",
     title1: "A blank server in.",
     title2: "Your Claude workstation out.",
     lead: "One command installs Claude Code, a full KDE Plasma desktop over RDP, hardened SSH and the exact config I use every day. Change your setup at home, and the server follows.",
@@ -73,7 +72,6 @@ const STRINGS = {
     base: "",
   },
   fr: {
-    badge: "Nouveau : le guide pas à pas Claude Code sur VPS",
     title1: "Un serveur vide en entrée.",
     title2: "Votre poste Claude en sortie.",
     lead: "Une seule commande installe Claude Code, un bureau KDE Plasma complet via RDP, un SSH durci et exactement la configuration que j'utilise au quotidien. Modifiez votre setup chez vous, le serveur suit.",
@@ -120,7 +118,6 @@ const STRINGS = {
     base: "/fr",
   },
   it: {
-    badge: "Novità: la guida passo passo a Claude Code su VPS",
     title1: "Entra un server vuoto.",
     title2: "Esce la tua postazione Claude.",
     lead: "Un solo comando installa Claude Code, un desktop KDE Plasma completo via RDP, un SSH blindato ed esattamente la configurazione che uso ogni giorno. Cambi il setup a casa, il server si adegua.",
@@ -167,7 +164,6 @@ const STRINGS = {
     base: "/it",
   },
   tr: {
-    badge: "Yeni: adım adım Claude Code VPS rehberi",
     title1: "Boş bir sunucu girer.",
     title2: "Claude iş istasyonun çıkar.",
     lead: "Tek komut Claude Code'u, RDP üzerinden tam bir KDE Plasma masaüstünü, sıkılaştırılmış SSH'ı ve her gün kullandığım ayarların birebir aynısını kurar. Evde ayarını değiştir, sunucu da takip etsin.",
@@ -302,10 +298,6 @@ onBeforeUnmount(() => {
       <div class="lx-grain" aria-hidden="true" />
 
       <div class="lx-hero-inner">
-        <a class="lx-badge" :href="link('/guide/claude-code-vps')">
-          <span class="spark" />{{ s.badge }}<span class="arr">→</span>
-        </a>
-
         <h1 class="lx-title">
           <span class="l1">
             <span v-for="(w, i) in s.title1.split(' ')" :key="'a' + i" class="w" :style="{ '--d': i * 70 + 'ms' }">{{ w }}&nbsp;</span>
