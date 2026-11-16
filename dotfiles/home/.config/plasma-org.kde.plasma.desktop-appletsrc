@@ -20,7 +20,7 @@ DialogHeight=630
 DialogWidth=810
 
 [Containments][1][Wallpaper][org.kde.image][General]
-Image=file:///usr/share/desktop-base/emerald-theme/wallpaper/
+Image=file://@HOME@/.local/share/wallpapers/HaltOS
 SlidePaths=/usr/share/wallpapers/
 
 [Containments][2]
@@ -49,10 +49,11 @@ plugin=org.kde.plasma.kickoff
 
 [Containments][2][Applets][3][Configuration]
 popupHeight=509
-popupWidth=647
+popupWidth=685
 
 [Containments][2][Applets][3][Configuration][General]
 favoritesPortedToKAstats=true
+icon=haltos-start
 
 [Containments][2][Applets][4]
 immutability=1
