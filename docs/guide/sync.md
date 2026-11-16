@@ -67,7 +67,7 @@ The list lives in [`dotfiles/manifest.txt`](https://github.com/halitsever/claude
 | --- | --- |
 | Plasma | `kdeglobals`, `kwinrc`, `kglobalshortcutsrc`, `plasmarc`, `plasmashellrc`, `plasma-org.kde.plasma.desktop-appletsrc`, `kdedefaults/`, power and notification settings |
 | Apps | `dolphinrc`, `konsolerc`, `katerc`, `~/.local/share/konsole/`, GTK theme settings, `mimeapps.list` |
-| Look | `~/.local/share/color-schemes/`, `plasma/`, `aurorae/`, `wallpapers/` when they exist |
+| Look | `~/.local/share/color-schemes/`, `plasma/`, `aurorae/` when they exist |
 | Claude | `~/.claude/settings.json`, `hooks/` |
 | Shell | `.tmux.conf`, `.xsession` |
 
@@ -75,4 +75,4 @@ Add a line to the manifest to track something else. Paths that do not exist on y
 
 ## What never gets captured
 
-Your home path is replaced with `@HOME@` so the files work for any username, and sections that hold recent files or history are dropped. Credentials are simply not on the list: `~/.claude/.credentials.json`, `~/.claude/ntfy-topic`, SSH keys, `kwalletrc`, browser profiles. Keep it that way, the repo is public.
+Your home path is replaced with `@HOME@` so the files work for any username, and sections that hold recent files or history are dropped. Credentials are simply not on the list: `~/.claude/.credentials.json`, `~/.claude/ntfy-topic`, SSH keys, `kwalletrc`, browser profiles. Binary files such as photos, wallpapers and icons are skipped with a warning even inside a listed folder, since they cannot be scrubbed. Keep it that way, the repo is public.

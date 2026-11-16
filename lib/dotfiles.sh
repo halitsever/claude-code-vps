@@ -25,14 +25,15 @@ scrub() {
   '
 }
 
+# Binary files (photos, wallpapers, icons) never go to the public repo, they cannot be scrubbed.
 capture_one() {
   local src=$1 dst=$2
-  mkdir -p "$(dirname "$dst")"
-  if is_text "$src"; then
-    scrub "$src" >"$dst"
-  else
-    cp "$src" "$dst"
+  if ! is_text "$src"; then
+    warn "skipped binary file ${src#"$HOME"/}"
+    return 1
   fi
+  mkdir -p "$(dirname "$dst")"
+  scrub "$src" >"$dst"
   [[ -x $src ]] && chmod +x "$dst"
   return 0
 }
@@ -49,12 +50,10 @@ cmd_capture() {
     src=$HOME/${path%/}
     if [[ -d $src ]]; then
       while IFS= read -r -d '' f; do
-        capture_one "$f" "$STORE/${f#"$HOME"/}"
-        n=$((n + 1))
+        capture_one "$f" "$STORE/${f#"$HOME"/}" && n=$((n + 1))
       done < <(find "$src" -type f -print0)
     elif [[ -f $src ]]; then
-      capture_one "$src" "$STORE/$path"
-      n=$((n + 1))
+      capture_one "$src" "$STORE/$path" && n=$((n + 1))
     else
       info "not on this machine: $path"
     fi
