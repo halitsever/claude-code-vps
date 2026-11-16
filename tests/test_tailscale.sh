@@ -27,7 +27,7 @@ test_lockdown_calls_ufw_in_order() {
   stub ufw 'exit 0'
   RDP_PORT=53389 SETUP_CONF=$TMP/conf
   assert_ok lockdown_firewall
-  assert_eq "$(cat "$STUB_LOG")" $'ufw allow in on tailscale0\nufw delete allow OpenSSH\nufw delete allow 22/tcp\nufw delete allow 53389/tcp'
+  assert_eq "$(cat "$STUB_LOG")" $'ufw allow in on tailscale0\nufw delete allow OpenSSH\nufw delete allow 22/tcp\nufw delete allow 22\nufw delete allow 53389/tcp\nufw delete allow 53389\nufw --force enable\nufw status'
   assert_ok grep -qx 'FIREWALL=tailscale' "$SETUP_CONF"
 }
 
@@ -122,4 +122,46 @@ test_wait_without_tty_polls_slowly() {
   local calls
   calls=$(grep -c '^ss' "$STUB_LOG")
   ((calls <= 3)) || fail "ss ran $calls times in 2s, expected a 2s poll"
+}
+
+test_peer_ignores_server_connecting_to_itself() {
+  stub ss 'echo "0 0 100.121.162.28:22 100.121.162.28:5555"'
+  assert_fail tailnet_peer_seen 22 53389
+}
+
+test_lockdown_enables_ufw_and_drops_bare_port_rules() {
+  stub ufw 'exit 0'
+  RDP_PORT=53389 SETUP_CONF=$TMP/conf
+  assert_ok lockdown_firewall
+  assert_ok grep -qx 'ufw --force enable' "$STUB_LOG"
+  assert_ok grep -qx 'ufw delete allow 22' "$STUB_LOG"
+  assert_ok grep -qx 'ufw delete allow 53389' "$STUB_LOG"
+}
+
+test_lockdown_warns_about_leftover_rules() {
+  stub ufw '[[ $1 == status ]] && printf "%s\n" "53389/tcp                  ALLOW IN    95.70.130.136" "Anywhere on tailscale0     ALLOW IN    Anywhere"; exit 0'
+  RDP_PORT=53389 SETUP_CONF=$TMP/conf
+  lockdown_firewall 2>"$TMP/err"
+  assert_ok grep -q '95.70.130.136' "$TMP/err"
+  assert_fail grep -q 'tailscale0' "$TMP/err"
+}
+
+test_flow_survives_failing_tailscale_ip() {
+  stub tailscale '[[ $1 == ip ]] && exit 1; exit 0'
+  stub systemctl 'exit 0'
+  stub ss 'exit 0'
+  TAILNET_WAIT=1 SETUP_CONF=$TMP/conf TARGET_USER=dev
+  assert_ok tailscale_flow
+}
+
+test_cmd_help_does_nothing() {
+  fake_tailscale
+  assert_ok cmd_tailscale --help
+  assert_eq "$(cat "$STUB_LOG")" ""
+}
+
+test_cmd_rejects_unknown_option() {
+  fake_tailscale
+  assert_fail cmd_tailscale --bogus
+  assert_eq "$(cat "$STUB_LOG")" ""
 }

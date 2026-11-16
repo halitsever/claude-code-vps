@@ -40,7 +40,8 @@ run_tests() {
   local t failed=0 count=0
   for t in $(declare -F | awk '$3 ~ /^test_/ {print $3}'); do
     count=$((count + 1))
-    if (
+    # Run outside an `if`, since bash ignores set -e for everything inside a condition.
+    (
       TMP=$(mktemp -d)
       STUB_DIR=$TMP/bin STUB_LOG=$TMP/stub.log QUIET=1
       export STUB_LOG
@@ -48,7 +49,8 @@ run_tests() {
       PATH="$STUB_DIR:$PATH"
       "$t"
       [[ ! -e $TMP/.failed ]] || { sed 's/^/    | /' "$TMP/out" 2>/dev/null >&2; exit 1; }
-    ); then
+    )
+    if (($? == 0)); then
       printf 'PASS %s\n' "$t"
     else
       printf 'FAIL %s\n' "$t"

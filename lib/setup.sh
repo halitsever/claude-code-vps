@@ -322,7 +322,8 @@ step_dotfiles() {
 summary() {
   local ip
   if [[ $FIREWALL == tailscale ]]; then
-    ip=$(tailscale ip -4 2>/dev/null | head -n1)
+    ip=$(tailscale ip -4 2>/dev/null | head -n1) || true
+    ip=${ip:-<tailscale-ip>}
   else
     ip=$(curl -fsS -m 4 https://api.ipify.org 2>/dev/null || hostname -I | awk '{print $1}')
   fi

@@ -40,3 +40,10 @@ test_summary_shows_public_ip_by_default() {
   FIREWALL=public TARGET_USER=dev RDP_PORT=53389
   assert_ok grep -q 'ssh dev@188.132.232.187' <(summary)
 }
+
+test_summary_survives_tailscale_down() {
+  stub curl 'echo 188.132.232.187'
+  stub tailscale 'exit 1'
+  FIREWALL=tailscale TARGET_USER=dev RDP_PORT=53389
+  assert_ok summary
+}
