@@ -1,0 +1,80 @@
+#!/usr/bin/env bash
+# claude-vps: set up a fresh Ubuntu server as a remote Claude Code workstation and keep its config in sync.
+set -Eeuo pipefail
+
+VERSION=0.1.0
+REPO_DIR=$(cd "$(dirname "$(readlink -f "${BASH_SOURCE[0]}")")/.." && pwd)
+
+# shellcheck source=../lib/common.sh
+. "$REPO_DIR/lib/common.sh"
+# shellcheck source=../lib/setup.sh
+. "$REPO_DIR/lib/setup.sh"
+# shellcheck source=../lib/dotfiles.sh
+. "$REPO_DIR/lib/dotfiles.sh"
+
+check() {
+  local label=$1
+  shift
+  if "$@" >/dev/null 2>&1; then
+    printf '  %s✓%s %s\n' "$C_OK" "$C_RESET" "$label"
+  else
+    printf '  %s✗%s %s\n' "$C_ERR" "$C_RESET" "$label"
+  fi
+}
+
+cmd_doctor() {
+  log "claude-vps $VERSION at $REPO_DIR"
+  check "claude on PATH" has claude
+  check "tmux" has tmux
+  check "git and gh" bash -c 'command -v git && command -v gh'
+  check "docker running" systemctl is-active --quiet docker
+  check "xrdp running" systemctl is-active --quiet xrdp
+  check "plasma X11 session" has startplasma-x11
+  check "ufw active" bash -c 'systemctl is-active --quiet ufw'
+  check "~/.xsession starts Plasma" grep -q startplasma "$HOME/.xsession"
+  check "ntfy topic set" test -s "$HOME/.claude/ntfy-topic"
+  check "autosync timer" systemctl --user is-active --quiet claude-vps-sync.timer
+  local port
+  port=$(awk -F= '/^port=/ {print $2; exit}' /etc/xrdp/xrdp.ini 2>/dev/null || true)
+  [[ -n $port ]] && info "RDP port: $port"
+  return 0
+}
+
+usage() {
+  cat <<EOF
+${C_BOLD}claude-vps${C_RESET} $VERSION
+
+On the server:
+  sudo claude-vps setup [options]   install everything (see: claude-vps setup --help)
+  claude-vps sync                   pull this repo and apply the config
+  claude-vps autosync on|off        sync every 30 minutes with a systemd user timer
+  claude-vps doctor                 check what is installed and running
+
+On your own machine:
+  claude-vps capture                copy your current config into dotfiles/
+  claude-vps publish                capture, commit and push in one go
+
+Both:
+  claude-vps apply                  write dotfiles/ into \$HOME (backs up what it replaces)
+  claude-vps version
+EOF
+}
+
+main() {
+  local cmd=${1:-help}
+  (($#)) && shift
+  case $cmd in
+    setup) cmd_setup "$@" ;;
+    sync) cmd_sync "$@" ;;
+    apply) cmd_apply "$@" ;;
+    capture) cmd_capture "$@" ;;
+    publish) cmd_publish "$@" ;;
+    autosync) cmd_autosync "$@" ;;
+    doctor) cmd_doctor "$@" ;;
+    version | -v | --version) echo "$VERSION" ;;
+    help | -h | --help) usage ;;
+    *) usage; die "unknown command: $cmd" ;;
+  esac
+}
+
+main "$@"

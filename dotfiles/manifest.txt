@@ -1,0 +1,43 @@
+# Paths under $HOME that `claude-vps capture` copies into dotfiles/home.
+# A trailing slash means the whole directory. Secrets never go here.
+
+# KDE Plasma
+.config/kdeglobals
+.config/kwinrc
+.config/kglobalshortcutsrc
+.config/kcminputrc
+.config/kscreenlockerrc
+.config/ksmserverrc
+.config/ksplashrc
+.config/plasmarc
+.config/plasmashellrc
+.config/plasma-org.kde.plasma.desktop-appletsrc
+.config/plasma-localerc
+.config/plasmanotifyrc
+.config/powermanagementprofilesrc
+.config/powerdevilrc
+.config/kdedefaults/
+.config/dolphinrc
+.config/konsolerc
+.config/katerc
+.config/kate-externaltoolspluginrc
+.config/katevirc
+.config/gtkrc
+.config/gtkrc-2.0
+.config/gtk-3.0/settings.ini
+.config/gtk-4.0/settings.ini
+.config/mimeapps.list
+.local/share/konsole/
+.local/share/color-schemes/
+.local/share/plasma/
+.local/share/aurorae/
+.local/share/wallpapers/
+
+# Claude Code
+.claude/CLAUDE.md
+.claude/settings.json
+.claude/hooks/
+
+# Shell and session
+.tmux.conf
+.xsession

@@ -1,48 +1,48 @@
-<p align="center" class="logo-section">
-<img src="https://i.ibb.co/NrPh9xP/image.png" height="80" width="80"/>
-<br/>
-<img src="https://halitsever-api.vercel.app/api/repo-title?title=repo_name">
+<p align="center">
+  <img src="docs/public/logo.svg" height="80" width="80"/>
+</p>
+
+<h1 align="center">claude-vps</h1>
 
 <p align="center">
-✋ Coming soon...<br>
-<br/>
-<br/>
-<img src="https://img.shields.io/github/sponsors/halitsever"/>
-</p>
-<p align="center">
-<a align="center" href="#">Documentation</a>
-  </p>
+One command turns a blank Ubuntu server into a remote Claude Code workstation:<br/>
+KDE Plasma over RDP, hardened SSH, Docker, Chrome and my own KDE + Claude config.
 </p>
 
 <p align="center">
-<img src="https://halitsever-api.vercel.app/api/details"/>
+<a href="https://halitsever.github.io/claude-vps/">Documentation</a> ·
+<a href="https://halitsever.github.io/claude-vps/tr/">Türkçe</a>
 </p>
 
-- 🧑‍💻 [**TODO**](#) - update docs
+## Install
 
-<p align="center" >
-<img src="https://halitsever-api.vercel.app/api/installation"/>
-</p>
+On a fresh Ubuntu 24.04+ server, as root:
 
-Todo: update docs
+```bash
+curl -fsSL https://raw.githubusercontent.com/halitsever/claude-vps/main/install.sh | sudo bash
+```
 
-<p align="center">
-<a href="https://github.com/halitsever/repo_name/issues"><img src="https://halitsever-api.vercel.app/api/issue"/></a>
-</p>
+Then SSH in as the new user, run `tmux` and `claude`, or connect to the desktop with any RDP client on port `53389`.
 
-<p align="center">
-Found a bug or have an idea? Open an <a href="https://github.com/halitsever/repo_name/issues">issue</a>.<br/>
-Read the <a href=".github/CONTRIBUTING.md">contributing guide</a> before sending a pull request.
-</p>
+## Keep the server in sync
 
-<p align="center">
-<img src="https://halitsever-api.vercel.app/api/sponsor"/>
-</p>
+```bash
+claude-vps publish        # on your machine: capture KDE + Claude config, commit, push
+claude-vps sync           # on the server: pull and apply
+claude-vps autosync on    # or let the server pull every 30 minutes
+```
 
-<p align="center">
-<img src="https://halitsever-api.vercel.app/api/license"/>
-</p>
+What gets captured is listed in [`dotfiles/manifest.txt`](dotfiles/manifest.txt). Credentials are never part of it.
 
-<p align="center">
-Released under the <a href="LICENSE">MIT License</a>.
-</p>
+## Layout
+
+| Path | |
+| --- | --- |
+| `install.sh` | bootstrap for `curl \| bash` |
+| `bin/claude-vps` | the CLI |
+| `lib/setup.sh` | the nine setup steps |
+| `lib/dotfiles.sh` | capture, apply, sync |
+| `dotfiles/home` | captured config, mirrored into `$HOME` |
+| `docs/` | VitePress site, English and Turkish |
+
+Not affiliated with Anthropic. Released under the [MIT License](LICENSE).
