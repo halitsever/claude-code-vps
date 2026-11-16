@@ -1,6 +1,6 @@
 # `claude-vps setup`: turns a fresh Ubuntu server into a remote Claude Code workstation.
 
-STEPS=(base user ssh firewall desktop rdp apps claude dotfiles)
+STEPS=(base user ssh firewall desktop rdp apps claude dotfiles tailscale)
 
 declare -A STEP_DESC=(
   [base]="System update, core packages, swap, unattended upgrades"
@@ -12,6 +12,7 @@ declare -A STEP_DESC=(
   [apps]="Docker, Google Chrome, GitHub CLI"
   [claude]="Claude Code native install, claudegrid and ntfy notifications"
   [dotfiles]="Your KDE, Claude and shell config from this repo"
+  [tailscale]="Tailscale, then SSH and RDP closed to the internet (asks first)"
 )
 
 TARGET_USER=${TARGET_USER:-}

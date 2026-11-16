@@ -13,6 +13,8 @@ VERSION=$(cat "$REPO_DIR/VERSION")
 . "$REPO_DIR/lib/dotfiles.sh"
 # shellcheck source=../lib/release.sh
 . "$REPO_DIR/lib/release.sh"
+# shellcheck source=../lib/tailscale.sh
+. "$REPO_DIR/lib/tailscale.sh"
 
 check() {
   local label=$1
@@ -52,6 +54,7 @@ On the server:
   claude-vps sync                   pull this repo and apply the config
   claude-vps autosync on|off        sync every 30 minutes with a systemd user timer
   claude-vps doctor                 check what is installed and running
+  sudo claude-vps tailscale         join a tailnet, then close SSH and RDP to the internet
 
 On your own machine:
   claude-vps capture                copy your current config into dotfiles/
@@ -77,6 +80,7 @@ main() {
     release) cmd_release "$@" ;;
     autosync) cmd_autosync "$@" ;;
     doctor) cmd_doctor "$@" ;;
+    tailscale) cmd_tailscale "$@" ;;
     version | -v | --version) echo "$VERSION" ;;
     help | -h | --help) usage ;;
     *) usage; die "unknown command: $cmd" ;;
