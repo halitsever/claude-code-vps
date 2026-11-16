@@ -43,6 +43,10 @@ scrub() {
 # Binary files (photos, wallpapers, icons) never go to the public repo, they cannot be scrubbed.
 capture_one() {
   local src=$1 dst=$2
+  if is_local_only "${src#"$HOME"/}"; then
+    info "kept repo copy of ${src#"$HOME"/}"
+    return 1
+  fi
   if ! is_text "$src"; then
     warn "skipped binary file ${src#"$HOME"/}"
     return 1
@@ -58,8 +62,21 @@ cmd_capture() {
   mkdir -p "$(dirname "$SOURCE_MARK")"
   touch "$SOURCE_MARK"
   log "Capturing config from $HOME"
+  # Local-only paths keep the copy already in the repo, since this machine's version is not for sharing.
+  local keep rel
+  keep=$(mktemp -d)
+  if [[ -d $STORE ]]; then
+    while IFS= read -r -d '' f; do
+      rel=${f#"$STORE"/}
+      is_local_only "$rel" || continue
+      mkdir -p "$(dirname "$keep/$rel")"
+      cp -p "$f" "$keep/$rel"
+    done < <(find "$STORE" -type f -print0)
+  fi
   rm -rf "$STORE"
   mkdir -p "$STORE"
+  cp -a "$keep/." "$STORE/"
+  rm -rf "$keep"
   local path src n=0 f
   while IFS= read -r path; do
     src=$HOME/${path%/}

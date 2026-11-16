@@ -53,7 +53,7 @@ claude-vps autosync off
 
 ### Keeping a file local
 
-List home paths in `~/.config/claude-vps/local-only`, one per line, and `apply` leaves them alone on that machine. A trailing slash covers a whole folder. Use it for settings that only make sense on one machine or must not reach the public repo:
+List home paths in `~/.config/claude-vps/local-only`, one per line. `apply` leaves them alone on that machine, and `capture` keeps the copy already in the repo instead of taking this machine's. A trailing slash covers a whole folder. Use it for settings that only make sense on one machine or must not reach the public repo:
 
 ```text
 .claude/settings.json

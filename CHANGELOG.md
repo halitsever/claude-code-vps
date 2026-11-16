@@ -4,7 +4,7 @@ Servers pick up a new version with `sudo claude-vps update`.
 
 ## Unreleased
 
-- Paths listed in `~/.config/claude-vps/local-only` are never touched by `apply`, for per-machine settings that should not be synced.
+- Paths listed in `~/.config/claude-vps/local-only` are never touched by `apply` and never captured (the repo copy is kept), for per-machine settings that should not be synced.
 - Servers allow `gh pr merge` and `gh repo edit` in Claude Code without a prompt.
 - `capture` skips binary files (photos, wallpapers, icons) with a warning, and `wallpapers/` is no longer in the manifest, so a private image can never reach the public repo.
 - `apply` runs the executables in `~/.config/claude-vps/post-apply.d/` after it changes files, so layers such as [HaltOS](https://github.com/halitsever/haltos) survive a sync.
