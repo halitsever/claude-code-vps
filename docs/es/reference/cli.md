@@ -11,11 +11,13 @@ claude-vps <command> [options]
 | Comando | Dónde | Qué hace |
 | --- | --- | --- |
 | `setup` | servidor, como root | Ejecuta los pasos de instalación |
+| `update` | servidor, como root | Descarga la última versión y vuelve a ejecutar setup con las opciones de la primera instalación |
 | `sync` | servidor | `git pull` y después `apply` |
 | `autosync on\|off` | servidor | Timer de systemd del usuario que ejecuta `sync` cada 30 minutos |
 | `doctor` | servidor | Revisa Claude, tmux, Docker, xrdp, Plasma, ufw, ntfy y autosync |
 | `capture` | tu ordenador | Copia los archivos de `dotfiles/manifest.txt` a `dotfiles/home` |
 | `publish` | tu ordenador | `capture`, commit y push |
+| `release X.Y.Z` | tu ordenador | Escribe `VERSION`, crea la etiqueta `vX.Y.Z` y hace push. GitHub publica la versión a partir de `CHANGELOG.md` |
 | `apply` | en cualquier sitio | Copia `dotfiles/home` a `$HOME` y guarda copia de lo que reemplaza |
 | `version` | en cualquier sitio | Muestra la versión |
 
@@ -39,6 +41,32 @@ sudo claude-vps setup [options]
 | `-n, --dry-run` | desactivado | Muestra los comandos sin ejecutarlos |
 
 Pasos, en orden: `base user ssh firewall desktop rdp apps claude dotfiles`.
+
+## Actualizar
+
+Cuando salga una versión nueva, ejecuta esto en cada servidor:
+
+```bash
+sudo claude-vps update
+```
+
+Descarga el código nuevo, te muestra qué ha cambiado y vuelve a ejecutar todos los pasos de setup. Los pasos que ya están hechos se saltan. xrdp y SSH solo se reinician si cambió su configuración, así que una sesión RDP abierta no se corta. Las opciones que elegiste en la primera instalación (usuario, puerto RDP, pasos omitidos) se guardan en `/etc/claude-vps.conf` y se vuelven a usar.
+
+`claude-vps sync` también te avisa cuando llega una versión nueva.
+
+## Publicar una versión
+
+En tu ordenador, añade una sección `## X.Y.Z` a `CHANGELOG.md`, haz commit y después ejecuta:
+
+```bash
+claude-vps release X.Y.Z
+```
+
+El workflow de release comprueba que la etiqueta coincide con `VERSION` y publica una release en GitHub. Como notas usa esa sección del changelog.
+
+## Máquinas de origen de la configuración
+
+`claude-vps capture` marca la máquina donde se ejecuta como origen de la configuración (`~/.config/claude-vps/source`). En esa máquina, `apply` y `sync` no tocan tus archivos, porque la copia del repo puede ser más antigua que la que estás usando. Si aun así quieres sobrescribirlos, usa `claude-vps apply --force`.
 
 ## install.sh
 

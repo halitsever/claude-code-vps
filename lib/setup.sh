@@ -119,14 +119,15 @@ step_ssh() {
   fi
   # sshd keeps the first value it reads, so this file has to sort before the cloud image defaults.
   local conf=/etc/ssh/sshd_config.d/10-claude-vps.conf
+  local want=$'PasswordAuthentication no\nKbdInteractiveAuthentication no\nPermitRootLogin prohibit-password'
+  if [[ -f $conf && $(cat "$conf") == "$want" ]]; then
+    ok "SSH already accepts keys only"
+    return
+  fi
   if [[ $DRY_RUN == 1 ]]; then
     info "would write $conf"
   else
-    cat >"$conf" <<'EOF'
-PasswordAuthentication no
-KbdInteractiveAuthentication no
-PermitRootLogin prohibit-password
-EOF
+    printf '%s\n' "$want" >"$conf"
   fi
   run sshd -t
   run systemctl reload ssh
@@ -162,6 +163,8 @@ step_desktop() {
 step_rdp() {
   apt_install xrdp xorgxrdp
   run adduser xrdp ssl-cert
+  local before
+  before=$(md5sum /etc/xrdp/xrdp.ini 2>/dev/null)
   if [[ $DRY_RUN == 1 ]]; then
     info "would set xrdp port to $RDP_PORT"
   else
@@ -191,7 +194,10 @@ EOF
     chown "$TARGET_USER:$TARGET_USER" "$home/.xsession"
   fi
   run systemctl enable xrdp
-  run systemctl restart xrdp
+  # A restart drops open RDP connections, so only do it when something changed.
+  if [[ $before != "$(md5sum /etc/xrdp/xrdp.ini 2>/dev/null)" ]] || ! systemctl is-active --quiet xrdp; then
+    run systemctl restart xrdp
+  fi
   ok "xrdp listening on $RDP_PORT"
 }
 
@@ -254,7 +260,11 @@ step_dotfiles() {
   run chown -R "$TARGET_USER:$TARGET_USER" "$REPO_DIR"
   run git config --system --add safe.directory "$REPO_DIR"
   run ln -sf "$REPO_DIR/bin/claude-vps" /usr/local/bin/claude-vps
-  as_user "'$REPO_DIR/bin/claude-vps' apply"
+  if [[ -e $(user_home "$TARGET_USER")/.config/claude-vps/source ]]; then
+    info "this machine is where your config comes from, leaving its files alone"
+  else
+    as_user "'$REPO_DIR/bin/claude-vps' apply"
+  fi
 }
 
 summary() {
@@ -269,7 +279,18 @@ summary() {
   return 0
 }
 
+# Options from the last run, so `update` keeps a custom port or user.
+SETUP_CONF=/etc/claude-vps.conf
+
+save_setup_conf() {
+  [[ $DRY_RUN == 1 ]] && return
+  printf 'TARGET_USER=%q\nRDP_PORT=%q\nRDP_PUBLIC=%q\nTIMEZONE=%q\nSKIP=%q\n' \
+    "$TARGET_USER" "$RDP_PORT" "$RDP_PUBLIC" "$TIMEZONE" "$SKIP" >"$SETUP_CONF"
+}
+
 cmd_setup() {
+  # shellcheck disable=SC1090
+  if [[ -r $SETUP_CONF ]]; then . "$SETUP_CONF"; fi
   while (($#)); do
     case $1 in
       -u | --user) TARGET_USER=$2; shift ;;
@@ -296,6 +317,7 @@ cmd_setup() {
     log "${STEP_DESC[$s]}"
     "step_$s"
   done
+  save_setup_conf
   summary
 }
 

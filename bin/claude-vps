@@ -2,8 +2,8 @@
 # claude-vps: set up a fresh Ubuntu server as a remote Claude Code workstation and keep its config in sync.
 set -Eeuo pipefail
 
-VERSION=0.1.0
 REPO_DIR=$(cd "$(dirname "$(readlink -f "${BASH_SOURCE[0]}")")/.." && pwd)
+VERSION=$(cat "$REPO_DIR/VERSION")
 
 # shellcheck source=../lib/common.sh
 . "$REPO_DIR/lib/common.sh"
@@ -11,6 +11,8 @@ REPO_DIR=$(cd "$(dirname "$(readlink -f "${BASH_SOURCE[0]}")")/.." && pwd)
 . "$REPO_DIR/lib/setup.sh"
 # shellcheck source=../lib/dotfiles.sh
 . "$REPO_DIR/lib/dotfiles.sh"
+# shellcheck source=../lib/release.sh
+. "$REPO_DIR/lib/release.sh"
 
 check() {
   local label=$1
@@ -46,6 +48,7 @@ ${C_BOLD}claude-vps${C_RESET} $VERSION
 
 On the server:
   sudo claude-vps setup [options]   install everything (see: claude-vps setup --help)
+  sudo claude-vps update            get the latest release and apply new setup steps
   claude-vps sync                   pull this repo and apply the config
   claude-vps autosync on|off        sync every 30 minutes with a systemd user timer
   claude-vps doctor                 check what is installed and running
@@ -53,6 +56,7 @@ On the server:
 On your own machine:
   claude-vps capture                copy your current config into dotfiles/
   claude-vps publish                capture, commit and push in one go
+  claude-vps release X.Y.Z          tag a new version (needs a CHANGELOG entry)
 
 Both:
   claude-vps apply                  write dotfiles/ into \$HOME (backs up what it replaces)
@@ -69,6 +73,8 @@ main() {
     apply) cmd_apply "$@" ;;
     capture) cmd_capture "$@" ;;
     publish) cmd_publish "$@" ;;
+    update) cmd_update "$@" ;;
+    release) cmd_release "$@" ;;
     autosync) cmd_autosync "$@" ;;
     doctor) cmd_doctor "$@" ;;
     version | -v | --version) echo "$VERSION" ;;

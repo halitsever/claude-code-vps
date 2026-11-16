@@ -4,6 +4,8 @@ MANIFEST=$REPO_DIR/dotfiles/manifest.txt
 STORE=$REPO_DIR/dotfiles/home
 # Starter files: created when missing, never overwritten, never captured.
 SEED=$REPO_DIR/dotfiles/seed
+# Present on machines that publish config. apply would roll their live settings back.
+SOURCE_MARK=$HOME/.config/claude-vps/source
 
 is_text() { [[ ! -s $1 ]] || grep -Iq . "$1"; }
 
@@ -33,6 +35,8 @@ capture_one() {
 
 cmd_capture() {
   [[ -f $MANIFEST ]] || die "missing $MANIFEST"
+  mkdir -p "$(dirname "$SOURCE_MARK")"
+  touch "$SOURCE_MARK"
   log "Capturing config from $HOME"
   rm -rf "$STORE"
   mkdir -p "$STORE"
@@ -79,6 +83,11 @@ render() {
 
 cmd_apply() {
   [[ -d $STORE ]] || die "no captured config in $STORE, run capture on your machine first"
+  if [[ -e $SOURCE_MARK && ${1:-} != --force ]]; then
+    warn "this machine publishes config, so applying would roll your live settings back"
+    info "run 'claude-vps apply --force' if that is really what you want"
+    return 0
+  fi
   log "Applying config to $HOME"
   local backup
   backup=$HOME/.local/state/claude-vps/backup-$(date +%Y%m%d-%H%M%S)
@@ -120,9 +129,15 @@ cmd_apply() {
 }
 
 cmd_sync() {
+  local before after
+  before=$(cat "$REPO_DIR/VERSION")
   log "Pulling $(git -C "$REPO_DIR" remote get-url origin 2>/dev/null || echo repo)"
   git -C "$REPO_DIR" pull -q --ff-only
-  cmd_apply
+  after=$(cat "$REPO_DIR/VERSION")
+  cmd_apply "$@"
+  if [[ $before != "$after" ]]; then
+    warn "claude-vps $before is now $after. Run 'sudo claude-vps update' to apply new setup steps"
+  fi
 }
 
 cmd_autosync() {

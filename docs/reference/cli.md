@@ -11,11 +11,13 @@ claude-vps <command> [options]
 | Command | Where | What it does |
 | --- | --- | --- |
 | `setup` | server, as root | Runs the install steps |
+| `update` | server, as root | Pulls the latest release and runs setup again with the options from the first install |
 | `sync` | server | `git pull`, then `apply` |
 | `autosync on\|off` | server | systemd user timer that runs `sync` every 30 minutes |
 | `doctor` | server | Checks Claude, tmux, Docker, xrdp, Plasma, ufw, ntfy and autosync |
 | `capture` | your machine | Copies the files in `dotfiles/manifest.txt` into `dotfiles/home` |
 | `publish` | your machine | `capture`, commit and push |
+| `release X.Y.Z` | your machine | Writes `VERSION`, tags `vX.Y.Z` and pushes. GitHub publishes the release from `CHANGELOG.md` |
 | `apply` | anywhere | Writes `dotfiles/home` into `$HOME`, backing up what it replaces |
 | `version` | anywhere | Prints the version |
 
@@ -39,6 +41,32 @@ sudo claude-vps setup [options]
 | `-n, --dry-run` | off | Print commands instead of running them |
 
 Steps, in order: `base user ssh firewall desktop rdp apps claude dotfiles`.
+
+## Updating
+
+When a new version is out, run this on each server:
+
+```bash
+sudo claude-vps update
+```
+
+It pulls the new code, shows what changed, and runs every setup step again. Steps that are already done are skipped, and xrdp and SSH are only restarted if their config changed, so an open RDP session stays connected. The options you chose on the first install (user, RDP port, skipped steps) are kept in `/etc/claude-vps.conf` and reused.
+
+`claude-vps sync` also tells you when a new version has arrived.
+
+## Releasing a version
+
+On your own machine, add a `## X.Y.Z` section to `CHANGELOG.md`, commit it, then:
+
+```bash
+claude-vps release X.Y.Z
+```
+
+The release workflow checks that the tag matches `VERSION` and publishes a GitHub release with that changelog section as notes.
+
+## Config source machines
+
+`claude-vps capture` marks the machine it runs on as a config source (`~/.config/claude-vps/source`). On such a machine `apply` and `sync` leave your files alone, because the repo copy can be older than what you are using. Use `claude-vps apply --force` to override.
 
 ## install.sh
 

@@ -11,11 +11,13 @@ claude-vps <command> [options]
 | Komut | Nerede | Ne yapar |
 | --- | --- | --- |
 | `setup` | sunucuda, root olarak | Kurulum adımlarını çalıştırır |
+| `update` | sunucuda, root olarak | Son sürümü çeker, kurulumu ilk seferdeki seçeneklerle yeniden çalıştırır |
 | `sync` | sunucuda | `git pull`, ardından `apply` |
 | `autosync on\|off` | sunucuda | `sync` komutunu 30 dakikada bir çalıştıran systemd kullanıcı zamanlayıcısı |
 | `doctor` | sunucuda | Claude, tmux, Docker, xrdp, Plasma, ufw, ntfy ve autosync durumunu kontrol eder |
 | `capture` | senin bilgisayarında | `dotfiles/manifest.txt` içindeki dosyaları `dotfiles/home` klasörüne kopyalar |
 | `publish` | senin bilgisayarında | `capture`, commit ve push |
+| `release X.Y.Z` | senin bilgisayarında | `VERSION` dosyasını yazar, `vX.Y.Z` etiketini atar ve push eder. GitHub sürümü `CHANGELOG.md` içeriğiyle yayınlar |
 | `apply` | her yerde | `dotfiles/home` içeriğini `$HOME` klasörüne yazar, üzerine yazdığı dosyaları yedekler |
 | `version` | her yerde | Sürümü gösterir |
 
@@ -39,6 +41,32 @@ sudo claude-vps setup [options]
 | `-n, --dry-run` | kapalı | Komutları çalıştırmaz, sadece ekrana yazar |
 
 Adımlar sırasıyla: `base user ssh firewall desktop rdp apps claude dotfiles`.
+
+## Güncelleme
+
+Yeni sürüm çıktığında her sunucuda şunu çalıştır:
+
+```bash
+sudo claude-vps update
+```
+
+Komut yeni kodu çeker, nelerin değiştiğini gösterir ve kurulum adımlarının hepsini yeniden çalıştırır. Zaten yapılmış adımlar atlanır. xrdp ve SSH sadece ayarları değiştiyse yeniden başlatılır, bu yüzden açık RDP oturumun kopmaz. İlk kurulumda seçtiğin ayarlar (kullanıcı, RDP portu, atlanan adımlar) `/etc/claude-vps.conf` dosyasında saklanır ve tekrar kullanılır.
+
+`claude-vps sync` de yeni bir sürüm geldiğinde haber verir.
+
+## Sürüm yayınlama
+
+Kendi bilgisayarında `CHANGELOG.md` dosyasına `## X.Y.Z` başlıklı bir bölüm ekle, commit et, sonra şunu çalıştır:
+
+```bash
+claude-vps release X.Y.Z
+```
+
+Release workflow'u etiketin `VERSION` ile aynı olduğunu kontrol eder ve GitHub'da yeni sürümü yayınlar. Sürüm notları changelog'daki o bölümden alınır.
+
+## Ayarların kaynağı olan makineler
+
+`claude-vps capture` çalıştığı makineyi ayar kaynağı olarak işaretler (`~/.config/claude-vps/source`). Böyle bir makinede `apply` ve `sync` dosyalarına dokunmaz, çünkü repodaki kopya şu an kullandığından eski olabilir. Yine de üzerine yazmak istersen `claude-vps apply --force` kullan.
 
 ## install.sh
 

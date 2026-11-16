@@ -47,6 +47,12 @@ curl -fsSL https://raw.githubusercontent.com/halitsever/claude-code-vps/main/ins
 
 Then SSH in as the new user, run `tmux` and `claude`, or connect to the desktop with any RDP client on port `53389`.
 
+When a new version is released, update each server with:
+
+```bash
+sudo claude-vps update
+```
+
 Keep the server in sync with your own machine:
 
 ```bash
