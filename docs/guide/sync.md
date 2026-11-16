@@ -51,6 +51,10 @@ claude-vps autosync        # show when it runs next
 claude-vps autosync off
 ```
 
+### Hooks after apply
+
+When `apply` changes files, it then runs every executable in `~/.config/claude-vps/post-apply.d/`, in name order. Tools that layer their own settings on top of your config use this to put them back after a sync, for example [HaltOS](https://github.com/halitsever/haltos). A failing hook prints a warning and does not stop the sync.
+
 ::: warning Plasma and live sessions
 Plasma keeps some settings in memory and writes them back when you log out. If a sync lands while you are connected over RDP, log out and back in to see it, and avoid changing the same setting on the server in the meantime.
 :::
@@ -63,7 +67,7 @@ The list lives in [`dotfiles/manifest.txt`](https://github.com/halitsever/claude
 | --- | --- |
 | Plasma | `kdeglobals`, `kwinrc`, `kglobalshortcutsrc`, `plasmarc`, `plasmashellrc`, `plasma-org.kde.plasma.desktop-appletsrc`, `kdedefaults/`, power and notification settings |
 | Apps | `dolphinrc`, `konsolerc`, `katerc`, `~/.local/share/konsole/`, GTK theme settings, `mimeapps.list` |
-| Look | `~/.local/share/color-schemes/`, `plasma/`, `aurorae/`, `wallpapers/` when they exist |
+| Look | `~/.local/share/color-schemes/`, `plasma/`, `aurorae/` when they exist |
 | Claude | `~/.claude/settings.json`, `hooks/` |
 | Shell | `.tmux.conf`, `.xsession` |
 
@@ -71,4 +75,4 @@ Add a line to the manifest to track something else. Paths that do not exist on y
 
 ## What never gets captured
 
-Your home path is replaced with `@HOME@` so the files work for any username, and sections that hold recent files or history are dropped. Credentials are simply not on the list: `~/.claude/.credentials.json`, `~/.claude/ntfy-topic`, SSH keys, `kwalletrc`, browser profiles. Keep it that way, the repo is public.
+Your home path is replaced with `@HOME@` so the files work for any username, and sections that hold recent files or history are dropped. Credentials are simply not on the list: `~/.claude/.credentials.json`, `~/.claude/ntfy-topic`, SSH keys, `kwalletrc`, browser profiles. Binary files such as photos, wallpapers and icons are skipped with a warning even inside a listed folder, since they cannot be scrubbed. Keep it that way, the repo is public.

@@ -31,7 +31,6 @@
 .local/share/color-schemes/
 .local/share/plasma/
 .local/share/aurorae/
-.local/share/wallpapers/
 
 # Claude Code
 .claude/settings.json

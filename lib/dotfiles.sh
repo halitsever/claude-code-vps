@@ -25,14 +25,15 @@ scrub() {
   '
 }
 
+# Binary files (photos, wallpapers, icons) never go to the public repo, they cannot be scrubbed.
 capture_one() {
   local src=$1 dst=$2
-  mkdir -p "$(dirname "$dst")"
-  if is_text "$src"; then
-    scrub "$src" >"$dst"
-  else
-    cp "$src" "$dst"
+  if ! is_text "$src"; then
+    warn "skipped binary file ${src#"$HOME"/}"
+    return 1
   fi
+  mkdir -p "$(dirname "$dst")"
+  scrub "$src" >"$dst"
   [[ -x $src ]] && chmod +x "$dst"
   return 0
 }
@@ -49,12 +50,10 @@ cmd_capture() {
     src=$HOME/${path%/}
     if [[ -d $src ]]; then
       while IFS= read -r -d '' f; do
-        capture_one "$f" "$STORE/${f#"$HOME"/}"
-        n=$((n + 1))
+        capture_one "$f" "$STORE/${f#"$HOME"/}" && n=$((n + 1))
       done < <(find "$src" -type f -print0)
     elif [[ -f $src ]]; then
-      capture_one "$src" "$STORE/$path"
-      n=$((n + 1))
+      capture_one "$src" "$STORE/$path" && n=$((n + 1))
     else
       info "not on this machine: $path"
     fi
@@ -118,6 +117,17 @@ render() {
   fi
 }
 
+# Lets tools that layer on top of the synced config, such as a theme, put their settings back.
+run_post_apply_hooks() {
+  local dir=$HOME/.config/claude-vps/post-apply.d hook
+  [[ -d $dir ]] || return 0
+  for hook in "$dir"/*; do
+    [[ -f $hook && -x $hook ]] || continue
+    info "running hook $(basename "$hook")"
+    "$hook" || warn "hook $(basename "$hook") failed"
+  done
+}
+
 cmd_apply() {
   [[ -d $STORE ]] || die "no captured config in $STORE, run capture on your machine first"
   if [[ -e $SOURCE_MARK && ${1:-} != --force ]]; then
@@ -160,6 +170,7 @@ cmd_apply() {
   fi
   if ((changed)); then
     ok "$changed files updated, old copies in ${backup/#$HOME/\~}"
+    run_post_apply_hooks
     info "log out of the desktop and back in to see KDE changes"
   else
     ok "already up to date"
