@@ -11,6 +11,8 @@ KDE Plasma over RDP, hardened SSH, Docker, Chrome and my own KDE + Claude config
 
 <p align="center">
 <a href="https://halitsever.github.io/claude-vps/">Documentation</a> ·
+<a href="https://halitsever.github.io/claude-vps/fr/">Français</a> ·
+<a href="https://halitsever.github.io/claude-vps/it/">Italiano</a> ·
 <a href="https://halitsever.github.io/claude-vps/tr/">Türkçe</a>
 </p>
 
@@ -43,6 +45,6 @@ What gets captured is listed in [`dotfiles/manifest.txt`](dotfiles/manifest.txt)
 | `lib/setup.sh` | the nine setup steps |
 | `lib/dotfiles.sh` | capture, apply, sync |
 | `dotfiles/home` | captured config, mirrored into `$HOME` |
-| `docs/` | VitePress site, English and Turkish |
+| `docs/` | VitePress site in English, French, Italian and Turkish |
 
 Not affiliated with Anthropic. Released under the [MIT License](LICENSE).

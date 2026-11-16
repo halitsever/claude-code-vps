@@ -49,6 +49,29 @@ function sidebarTr(): DefaultTheme.SidebarItem[] {
   ];
 }
 
+function sidebarFor(prefix: string, t: { guide: string; ref: string; pages: string[] }): DefaultTheme.SidebarItem[] {
+  const [start, installs, rdp, claude, sync, cli, trouble] = t.pages;
+  return [
+    {
+      text: t.guide,
+      items: [
+        { text: start, link: `${prefix}/guide/getting-started` },
+        { text: installs, link: `${prefix}/guide/what-it-installs` },
+        { text: rdp, link: `${prefix}/guide/remote-desktop` },
+        { text: claude, link: `${prefix}/guide/claude-code` },
+        { text: sync, link: `${prefix}/guide/sync` },
+      ],
+    },
+    {
+      text: t.ref,
+      items: [
+        { text: cli, link: `${prefix}/reference/cli` },
+        { text: trouble, link: `${prefix}/reference/troubleshooting` },
+      ],
+    },
+  ];
+}
+
 export default defineConfig({
   title: "claude-vps",
   base,
@@ -83,6 +106,56 @@ export default defineConfig({
         ],
         sidebar: sidebarEn(),
         editLink: { pattern: `${repo}/edit/main/docs/:path`, text: "Edit this page on GitHub" },
+      },
+    },
+    fr: {
+      label: "Français",
+      lang: "fr-FR",
+      link: "/fr/",
+      description: "Une seule commande transforme un serveur Ubuntu vierge en poste Claude Code distant, avec KDE Plasma, RDP et votre propre configuration.",
+      themeConfig: {
+        nav: [
+          { text: "Guide", link: "/fr/guide/getting-started" },
+          { text: "CLI", link: "/fr/reference/cli" },
+        ],
+        sidebar: sidebarFor("/fr", {
+          guide: "Guide",
+          ref: "Référence",
+          pages: ["Bien démarrer", "Ce qui est installé", "Bureau à distance", "Utiliser Claude Code", "Synchroniser la config", "CLI", "Dépannage"],
+        }),
+        editLink: { pattern: `${repo}/edit/main/docs/:path`, text: "Modifier cette page sur GitHub" },
+        outline: { label: "Sur cette page" },
+        docFooter: { prev: "Précédent", next: "Suivant" },
+        lastUpdated: { text: "Dernière mise à jour" },
+        darkModeSwitchLabel: "Apparence",
+        sidebarMenuLabel: "Menu",
+        returnToTopLabel: "Retour en haut",
+        langMenuLabel: "Langue",
+      },
+    },
+    it: {
+      label: "Italiano",
+      lang: "it-IT",
+      link: "/it/",
+      description: "Un solo comando trasforma un server Ubuntu vuoto in una postazione Claude Code remota, con KDE Plasma, RDP e la tua configurazione.",
+      themeConfig: {
+        nav: [
+          { text: "Guida", link: "/it/guide/getting-started" },
+          { text: "CLI", link: "/it/reference/cli" },
+        ],
+        sidebar: sidebarFor("/it", {
+          guide: "Guida",
+          ref: "Riferimento",
+          pages: ["Per iniziare", "Cosa viene installato", "Desktop remoto", "Usare Claude Code", "Sincronizzare la config", "CLI", "Risoluzione problemi"],
+        }),
+        editLink: { pattern: `${repo}/edit/main/docs/:path`, text: "Modifica questa pagina su GitHub" },
+        outline: { label: "In questa pagina" },
+        docFooter: { prev: "Precedente", next: "Successivo" },
+        lastUpdated: { text: "Ultimo aggiornamento" },
+        darkModeSwitchLabel: "Aspetto",
+        sidebarMenuLabel: "Menu",
+        returnToTopLabel: "Torna su",
+        langMenuLabel: "Lingua",
       },
     },
     tr: {

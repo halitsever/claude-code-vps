@@ -3,7 +3,7 @@ import { computed, ref } from "vue";
 import { withBase } from "vitepress";
 import TerminalDemo from "./TerminalDemo.vue";
 
-const props = defineProps<{ lang?: "en" | "tr" }>();
+const props = defineProps<{ lang?: "en" | "fr" | "it" | "tr" }>();
 
 const INSTALL = "curl -fsSL https://raw.githubusercontent.com/halitsever/claude-vps/main/install.sh | sudo bash";
 const REPO = "https://github.com/halitsever/claude-vps";
@@ -96,6 +96,94 @@ const STRINGS = {
     ctaTitle: "Temiz bir Ubuntu makine al ve şunu yapıştır.",
     ctaText: "Hetzner, DigitalOcean, evdeki boş bir makine: Ubuntu 24.04 ve üstünü çalıştıran her şey.",
     base: "/tr",
+  },
+  fr: {
+    eyebrow: "Ubuntu 24.04 / 26.04 · KDE Plasma 6 · Claude Code",
+    title1: "Un serveur vide en entrée.",
+    title2: "Votre poste Claude en sortie.",
+    lead: "Une seule commande installe Claude Code, un bureau KDE Plasma complet via RDP, un SSH durci et exactement la configuration que j'utilise au quotidien. Modifiez votre setup chez vous, le serveur suit.",
+    start: "Lire le guide",
+    github: "Voir sur GitHub",
+    copy: "Copier",
+    copied: "Copié",
+    stats: [
+      ["1", "commande"],
+      ["9", "étapes"],
+      ["~10", "minutes"],
+      ["0", "config manuelle"],
+    ],
+    desktopKicker: "Le bureau",
+    desktopTitle: "Plasma, à une connexion RDP.",
+    desktopText: "Connectez-vous avec n'importe quel client RDP, depuis un portable, une tablette ou un téléphone. Konsole, Dolphin et Chrome sont déjà là, avec le thème que vous avez laissé.",
+    bentoKicker: "Ce que vous obtenez",
+    bentoTitle: "Tout ce dont un agent qui tourne longtemps a besoin.",
+    bento: [
+      { t: "Claude Code, toujours actif", d: "Installation native pour votre utilisateur, tmux pour des sessions qui survivent à une coupure SSH, et votre CLAUDE.md global, vos hooks et votre barre d'état déjà en place.", tag: "claude" },
+      { t: "Votre KDE, pas celui par défaut", d: "Panneaux, raccourcis, tiling, palette de couleurs et profils Konsole sont capturés sur votre machine et rejoués sur le serveur.", tag: "plasma" },
+      { t: "Verrouillé", d: "SSH par clé uniquement, pas de connexion root par mot de passe, ufw, mises à jour de sécurité automatiques.", tag: "security" },
+      { t: "Prévient votre téléphone", d: "Un hook Notification envoie « Claude vous attend » sur ntfy.sh, vous pouvez vous éloigner.", tag: "ntfy" },
+      { t: "Outils de dev", d: "Docker, GitHub CLI, Node, ripgrep, outils de compilation et Chrome pour les tâches dans le navigateur.", tag: "tools" },
+      { t: "Relançable", d: "Chaque étape vérifie d'abord ce qui est déjà installé. Relancez après une mise à niveau ou avec --only.", tag: "idempotent" },
+    ],
+    flowKicker: "Restez synchronisé",
+    flowTitle: "Réglez chez vous. Ça apparaît sur le serveur.",
+    flowText: "Le dépôt fait foi. Publiez depuis votre machine, le serveur récupère à intervalles réguliers.",
+    flow: [
+      { cmd: "claude-vps publish", t: "Votre machine", d: "Capture la config KDE et Claude, nettoie les chemins personnels, commit et push." },
+      { cmd: "git push", t: "GitHub", d: "Des fichiers simples dans dotfiles/home. Faciles à comparer, faciles à relire." },
+      { cmd: "claude-vps sync", t: "Serveur", d: "Récupère et applique, en sauvegardant tout ce qu'il remplace. Ou laissez autosync le faire toutes les 30 minutes." },
+    ],
+    stepsKicker: "Sous le capot",
+    stepsTitle: "Neuf étapes, tout en bash lisible.",
+    steps: ["base", "user", "ssh", "firewall", "desktop", "rdp", "apps", "claude", "dotfiles"],
+    stepsLink: "Voir ce que fait chaque étape",
+    ctaTitle: "Prenez un Ubuntu tout neuf et collez ceci.",
+    ctaText: "Hetzner, DigitalOcean, une machine qui traîne à la maison : tout ce qui tourne sous Ubuntu 24.04 ou plus récent.",
+    base: "/fr",
+  },
+  it: {
+    eyebrow: "Ubuntu 24.04 / 26.04 · KDE Plasma 6 · Claude Code",
+    title1: "Entra un server vuoto.",
+    title2: "Esce la tua postazione Claude.",
+    lead: "Un solo comando installa Claude Code, un desktop KDE Plasma completo via RDP, un SSH blindato ed esattamente la configurazione che uso ogni giorno. Cambi il setup a casa, il server si adegua.",
+    start: "Leggi la guida",
+    github: "Vedi su GitHub",
+    copy: "Copia",
+    copied: "Copiato",
+    stats: [
+      ["1", "comando"],
+      ["9", "passaggi"],
+      ["~10", "minuti"],
+      ["0", "config manuale"],
+    ],
+    desktopKicker: "Il desktop",
+    desktopTitle: "Plasma, a una connessione RDP di distanza.",
+    desktopText: "Collegati con qualsiasi client RDP, da un portatile, un tablet o un telefono. Konsole, Dolphin e Chrome sono già lì, con il tema che hai lasciato.",
+    bentoKicker: "Cosa ottieni",
+    bentoTitle: "Tutto ciò che serve a un agente che lavora a lungo.",
+    bento: [
+      { t: "Claude Code, sempre acceso", d: "Installazione nativa per il tuo utente, tmux per sessioni che sopravvivono a un SSH caduto, e il tuo CLAUDE.md globale, gli hook e la status line già al loro posto.", tag: "claude" },
+      { t: "Il tuo KDE, non quello di default", d: "Pannelli, scorciatoie, tiling, schema colori e profili di Konsole vengono catturati dalla tua macchina e riapplicati sul server.", tag: "plasma" },
+      { t: "Blindato", d: "SSH solo con chiave, niente login root con password, ufw, aggiornamenti di sicurezza automatici.", tag: "security" },
+      { t: "Avvisa il tuo telefono", d: "Un hook Notification manda «Claude ti sta aspettando» a ntfy.sh, così puoi allontanarti.", tag: "ntfy" },
+      { t: "Strumenti di sviluppo", d: "Docker, GitHub CLI, Node, ripgrep, strumenti di build e Chrome per le attività nel browser.", tag: "tools" },
+      { t: "Rieseguibile", d: "Ogni passaggio controlla prima cosa c'è già. Rilancialo dopo un aggiornamento o con --only.", tag: "idempotent" },
+    ],
+    flowKicker: "Resta sincronizzato",
+    flowTitle: "Modifica a casa. Compare sul server.",
+    flowText: "Il repository è la fonte di verità. Pubblica dalla tua macchina, il server scarica a intervalli regolari.",
+    flow: [
+      { cmd: "claude-vps publish", t: "La tua macchina", d: "Cattura la config di KDE e Claude, ripulisce i percorsi personali, fa commit e push." },
+      { cmd: "git push", t: "GitHub", d: "File semplici in dotfiles/home. Facili da confrontare, facili da rivedere." },
+      { cmd: "claude-vps sync", t: "Server", d: "Scarica e applica, facendo il backup di tutto ciò che sostituisce. Oppure lascia che autosync lo faccia ogni 30 minuti." },
+    ],
+    stepsKicker: "Sotto il cofano",
+    stepsTitle: "Nove passaggi, tutto bash leggibile.",
+    steps: ["base", "user", "ssh", "firewall", "desktop", "rdp", "apps", "claude", "dotfiles"],
+    stepsLink: "Cosa fa ogni passaggio",
+    ctaTitle: "Prendi un Ubuntu nuovo e incolla questo.",
+    ctaText: "Hetzner, DigitalOcean, una macchina inutilizzata a casa: qualsiasi cosa con Ubuntu 24.04 o successivo.",
+    base: "/it",
   },
 } as const;
 
