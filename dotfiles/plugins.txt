@@ -1,0 +1,5 @@
+# Public Claude Code plugins, installed on servers by `claude-vps apply`.
+code-review-anthropics@anthropic-plugin-directory
+frontend-design@anthropic-plugin-directory
+mattpocock-skills@claude-plugins-official
+superpowers@claude-plugins-official

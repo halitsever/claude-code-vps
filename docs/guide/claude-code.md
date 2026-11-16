@@ -58,6 +58,8 @@ From `dotfiles/home/.claude`:
 - **`CLAUDE.md`**: an empty file for your own global instructions. It is only created when missing, so what you write there is never overwritten
 - **`hooks/notify.sh`**: the ntfy hook above
 
+From `dotfiles/plugins.txt`, the public plugins installed on your machine: `capture` lists everything from the Anthropic directory and the official marketplace, and `apply` installs what the server is missing. Skills you wrote yourself are left out; the ones synced from claude.ai show up once you log in.
+
 Change any of them on your own machine and run `claude-vps publish`. See [Keeping config in sync](/guide/sync).
 
 ## Updating Claude Code

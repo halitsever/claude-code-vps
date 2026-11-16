@@ -6,6 +6,10 @@ STORE=$REPO_DIR/dotfiles/home
 SEED=$REPO_DIR/dotfiles/seed
 # Present on machines that publish config. apply would roll their live settings back.
 SOURCE_MARK=$HOME/.config/claude-vps/source
+PLUGINS=$REPO_DIR/dotfiles/plugins.txt
+INSTALLED_PLUGINS=$HOME/.claude/plugins/installed_plugins.json
+# Skills you wrote yourself live in other marketplaces or sync from claude.ai, so they stay out.
+PUBLIC_MARKETPLACES='anthropic-plugin-directory|claude-plugins-official'
 
 is_text() { [[ ! -s $1 ]] || grep -Iq . "$1"; }
 
@@ -56,9 +60,42 @@ cmd_capture() {
     fi
   done < <(manifest_paths)
   ok "$n files in dotfiles/home"
+  capture_plugins
   if git -C "$REPO_DIR" rev-parse >/dev/null 2>&1; then
     git -C "$REPO_DIR" status --short -- dotfiles | sed 's/^/  /'
   fi
+}
+
+installed_plugins() {
+  [[ -f $INSTALLED_PLUGINS ]] && jq -r '.plugins | keys[]' "$INSTALLED_PLUGINS"
+  return 0
+}
+
+capture_plugins() {
+  has jq || { warn "jq is missing, plugin list not captured"; return; }
+  {
+    echo '# Public Claude Code plugins, installed on servers by `claude-vps apply`.'
+    installed_plugins | grep -E "@($PUBLIC_MARKETPLACES)\$" | sort
+  } >"$PLUGINS"
+  ok "$(grep -vc '^#' "$PLUGINS") public plugins in dotfiles/plugins.txt"
+}
+
+apply_plugins() {
+  [[ -f $PLUGINS ]] || return 0
+  local claude=$HOME/.local/bin/claude have id added=0
+  [[ -x $claude ]] || claude=$(command -v claude) || { warn "claude not found, plugins skipped"; return 0; }
+  have=$(installed_plugins)
+  while IFS= read -r id; do
+    grep -qxF "$id" <<<"$have" && continue
+    if "$claude" plugin install "$id" --scope user >/dev/null 2>&1; then
+      info "installed plugin $id"
+      added=$((added + 1))
+    else
+      warn "could not install plugin $id, try: claude plugin install $id"
+    fi
+  done < <(grep -vE '^\s*(#|$)' "$PLUGINS")
+  ((added)) && ok "$added plugins installed, restart Claude Code to load them"
+  return 0
 }
 
 cmd_publish() {
@@ -109,6 +146,7 @@ cmd_apply() {
     changed=$((changed + 1))
   done < <(find "$STORE" -type f -print0)
   rm -f "$tmp"
+  apply_plugins
   if [[ -d $SEED ]]; then
     while IFS= read -r -d '' f; do
       rel=${f#"$SEED"/}

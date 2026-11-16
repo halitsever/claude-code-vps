@@ -63,7 +63,7 @@ xrdp drives an Xorg session. Plasma 6 still ships an X11 session on Ubuntu 24.04
 
 ## 9. dotfiles
 
-Hands `/opt/claude-vps` to your user, links `claude-vps` into `/usr/local/bin`, and runs `claude-vps apply` as you. That writes everything under `dotfiles/home` into your home directory: KDE config, Konsole profiles, `~/.claude/settings.json`, `CLAUDE.md`, hooks, `.tmux.conf`.
+Hands `/opt/claude-vps` to your user, links `claude-vps` into `/usr/local/bin`, and runs `claude-vps apply` as you. That writes everything under `dotfiles/home` into your home directory: KDE config, Konsole profiles, `~/.claude/settings.json`, `CLAUDE.md`, hooks, `.tmux.conf`. It also installs the public Claude Code plugins listed in `dotfiles/plugins.txt`.
 
 ## Running steps again
 

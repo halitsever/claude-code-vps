@@ -2,6 +2,10 @@
 
 Servers pick up a new version with `sudo claude-vps update`.
 
+## Unreleased
+
+- `capture` records your public Claude Code plugins (Anthropic directory and official marketplace) in `dotfiles/plugins.txt`, and `apply` installs the ones a server is missing. Your own skills stay out.
+
 ## 0.3.0
 
 - [claudegrid](https://github.com/halitsever/claudegrid) comes preinstalled from its latest `.deb`, with its Konsole profile, app menu entry and `qdbus` for Konsole split panes.

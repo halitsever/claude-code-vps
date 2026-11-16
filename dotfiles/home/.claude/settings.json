@@ -1,7 +1,9 @@
 {
   "enabledPlugins": {
     "mattpocock-skills@claude-plugins-official": true,
-    "code-review-anthropics@anthropic-plugin-directory": true
+    "code-review-anthropics@anthropic-plugin-directory": true,
+    "frontend-design@anthropic-plugin-directory": true,
+    "superpowers@claude-plugins-official": true
   },
   "tui": "fullscreen",
   "theme": "dark",
