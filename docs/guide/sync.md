@@ -51,6 +51,15 @@ claude-vps autosync        # show when it runs next
 claude-vps autosync off
 ```
 
+### Keeping a file local
+
+List home paths in `~/.config/claude-vps/local-only`, one per line, and `apply` leaves them alone on that machine. A trailing slash covers a whole folder. Use it for settings that only make sense on one machine or must not reach the public repo:
+
+```text
+.claude/settings.json
+.config/kate/
+```
+
 ### Hooks after apply
 
 When `apply` changes files, it then runs every executable in `~/.config/claude-vps/post-apply.d/`, in name order. Tools that layer their own settings on top of your config use this to put them back after a sync, for example [HaltOS](https://github.com/halitsever/haltos). A failing hook prints a warning and does not stop the sync.
