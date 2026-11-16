@@ -34,7 +34,6 @@
 .local/share/wallpapers/
 
 # Claude Code
-.claude/CLAUDE.md
 .claude/settings.json
 .claude/hooks/
 

@@ -55,7 +55,7 @@ Le topic est un secret : quiconque le connaît peut lire vos notifications. C'es
 Depuis `dotfiles/home/.claude` :
 
 - **`settings.json`** : thème sombre, TUI plein écran, une barre d'état avec le modèle, le dossier, la branche git et l'usage du contexte, les plugins que j'utilise et le hook de notification
-- **`CLAUDE.md`** : mes instructions globales pour tous les projets
+- **`CLAUDE.md`** : un fichier vide pour vos propres instructions globales. Il n'est créé que s'il manque, ce que vous y écrivez n'est donc jamais écrasé
 - **`hooks/notify.sh`** : le hook ntfy décrit plus haut
 
 Modifiez-les sur votre propre machine puis lancez `claude-vps publish`. Voir [Synchroniser la config](/fr/guide/sync).

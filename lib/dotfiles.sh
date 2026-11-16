@@ -2,6 +2,8 @@
 
 MANIFEST=$REPO_DIR/dotfiles/manifest.txt
 STORE=$REPO_DIR/dotfiles/home
+# Starter files: created when missing, never overwritten, never captured.
+SEED=$REPO_DIR/dotfiles/seed
 
 is_text() { [[ ! -s $1 ]] || grep -Iq . "$1"; }
 
@@ -98,6 +100,17 @@ cmd_apply() {
     changed=$((changed + 1))
   done < <(find "$STORE" -type f -print0)
   rm -f "$tmp"
+  if [[ -d $SEED ]]; then
+    while IFS= read -r -d '' f; do
+      rel=${f#"$SEED"/}
+      target=$HOME/$rel
+      [[ -e $target ]] && continue
+      mkdir -p "$(dirname "$target")"
+      cp "$f" "$target"
+      info "created $rel"
+      changed=$((changed + 1))
+    done < <(find "$SEED" -type f -print0)
+  fi
   if ((changed)); then
     ok "$changed files updated, old copies in ${backup/#$HOME/\~}"
     info "log out of the desktop and back in to see KDE changes"

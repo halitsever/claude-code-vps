@@ -64,7 +64,7 @@ La liste se trouve dans [`dotfiles/manifest.txt`](https://github.com/halitsever/
 | Plasma | `kdeglobals`, `kwinrc`, `kglobalshortcutsrc`, `plasmarc`, `plasmashellrc`, `plasma-org.kde.plasma.desktop-appletsrc`, `kdedefaults/`, réglages d'énergie et de notifications |
 | Applis | `dolphinrc`, `konsolerc`, `katerc`, `~/.local/share/konsole/`, réglages du thème GTK, `mimeapps.list` |
 | Apparence | `~/.local/share/color-schemes/`, `plasma/`, `aurorae/`, `wallpapers/` s'ils existent |
-| Claude | `~/.claude/CLAUDE.md`, `settings.json`, `hooks/` |
+| Claude | `~/.claude/settings.json`, `hooks/` |
 | Shell | `.tmux.conf`, `.xsession` |
 
 Ajoutez une ligne au manifeste pour suivre autre chose. Les chemins absents de votre machine sont ignorés.

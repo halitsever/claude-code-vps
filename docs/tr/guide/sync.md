@@ -64,7 +64,7 @@ Liste [`dotfiles/manifest.txt`](https://github.com/halitsever/claude-code-vps/bl
 | Plasma | `kdeglobals`, `kwinrc`, `kglobalshortcutsrc`, `plasmarc`, `plasmashellrc`, `plasma-org.kde.plasma.desktop-appletsrc`, `kdedefaults/`, güç ve bildirim ayarları |
 | Uygulamalar | `dolphinrc`, `konsolerc`, `katerc`, `~/.local/share/konsole/`, GTK tema ayarları, `mimeapps.list` |
 | Görünüm | varsa `~/.local/share/color-schemes/`, `plasma/`, `aurorae/`, `wallpapers/` |
-| Claude | `~/.claude/CLAUDE.md`, `settings.json`, `hooks/` |
+| Claude | `~/.claude/settings.json`, `hooks/` |
 | Shell | `.tmux.conf`, `.xsession` |
 
 Başka bir şeyi takip etmek için manifest'e bir satır ekle. Makinende olmayan yollar atlanır.

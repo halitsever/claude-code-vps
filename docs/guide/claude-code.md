@@ -55,7 +55,7 @@ The topic is a secret: anyone who knows it can read your notifications. That is 
 From `dotfiles/home/.claude`:
 
 - **`settings.json`**: dark theme, fullscreen TUI, a status line with model, folder, git branch and context usage, the plugins I use and the notify hook
-- **`CLAUDE.md`**: my global instructions for every project
+- **`CLAUDE.md`**: an empty file for your own global instructions. It is only created when missing, so what you write there is never overwritten
 - **`hooks/notify.sh`**: the ntfy hook above
 
 Change any of them on your own machine and run `claude-vps publish`. See [Keeping config in sync](/guide/sync).

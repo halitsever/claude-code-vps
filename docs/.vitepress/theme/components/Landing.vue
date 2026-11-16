@@ -53,7 +53,7 @@ const STRINGS = {
     bentoKicker: "What you get",
     bentoTitle: "Everything a long-running agent needs.",
     bento: [
-      { t: "Claude Code, always on", d: "tmux sessions that survive a dropped SSH, with your CLAUDE.md, hooks and status line already in place.", tag: "claude" },
+      { t: "Claude Code, always on", d: "tmux sessions that survive a dropped SSH, with your settings, hooks and status line already in place.", tag: "claude" },
       { t: "Your KDE, not a default one", d: "Panels, shortcuts, tiling and Konsole profiles, captured at home and replayed on the server.", tag: "plasma" },
       { t: "Locked down", d: "Key-only SSH, no root password login, ufw, unattended upgrades.", tag: "security" },
       { t: "Pings your phone", d: "A Notification hook sends Claude's questions to ntfy.sh. Walk away.", tag: "ntfy" },
@@ -100,7 +100,7 @@ const STRINGS = {
     bentoKicker: "Ce que vous obtenez",
     bentoTitle: "Tout ce dont un agent qui tourne longtemps a besoin.",
     bento: [
-      { t: "Claude Code, toujours actif", d: "Des sessions tmux qui survivent à une coupure SSH, avec votre CLAUDE.md, vos hooks et votre barre d'état.", tag: "claude" },
+      { t: "Claude Code, toujours actif", d: "Des sessions tmux qui survivent à une coupure SSH, avec vos réglages, vos hooks et votre barre d'état.", tag: "claude" },
       { t: "Votre KDE, pas celui par défaut", d: "Panneaux, raccourcis, tiling et profils Konsole, capturés chez vous et rejoués sur le serveur.", tag: "plasma" },
       { t: "Verrouillé", d: "SSH par clé, pas de connexion root par mot de passe, ufw, mises à jour automatiques.", tag: "security" },
       { t: "Prévient votre téléphone", d: "Un hook Notification envoie les questions de Claude sur ntfy.sh. Éloignez-vous.", tag: "ntfy" },
@@ -147,7 +147,7 @@ const STRINGS = {
     bentoKicker: "Cosa ottieni",
     bentoTitle: "Tutto ciò che serve a un agente che lavora a lungo.",
     bento: [
-      { t: "Claude Code, sempre acceso", d: "Sessioni tmux che sopravvivono a un SSH caduto, con il tuo CLAUDE.md, gli hook e la status line già pronti.", tag: "claude" },
+      { t: "Claude Code, sempre acceso", d: "Sessioni tmux che sopravvivono a un SSH caduto, con le tue impostazioni, gli hook e la status line già pronti.", tag: "claude" },
       { t: "Il tuo KDE, non quello di default", d: "Pannelli, scorciatoie, tiling e profili Konsole, catturati a casa e riapplicati sul server.", tag: "plasma" },
       { t: "Blindato", d: "SSH solo con chiave, niente login root con password, ufw, aggiornamenti automatici.", tag: "security" },
       { t: "Avvisa il tuo telefono", d: "Un hook Notification manda le domande di Claude a ntfy.sh. Puoi allontanarti.", tag: "ntfy" },
@@ -194,7 +194,7 @@ const STRINGS = {
     bentoKicker: "Neler geliyor",
     bentoTitle: "Uzun süre çalışan bir ajanın ihtiyacı olan her şey.",
     bento: [
-      { t: "Claude Code, hep açık", d: "SSH kopsa da yaşayan tmux oturumları; CLAUDE.md, hook'lar ve status line hazır.", tag: "claude" },
+      { t: "Claude Code, hep açık", d: "SSH kopsa da yaşayan tmux oturumları; ayarların, hook'lar ve status line hazır.", tag: "claude" },
       { t: "Varsayılan değil, senin KDE'n", d: "Paneller, kısayollar, tiling ve Konsole profilleri evden alınıp sunucuda aynen kurulur.", tag: "plasma" },
       { t: "Kilitli", d: "Sadece anahtarla SSH, root'a parolayla giriş yok, ufw, otomatik güncellemeler.", tag: "security" },
       { t: "Telefonuna haber verir", d: "Bir Notification hook'u Claude'un sorularını ntfy.sh'e yollar. Başından kalkabilirsin.", tag: "ntfy" },

@@ -64,7 +64,7 @@ The list lives in [`dotfiles/manifest.txt`](https://github.com/halitsever/claude
 | Plasma | `kdeglobals`, `kwinrc`, `kglobalshortcutsrc`, `plasmarc`, `plasmashellrc`, `plasma-org.kde.plasma.desktop-appletsrc`, `kdedefaults/`, power and notification settings |
 | Apps | `dolphinrc`, `konsolerc`, `katerc`, `~/.local/share/konsole/`, GTK theme settings, `mimeapps.list` |
 | Look | `~/.local/share/color-schemes/`, `plasma/`, `aurorae/`, `wallpapers/` when they exist |
-| Claude | `~/.claude/CLAUDE.md`, `settings.json`, `hooks/` |
+| Claude | `~/.claude/settings.json`, `hooks/` |
 | Shell | `.tmux.conf`, `.xsession` |
 
 Add a line to the manifest to track something else. Paths that do not exist on your machine are skipped.

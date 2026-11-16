@@ -55,7 +55,7 @@ Topic bir sır: bilen herkes bildirimlerini okuyabilir. Bu yüzden ayrı bir dos
 `dotfiles/home/.claude` içinden:
 
 - **`settings.json`**: koyu tema, tam ekran TUI, model, klasör, git branch ve context kullanımını gösteren bir status line, kullandığım plugin'ler ve notify hook'u
-- **`CLAUDE.md`**: her proje için global talimatlarım
+- **`CLAUDE.md`**: kendi global talimatların için boş bir dosya. Sadece yoksa oluşturulur, içine yazdıkların asla ezilmez
 - **`hooks/notify.sh`**: yukarıdaki ntfy hook'u
 
 Bunlardan herhangi birini kendi makinende değiştir ve `claude-vps publish` çalıştır. Bkz. [Config senkronizasyonu](/tr/guide/sync).

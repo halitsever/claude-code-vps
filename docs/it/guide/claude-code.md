@@ -55,7 +55,7 @@ Il topic va trattato come un segreto: chi lo conosce può leggere le tue notific
 Da `dotfiles/home/.claude`:
 
 - **`settings.json`**: tema scuro, TUI a schermo intero, una status line con modello, cartella, branch git e uso del contesto, i plugin che uso e l'hook di notifica
-- **`CLAUDE.md`**: le mie istruzioni globali per ogni progetto
+- **`CLAUDE.md`**: un file vuoto per le tue istruzioni globali. Viene creato solo se manca, quindi quello che ci scrivi non viene mai sovrascritto
 - **`hooks/notify.sh`**: l'hook ntfy descritto sopra
 
 Modifica uno qualsiasi di questi file sulla tua macchina e lancia `claude-vps publish`. Vedi [Tenere la configurazione sincronizzata](/it/guide/sync).
