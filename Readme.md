@@ -34,6 +34,7 @@ KDE Plasma over RDP, hardened SSH, tmux, Docker, Chrome and your own KDE + Claud
 - [**Step-by-step VPS guide**](https://halitsever.github.io/claude-code-vps/guide/claude-code-vps) - every step by hand, if you would rather not run a script
 - [**Config sync**](https://halitsever.github.io/claude-code-vps/guide/sync) - `claude-vps publish` at home, `claude-vps sync` or autosync on the server
 - [**Phone notifications**](https://halitsever.github.io/claude-code-vps/guide/claude-code) - a Notification hook that pushes "Claude is waiting" to ntfy.sh
+- [**HaltOS**](https://github.com/halitsever/haltos) - an optional monochrome, terminal-style desktop on top of this setup, installed together with claude-code-vps in one command
 
 <p align="center" >
 <img src="https://halitsever-api.vercel.app/api/installation"/>
