@@ -26,14 +26,6 @@
   color: #1a0f09 !important;
 }
 
-/* The landing draws its own background, so the nav floats over it. */
-.lx-page .VPNav,
-.lx-page .VPNavBar:not(.has-sidebar) {
-  background: transparent !important;
-}
-.lx-page .VPNavBar .divider-line {
-  opacity: 0;
-}
 
 .vp-doc h1 {
   letter-spacing: -0.03em;

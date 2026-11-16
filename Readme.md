@@ -1,23 +1,36 @@
+<p align="center" class="logo-section">
+<img src="https://i.ibb.co/NrPh9xP/image.png" height="80" width="80"/>
+<br/>
+<img src="https://halitsever-api.vercel.app/api/repo-title?title=claude-code-vps">
+
 <p align="center">
-  <img src="docs/public/logo.svg" height="80" width="80"/>
+Run Claude Code on a VPS. One command turns a blank Ubuntu server into a remote Claude Code workstation:<br>
+KDE Plasma over RDP, hardened SSH, tmux, Docker, Chrome and your own KDE + Claude config.<br>
+<br/>
+<br/>
+<img src="https://img.shields.io/github/sponsors/halitsever"/>
 </p>
-
-<h1 align="center">Claude Code VPS</h1>
-
 <p align="center">
-Run Claude Code on a VPS. One command turns a blank Ubuntu server into a remote Claude Code workstation:<br/>
-KDE Plasma over RDP, hardened SSH, Docker, Chrome and my own KDE + Claude config.
-</p>
-
-<p align="center">
-<a href="https://halitsever.github.io/claude-code-vps/guide/claude-code-vps">Step-by-step VPS guide</a> ·
-<a href="https://halitsever.github.io/claude-code-vps/">Documentation</a> ·
+<a align="center" href="https://halitsever.github.io/claude-code-vps/">Documentation</a> ·
+<a href="https://halitsever.github.io/claude-code-vps/guide/claude-code-vps">VPS guide</a> ·
 <a href="https://halitsever.github.io/claude-code-vps/fr/">Français</a> ·
 <a href="https://halitsever.github.io/claude-code-vps/it/">Italiano</a> ·
 <a href="https://halitsever.github.io/claude-code-vps/tr/">Türkçe</a>
+  </p>
 </p>
 
-## Install
+<p align="center">
+<img src="https://halitsever-api.vercel.app/api/details"/>
+</p>
+
+- [**One command setup**](https://halitsever.github.io/claude-code-vps/guide/getting-started) - base packages, sudo user, key-only SSH, ufw, KDE Plasma, xrdp, Docker, gh, Chrome and Claude Code
+- [**Step-by-step VPS guide**](https://halitsever.github.io/claude-code-vps/guide/claude-code-vps) - every step by hand, if you would rather not run a script
+- [**Config sync**](https://halitsever.github.io/claude-code-vps/guide/sync) - `claude-vps publish` at home, `claude-vps sync` or autosync on the server
+- [**Phone notifications**](https://halitsever.github.io/claude-code-vps/guide/claude-code) - a Notification hook that pushes "Claude is waiting" to ntfy.sh
+
+<p align="center" >
+<img src="https://halitsever-api.vercel.app/api/installation"/>
+</p>
 
 On a fresh Ubuntu 24.04+ server, as root:
 
@@ -25,11 +38,9 @@ On a fresh Ubuntu 24.04+ server, as root:
 curl -fsSL https://raw.githubusercontent.com/halitsever/claude-code-vps/main/install.sh | sudo bash
 ```
 
-Prefer to do it by hand? The [Claude Code on a VPS guide](https://halitsever.github.io/claude-code-vps/guide/claude-code-vps) walks through every step.
-
 Then SSH in as the new user, run `tmux` and `claude`, or connect to the desktop with any RDP client on port `53389`.
 
-## Keep the server in sync
+Keep the server in sync with your own machine:
 
 ```bash
 claude-vps publish        # on your machine: capture KDE + Claude config, commit, push
@@ -39,15 +50,24 @@ claude-vps autosync on    # or let the server pull every 30 minutes
 
 What gets captured is listed in [`dotfiles/manifest.txt`](dotfiles/manifest.txt). Credentials are never part of it.
 
-## Layout
+<p align="center">
+<a href="https://github.com/halitsever/claude-code-vps/issues"><img src="https://halitsever-api.vercel.app/api/issue"/></a>
+</p>
 
-| Path | |
-| --- | --- |
-| `install.sh` | bootstrap for `curl \| bash` |
-| `bin/claude-vps` | the CLI |
-| `lib/setup.sh` | the nine setup steps |
-| `lib/dotfiles.sh` | capture, apply, sync |
-| `dotfiles/home` | captured config, mirrored into `$HOME` |
-| `docs/` | VitePress site in English, French, Italian and Turkish |
+<p align="center">
+Found a bug or have an idea? Open an <a href="https://github.com/halitsever/claude-code-vps/issues">issue</a>.<br/>
+Read the <a href=".github/CONTRIBUTING.md">contributing guide</a> before sending a pull request.<br/>
+Not affiliated with Anthropic.
+</p>
 
-Not affiliated with Anthropic. Released under the [MIT License](LICENSE).
+<p align="center">
+<img src="https://halitsever-api.vercel.app/api/sponsor"/>
+</p>
+
+<p align="center">
+<img src="https://halitsever-api.vercel.app/api/license"/>
+</p>
+
+<p align="center">
+Released under the <a href="LICENSE">MIT License</a>.
+</p>
