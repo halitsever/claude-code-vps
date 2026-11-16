@@ -35,6 +35,8 @@ sshd keeps the first value it reads, which is why the file name starts with `10-
 
 `ufw` with OpenSSH and the RDP port allowed, everything else closed. Pass `--rdp-private` to keep RDP closed and reach it through an SSH tunnel instead.
 
+Once the [tailscale](#_10-tailscale) step has closed the public ports, this step only allows traffic on `tailscale0`, so `claude-vps update` never opens them again.
+
 ## 5. desktop
 
 `kde-plasma-desktop` plus the X11 session (`plasma-session-x11`, `kwin-x11` on Ubuntu 25.10+), Konsole, Dolphin, Kate, Spectacle, Noto and JetBrains Mono fonts. SDDM is disabled and the default target set to `multi-user`: nobody sits in front of a server, so it boots straight to a console and Plasma only starts when you connect.
@@ -64,6 +66,18 @@ xrdp drives an Xorg session. Plasma 6 still ships an X11 session on Ubuntu 24.04
 ## 9. dotfiles
 
 Hands `/opt/claude-vps` to your user, links `claude-vps` into `/usr/local/bin`, and runs `claude-vps apply` as you. That writes everything under `dotfiles/home` into your home directory: KDE config, Konsole profiles, `~/.claude/settings.json`, `CLAUDE.md`, hooks, `.tmux.conf`. It also installs the public Claude Code plugins listed in `dotfiles/plugins.txt`.
+
+## 10. tailscale
+
+Asks whether to set up [Tailscale](https://tailscale.com) and is skipped with `--yes`. On yes it installs Tailscale, prints the login link and waits until the server is on your tailnet. Then it waits up to five minutes for you to connect over SSH or RDP from your own machine through the `100.x` address. Only after it sees that connection does it offer to close SSH and RDP to the internet, so you cannot lock yourself out. The default answer keeps them open.
+
+Run the same flow later on any server:
+
+```bash
+sudo claude-vps tailscale
+```
+
+Tailscale keys expire after 180 days, which would drop a closed server off your tailnet. Turn that off for the server in the [Tailscale admin console](https://login.tailscale.com/admin/machines) under **Disable key expiry**.
 
 ## Running steps again
 

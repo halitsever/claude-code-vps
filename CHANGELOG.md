@@ -4,6 +4,8 @@ Servers pick up a new version with `sudo claude-vps update`.
 
 ## Unreleased
 
+- Setup ends by offering [Tailscale](https://tailscale.com), and `sudo claude-vps tailscale` runs the same flow on an existing server. Once a connection over Tailscale is seen, it offers to close SSH and RDP to the internet.
+- A server moved to Tailscale only keeps its public ports closed through `claude-vps update`.
 - Paths listed in `~/.config/claude-vps/local-only` are never touched by `apply` and never captured (the repo copy is kept), for per-machine settings that should not be synced.
 - Servers allow `gh pr merge` and `gh repo edit` in Claude Code without a prompt.
 - `capture` skips binary files (photos, wallpapers, icons) with a warning, and `wallpapers/` is no longer in the manifest, so a private image can never reach the public repo.

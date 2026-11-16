@@ -17,6 +17,10 @@ The server runs a full KDE Plasma session over RDP. It starts when you connect a
 
 Connect to `<server-ip>:53389`, pick **Xorg** if xrdp asks for a session type, and log in with your workstation user and password.
 
+## Over Tailscale
+
+With [Tailscale](https://tailscale.com) on the server and on your computer, connect to `<tailscale-ip>:53389` instead. `sudo claude-vps tailscale` sets it up and can then close SSH and RDP to the internet, which stops the scanning altogether. See the [tailscale step](/guide/what-it-installs#_10-tailscale).
+
 ## Through an SSH tunnel
 
 RDP is encrypted, but a port open to the internet still gets scanned. If you installed with `--rdp-private`, or you just prefer it, tunnel it:
