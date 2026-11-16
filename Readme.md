@@ -1,7 +1,7 @@
 <p align="center" class="logo-section">
-<img src="docs/public/logo.svg" alt="claude-code-vps logo" height="96" width="96"/>
+<img src="docs/public/logo.svg" alt="Claude Code VPS logo" height="96" width="96"/>
 <br/>
-<img src="https://halitsever-api.vercel.app/api/repo-title?title=claude-code-vps">
+<img src="https://halitsever-api.vercel.app/api/repo-title?title=Claude%20Code%20VPS">
 
 <p align="center">
 Run Claude Code on a VPS. One command turns a blank Ubuntu server into a remote Claude Code workstation:<br>
