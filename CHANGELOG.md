@@ -2,7 +2,7 @@
 
 Servers pick up a new version with `sudo claude-vps update`.
 
-## Unreleased
+## 0.4.0
 
 - Setup ends by offering [Tailscale](https://tailscale.com), and `sudo claude-vps tailscale` runs the same flow on an existing server. Once a connection over Tailscale is seen, it offers to close SSH and RDP to the internet.
 - A server moved to Tailscale only keeps its public ports closed through `claude-vps update`.
