@@ -4,11 +4,11 @@
 <img src="https://halitsever-api.vercel.app/api/repo-title?title=Claude%20Code%20VPS">
 
 <p align="center">
-Run Claude Code on a VPS. One command turns a blank Ubuntu server into a remote Claude Code workstation:<br>
+Run Claude Code on a VPS. One command turns a blank Ubuntu server into a remote workstation for Claude Code:<br>
 KDE Plasma over RDP, hardened SSH, tmux, Docker, Chrome and your own KDE + Claude config.<br>
 <br/>
 <br/>
-<img src="https://img.shields.io/github/sponsors/halitsever"/>
+<img src="https://img.shields.io/github/sponsors/halitsever" alt="GitHub Sponsors"/>
 </p>
 <p align="center">
 <a align="center" href="https://halitsever.github.io/claude-code-vps/">Documentation</a> ·
@@ -73,6 +73,12 @@ Found a bug or have an idea? Open an <a href="https://github.com/halitsever/clau
 Read the <a href=".github/CONTRIBUTING.md">contributing guide</a> before sending a pull request.<br/>
 Not affiliated with Anthropic.
 </p>
+
+### Related projects
+
+- [HaltOS](https://github.com/halitsever/haltos): an optional monochrome KDE Plasma theme and OS identity layer that installs on top of claude-code-vps in one command.
+- [claudegrid](https://github.com/halitsever/claudegrid): opens a grid of Claude Code agents in one terminal window, with a prompt, model and git worktree per pane. Preinstalled by `claude-vps setup`.
+- [explain-to-customer](https://github.com/halitsever/explain-to-customer): an agent skill for Claude Code that turns a code change into a short video, slides and diagrams for a client.
 
 <p align="center">
 <img src="https://halitsever-api.vercel.app/api/sponsor"/>

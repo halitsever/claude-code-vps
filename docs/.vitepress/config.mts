@@ -97,7 +97,7 @@ export default defineConfig({
     const url = urlFor(locale, path);
     const localeDesc = siteConfig.site.locales[locale]?.description ?? siteConfig.site.description;
     const title = pageData.frontmatter.title ?? pageData.title ?? siteName;
-    const desc = pageData.frontmatter.description ?? pageData.description ?? localeDesc;
+    const desc = pageData.frontmatter.description || pageData.description || localeDesc;
     const fullTitle = path === "" ? `${siteName}: ${title}` : `${title} | ${siteName}`;
 
     const head: HeadConfig[] = [
@@ -126,6 +126,8 @@ export default defineConfig({
           description: desc,
           url,
           downloadUrl: repo,
+          codeRepository: repo,
+          programmingLanguage: "Shell",
           license: "https://opensource.org/licenses/MIT",
           offers: { "@type": "Offer", price: "0", priceCurrency: "USD" },
           author: { "@type": "Person", name: "Halit Sever", url: "https://github.com/halitsever" },
