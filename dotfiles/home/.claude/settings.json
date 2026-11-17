@@ -29,5 +29,9 @@
       "Bash(gh repo edit *)"
     ]
   },
-  "skipWorkflowUsageWarning": true
+  "skipWorkflowUsageWarning": true,
+  "attribution": {
+    "commit": "",
+    "pr": ""
+  }
 }
