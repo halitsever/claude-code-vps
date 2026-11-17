@@ -1,0 +1,23 @@
+# claude-code-vps
+
+> claude-code-vps (`claude-vps`) is a Bash tool that turns a fresh Ubuntu 24.04 or 26.04 server into a remote workstation for Claude Code: a sudo user, key-only SSH, ufw, KDE Plasma over RDP (xrdp), Docker, Chrome, Claude Code and claudegrid. It also keeps KDE and Claude Code config in sync between your own machine and the server through a git repository.
+
+Install on a fresh server, as root: `curl -fsSL https://raw.githubusercontent.com/halitsever/claude-code-vps/main/install.sh | sudo bash`. RDP listens on port 53389. `claude-vps publish` captures config on your own machine, and `claude-vps sync` applies it on the server. Credentials are never captured.
+
+## Docs
+
+- [How to run Claude Code on a VPS](https://halitsever.github.io/claude-code-vps/guide/claude-code-vps): every step by hand, without the script
+- [Getting started](https://halitsever.github.io/claude-code-vps/guide/getting-started): the one-command install and first login
+- [What gets installed](https://halitsever.github.io/claude-code-vps/guide/what-it-installs): each setup step: packages, swap, SSH hardening, ufw, Plasma, xrdp, Docker, Chrome, Claude Code, dotfiles
+- [Remote desktop](https://halitsever.github.io/claude-code-vps/guide/remote-desktop): connecting over RDP from any OS, directly or through an SSH tunnel
+- [Running Claude Code](https://halitsever.github.io/claude-code-vps/guide/claude-code): logging in on a headless server, tmux sessions and ntfy.sh phone notifications
+- [Keeping config in sync](https://halitsever.github.io/claude-code-vps/guide/sync): capture, publish, sync and autosync
+- [CLI](https://halitsever.github.io/claude-code-vps/reference/cli): every claude-vps command and option, plus install.sh variables
+- [Troubleshooting](https://halitsever.github.io/claude-code-vps/reference/troubleshooting): black RDP screen, SSH lockout, claude not found and sync errors
+
+## Optional
+
+- [Docs home](https://halitsever.github.io/claude-code-vps/): overview and FAQ. The docs are also available in Spanish, German, French, Portuguese, Italian, Russian, Chinese, Japanese, Korean and Turkish under /es/, /de/, /fr/, /pt/, /it/, /ru/, /zh/, /ja/, /ko/ and /tr/
+- [Changelog](https://github.com/halitsever/claude-code-vps/blob/main/CHANGELOG.md): release notes
+- [Source](https://github.com/halitsever/claude-code-vps): repository
+- [HaltOS](https://github.com/halitsever/haltos): an optional monochrome desktop layer that installs on top of claude-code-vps
