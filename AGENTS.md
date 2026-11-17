@@ -16,7 +16,7 @@ claude-code-vps (`claude-vps`) is a Bash tool that sets up a fresh Ubuntu server
 - `dotfiles/home/.claude/settings.json` and its hooks are shipped to servers. They do not configure an agent working in this repo.
 - `dotfiles/seed/` files are copied only when the target does not exist yet. `dotfiles/seed/.claude/CLAUDE.md` is intentionally empty.
 - Binary files are never captured, and the paths in `~/.config/claude-vps/local-only` are never touched by `apply`.
-- HaltOS depends on two hooks here: the `local-only` list and the executables in `~/.config/claude-vps/post-apply.d/`, which `apply` runs after it changes files. Its `bootstrap.sh` clones this repo's `main` into `/opt/claude-vps` before it installs itself. Keep both hooks working.
+- `apply` skips paths in the `local-only` list and, after it changes files, runs every executable in `~/.config/claude-vps/post-apply.d/`. These are the public extension points for add-ons such as HaltOS. Keep them generic and backwards compatible, and keep add-on specific code out of this repo: add-ons depend on claude-code-vps, never the other way round.
 - Re-running setup must leave a working server alone: it does not restart xrdp or reload SSH when nothing changed, so open RDP sessions stay up. `sudo claude-vps update` re-runs setup with the options saved in `/etc/claude-vps.conf`.
 - Pushing a `v*` tag publishes a GitHub Release. The tag must match `VERSION`, and `CHANGELOG.md` needs a non-empty `## X.Y.Z` section. `claude-vps release X.Y.Z` (owner only) checks the changelog, commits a `VERSION` bump if needed, tags, and pushes `HEAD` along with the tag.
 - The docs workflow checks out full history (`fetch-depth: 0`) because VitePress `lastUpdated` reads git.
