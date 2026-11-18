@@ -120,17 +120,26 @@ export default defineConfig({
         { "@type": "WebSite", name: siteName, url: siteUrl, inLanguage: LOCALES[locale].lang },
         {
           "@type": "SoftwareApplication",
+          "@id": `${url}#app`,
           name: "claude-vps",
           applicationCategory: "DeveloperApplication",
           operatingSystem: "Ubuntu 24.04, Ubuntu 26.04",
           description: desc,
           url,
           downloadUrl: repo,
-          codeRepository: repo,
-          programmingLanguage: "Shell",
           license: "https://opensource.org/licenses/MIT",
           offers: { "@type": "Offer", price: "0", priceCurrency: "USD" },
           author: { "@type": "Person", name: "Halit Sever", url: "https://github.com/halitsever" },
+        },
+        {
+          "@type": "SoftwareSourceCode",
+          "@id": `${url}#source`,
+          name: "claude-code-vps",
+          codeRepository: repo,
+          programmingLanguage: "Shell",
+          license: "https://opensource.org/licenses/MIT",
+          author: { "@type": "Person", name: "Halit Sever", url: "https://github.com/halitsever" },
+          targetProduct: { "@id": `${url}#app` },
         },
         {
           "@type": "FAQPage",
@@ -187,7 +196,7 @@ export default defineConfig({
   ),
 
   themeConfig: {
-    logo: "/logo.svg",
+    logo: { src: "/logo.svg", alt: "Claude Code VPS logo" },
     siteTitle: "Claude Code VPS",
     socialLinks: [{ icon: "github", link: repo }],
     search: { provider: "local" },
