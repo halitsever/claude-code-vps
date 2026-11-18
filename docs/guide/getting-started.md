@@ -55,7 +55,7 @@ You get a summary like this:
 ```
 
 1. **Log in over SSH** as the new user. Root's SSH keys were copied over, so the same key works.
-2. **Start Claude Code** inside tmux and log in. See [Running Claude Code](/guide/claude-code).
+2. **Start Claude Code** inside tmux and log in. See [Run Claude Code on a remote server](/guide/claude-code).
 3. **Open the desktop** with any RDP client. See [Remote desktop](/guide/remote-desktop).
 
 ## Using your own config

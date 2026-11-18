@@ -1,8 +1,10 @@
 ---
-description: "Log in to Claude Code on a headless server, keep agents running in tmux after SSH disconnects and get phone notifications through ntfy.sh."
+description: "Run Claude Code on a remote server: log in on a headless box, keep agents running in tmux after SSH disconnects and get phone notifications through ntfy.sh."
 ---
 
-# Running Claude Code
+# Run Claude Code on a remote server
+
+After setup, Claude Code lives on the server and you reach it over SSH. This page covers logging in without a browser on the box, keeping agents alive in tmux and getting a ping on your phone when Claude needs you.
 
 ## First login
 

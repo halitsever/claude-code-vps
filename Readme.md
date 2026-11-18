@@ -4,7 +4,7 @@
 <img src="https://halitsever-api.vercel.app/api/repo-title?title=Claude%20Code%20VPS">
 
 <p align="center">
-Run Claude Code on a VPS. One command turns a blank Ubuntu server into a remote workstation for Claude Code:<br>
+Run Claude Code on an Ubuntu VPS or any remote server. One command turns a blank Ubuntu server into a remote workstation for Claude Code:<br>
 KDE Plasma over RDP, hardened SSH, tmux, Docker, Chrome and your own KDE + Claude config.<br>
 <br/>
 <br/>
