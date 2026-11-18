@@ -78,7 +78,7 @@ export default defineConfig({
       "meta",
       {
         name: "keywords",
-        content: "claude code vps, claude code server, claude code ubuntu, run claude code remotely, claude code ssh, claude code tmux, claude vps guide, kde plasma xrdp, remote dev server, ai coding agent server",
+        content: "claude code vps, claude code server, claude code ubuntu, claude code remote server, run claude code on server, run claude code remotely, claude code ssh, claude code tmux, claude vps guide, kde plasma xrdp, remote dev server, ai coding agent server",
       },
     ],
     ["meta", { property: "og:type", content: "website" }],

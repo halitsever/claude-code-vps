@@ -6,13 +6,13 @@ export default {
     lang: "en-US",
     og: "en_US",
     prefix: "",
-    homeTitle: "Run Claude Code on a VPS in one command",
-    description: "Run Claude Code on a VPS. One command turns a blank Ubuntu server into a remote Claude Code workstation with KDE Plasma, RDP and your own config.",
+    homeTitle: "Run Claude Code on an Ubuntu VPS in one command",
+    description: "Run Claude Code on an Ubuntu VPS or remote server. One command sets up Claude Code, KDE Plasma over RDP, hardened SSH, tmux and your own config.",
     nav: { vps: "VPS guide", docs: "Docs" },
     sidebar: {
       guide: "Guide",
       ref: "Reference",
-      pages: ["Claude Code on a VPS", "Getting started", "What gets installed", "Remote desktop", "Running Claude Code", "Keeping config in sync", "CLI", "Troubleshooting"],
+      pages: ["Claude Code on a VPS", "Getting started", "What gets installed", "Remote desktop", "Claude Code on a remote server", "Keeping config in sync", "CLI", "Troubleshooting"],
     },
     ui: {
       editLink: "Edit this page on GitHub",
@@ -29,7 +29,7 @@ export default {
   landing: {
     title1: "A blank server in.",
     title2: "Your Claude workstation out.",
-    lead: "One command installs Claude Code, a full KDE Plasma desktop over RDP, hardened SSH and the exact config I use every day. Change your setup at home, and the server follows.",
+    lead: "One command installs Claude Code on an Ubuntu server, with a full KDE Plasma desktop over RDP, hardened SSH and the exact config I use every day. Change your setup at home, and the server follows.",
     start: "Read the VPS guide",
     github: "Star on GitHub",
     copy: "Copy",

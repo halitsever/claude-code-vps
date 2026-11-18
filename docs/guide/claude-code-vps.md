@@ -81,7 +81,7 @@ ufw allow 53389/tcp   # only if you want RDP from the internet, see below
 ufw --force enable
 ```
 
-## 5. Install Claude Code
+## 5. Install Claude Code on Ubuntu
 
 Log in as your user and use the native installer. It needs no Node.js and updates itself:
 
