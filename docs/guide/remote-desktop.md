@@ -47,3 +47,7 @@ sudo ufw delete allow 53389/tcp
 ## One session per user
 
 xrdp reconnects you to your running session. Logging in locally and over RDP at the same time as the same user does not work with Plasma. On a server that never happens, since there is no local display.
+
+## Theme the desktop
+
+The desktop is stock KDE Plasma. For a monochrome, terminal-style look across Plasma, Kvantum, Konsole, the login screen and the boot splash, install [HaltOS](https://halitsever.github.io/haltos/) on top. It needs Plasma 6, so Ubuntu 25.04 or newer.
