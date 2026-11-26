@@ -61,6 +61,8 @@ export default defineConfig({
   appearance: "dark",
   sitemap: { hostname: siteUrl },
   head: [
+    /** Cloudflare Web Analytics, one token for every page on halitsever.github.io. */
+    ["script", { defer: "", src: "https://static.cloudflareinsights.com/beacon.min.js", "data-cf-beacon": '{"token": "dd7e54d3f48841c187d72d9dbb92a6b6"}' }],
     ["link", { rel: "icon", type: "image/svg+xml", href: base + "logo.svg" }],
     ["link", { rel: "apple-touch-icon", href: base + "logo-180.png" }],
     ["link", { rel: "preconnect", href: "https://fonts.googleapis.com" }],
