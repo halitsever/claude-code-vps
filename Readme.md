@@ -11,18 +11,18 @@ KDE Plasma over RDP, hardened SSH, tmux, Docker, Chrome and your own KDE + Claud
 <img src="https://img.shields.io/github/sponsors/halitsever" alt="GitHub Sponsors"/>
 </p>
 <p align="center">
-<a align="center" href="https://halitsever.github.io/claude-code-vps/">Documentation</a> ·
-<a href="https://halitsever.github.io/claude-code-vps/guide/claude-code-vps">VPS guide</a> ·
-<a href="https://halitsever.github.io/claude-code-vps/es/">Español</a> ·
-<a href="https://halitsever.github.io/claude-code-vps/de/">Deutsch</a> ·
-<a href="https://halitsever.github.io/claude-code-vps/fr/">Français</a> ·
-<a href="https://halitsever.github.io/claude-code-vps/pt/">Português</a> ·
-<a href="https://halitsever.github.io/claude-code-vps/it/">Italiano</a> ·
-<a href="https://halitsever.github.io/claude-code-vps/ru/">Русский</a> ·
-<a href="https://halitsever.github.io/claude-code-vps/zh/">简体中文</a> ·
-<a href="https://halitsever.github.io/claude-code-vps/ja/">日本語</a> ·
-<a href="https://halitsever.github.io/claude-code-vps/ko/">한국어</a> ·
-<a href="https://halitsever.github.io/claude-code-vps/tr/">Türkçe</a>
+<a align="center" href="https://projects.halit.org/claude-code-vps/">Documentation</a> ·
+<a href="https://projects.halit.org/claude-code-vps/guide/claude-code-vps">VPS guide</a> ·
+<a href="https://projects.halit.org/claude-code-vps/es/">Español</a> ·
+<a href="https://projects.halit.org/claude-code-vps/de/">Deutsch</a> ·
+<a href="https://projects.halit.org/claude-code-vps/fr/">Français</a> ·
+<a href="https://projects.halit.org/claude-code-vps/pt/">Português</a> ·
+<a href="https://projects.halit.org/claude-code-vps/it/">Italiano</a> ·
+<a href="https://projects.halit.org/claude-code-vps/ru/">Русский</a> ·
+<a href="https://projects.halit.org/claude-code-vps/zh/">简体中文</a> ·
+<a href="https://projects.halit.org/claude-code-vps/ja/">日本語</a> ·
+<a href="https://projects.halit.org/claude-code-vps/ko/">한국어</a> ·
+<a href="https://projects.halit.org/claude-code-vps/tr/">Türkçe</a>
   </p>
 </p>
 
@@ -30,10 +30,10 @@ KDE Plasma over RDP, hardened SSH, tmux, Docker, Chrome and your own KDE + Claud
 <img src="https://halitsever-api.vercel.app/api/details"/>
 </p>
 
-- [**One command setup**](https://halitsever.github.io/claude-code-vps/guide/getting-started) - base packages, sudo user, key-only SSH, ufw, KDE Plasma, xrdp, Docker, gh, Chrome, Claude Code and [claudegrid](https://github.com/halitsever/claudegrid)
-- [**Step-by-step VPS guide**](https://halitsever.github.io/claude-code-vps/guide/claude-code-vps) - every step by hand, if you would rather not run a script
-- [**Config sync**](https://halitsever.github.io/claude-code-vps/guide/sync) - `claude-vps publish` at home, `claude-vps sync` or autosync on the server
-- [**Phone notifications**](https://halitsever.github.io/claude-code-vps/guide/claude-code) - a Notification hook that pushes "Claude is waiting" to ntfy.sh
+- [**One command setup**](https://projects.halit.org/claude-code-vps/guide/getting-started) - base packages, sudo user, key-only SSH, ufw, KDE Plasma, xrdp, Docker, gh, Chrome, Claude Code and [claudegrid](https://github.com/halitsever/claudegrid)
+- [**Step-by-step VPS guide**](https://projects.halit.org/claude-code-vps/guide/claude-code-vps) - every step by hand, if you would rather not run a script
+- [**Config sync**](https://projects.halit.org/claude-code-vps/guide/sync) - `claude-vps publish` at home, `claude-vps sync` or autosync on the server
+- [**Phone notifications**](https://projects.halit.org/claude-code-vps/guide/claude-code) - a Notification hook that pushes "Claude is waiting" to ntfy.sh
 - [**HaltOS**](https://github.com/halitsever/haltos) - an optional monochrome, terminal-style desktop on top of this setup, installed together with claude-code-vps in one command
 
 <p align="center" >

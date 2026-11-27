@@ -50,4 +50,4 @@ xrdp reconnects you to your running session. Logging in locally and over RDP at 
 
 ## Theme the desktop
 
-The desktop is stock KDE Plasma. For a monochrome, terminal-style look across Plasma, Kvantum, Konsole, the login screen and the boot splash, install [HaltOS](https://halitsever.github.io/haltos/) on top. It needs Plasma 6, so Ubuntu 25.04 or newer.
+The desktop is stock KDE Plasma. For a monochrome, terminal-style look across Plasma, Kvantum, Konsole, the login screen and the boot splash, install [HaltOS](https://projects.halit.org/haltos/) on top. It needs Plasma 6, so Ubuntu 25.04 or newer.
