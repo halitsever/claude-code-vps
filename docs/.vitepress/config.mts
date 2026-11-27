@@ -58,6 +58,8 @@ export default defineConfig({
   base,
   cleanUrls: true,
   lastUpdated: true,
+  /** keeps the page hash map out of every page's HTML, which Semrush reads as a low text-to-HTML ratio */
+  metaChunk: true,
   appearance: "dark",
   sitemap: { hostname: siteUrl },
   head: [
