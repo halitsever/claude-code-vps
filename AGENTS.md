@@ -31,6 +31,6 @@ claude-code-vps (`claude-vps`) is a Bash tool that sets up a fresh Ubuntu server
 
 ## Docs site
 
-- The VitePress site lives in `docs/`, has its own `package.json` and lockfile, and deploys to https://halitsever.github.io/claude-code-vps/ from `.github/workflows/docs.yml` on pushes to `main` that touch `docs/`.
+- The VitePress site lives in `docs/`, has its own `package.json` and lockfile, and deploys to https://projects.halit.org/claude-code-vps/ from `.github/workflows/docs.yml` on pushes to `main` that touch `docs/`.
 - It is in 11 languages: English at the root plus `de`, `es`, `fr`, `it`, `ja`, `ko`, `pt`, `ru`, `tr` and `zh`. Each language has its own copy of every page, and the landing page strings are in `docs/.vitepress/theme/i18n/`. A content change belongs in every language.
 - `docs/.vitepress/config.mts` builds the canonical, hreflang, Open Graph and JSON-LD tags. A new page goes into its `PAGES` list and into `docs/public/llms.txt`.

@@ -2,7 +2,7 @@ import { defineConfig, type DefaultTheme, type HeadConfig } from "vitepress";
 import { LOCALES as I18N } from "./theme/i18n";
 
 const repo = "https://github.com/halitsever/claude-code-vps";
-const hostname = "https://halitsever.github.io";
+const hostname = "https://projects.halit.org";
 const base = "/claude-code-vps/";
 const siteUrl = hostname + base;
 const siteName = "Claude Code VPS";
@@ -63,7 +63,7 @@ export default defineConfig({
   appearance: "dark",
   sitemap: { hostname: siteUrl },
   head: [
-    /** Cloudflare Web Analytics, one token for every page on halitsever.github.io. */
+    /** Cloudflare Web Analytics, one token for every page on projects.halit.org. */
     ["script", { defer: "", src: "https://static.cloudflareinsights.com/beacon.min.js", "data-cf-beacon": '{"token": "dd7e54d3f48841c187d72d9dbb92a6b6"}' }],
     ["link", { rel: "icon", type: "image/svg+xml", href: base + "logo.svg" }],
     ["link", { rel: "apple-touch-icon", href: base + "logo-180.png" }],

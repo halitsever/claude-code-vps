@@ -6,18 +6,18 @@ Install on a fresh server, as root: `curl -fsSL https://raw.githubusercontent.co
 
 ## Docs
 
-- [How to run Claude Code on a VPS](https://halitsever.github.io/claude-code-vps/guide/claude-code-vps): every step by hand, without the script
-- [Getting started](https://halitsever.github.io/claude-code-vps/guide/getting-started): the one-command install and first login
-- [What gets installed](https://halitsever.github.io/claude-code-vps/guide/what-it-installs): each setup step: packages, swap, SSH hardening, ufw, Plasma, xrdp, Docker, Chrome, Claude Code, dotfiles
-- [Remote desktop](https://halitsever.github.io/claude-code-vps/guide/remote-desktop): connecting over RDP from any OS, directly or through an SSH tunnel
-- [Run Claude Code on a remote server](https://halitsever.github.io/claude-code-vps/guide/claude-code): logging in on a headless server, tmux sessions and ntfy.sh phone notifications
-- [Keeping config in sync](https://halitsever.github.io/claude-code-vps/guide/sync): capture, publish, sync and autosync
-- [CLI](https://halitsever.github.io/claude-code-vps/reference/cli): every claude-vps command and option, plus install.sh variables
-- [Troubleshooting](https://halitsever.github.io/claude-code-vps/reference/troubleshooting): black RDP screen, SSH lockout, claude not found and sync errors
+- [How to run Claude Code on a VPS](https://projects.halit.org/claude-code-vps/guide/claude-code-vps): every step by hand, without the script
+- [Getting started](https://projects.halit.org/claude-code-vps/guide/getting-started): the one-command install and first login
+- [What gets installed](https://projects.halit.org/claude-code-vps/guide/what-it-installs): each setup step: packages, swap, SSH hardening, ufw, Plasma, xrdp, Docker, Chrome, Claude Code, dotfiles
+- [Remote desktop](https://projects.halit.org/claude-code-vps/guide/remote-desktop): connecting over RDP from any OS, directly or through an SSH tunnel
+- [Run Claude Code on a remote server](https://projects.halit.org/claude-code-vps/guide/claude-code): logging in on a headless server, tmux sessions and ntfy.sh phone notifications
+- [Keeping config in sync](https://projects.halit.org/claude-code-vps/guide/sync): capture, publish, sync and autosync
+- [CLI](https://projects.halit.org/claude-code-vps/reference/cli): every claude-vps command and option, plus install.sh variables
+- [Troubleshooting](https://projects.halit.org/claude-code-vps/reference/troubleshooting): black RDP screen, SSH lockout, claude not found and sync errors
 
 ## Optional
 
-- [Docs home](https://halitsever.github.io/claude-code-vps/): overview and FAQ. The docs are also available in Spanish, German, French, Portuguese, Italian, Russian, Chinese, Japanese, Korean and Turkish under /es/, /de/, /fr/, /pt/, /it/, /ru/, /zh/, /ja/, /ko/ and /tr/
+- [Docs home](https://projects.halit.org/claude-code-vps/): overview and FAQ. The docs are also available in Spanish, German, French, Portuguese, Italian, Russian, Chinese, Japanese, Korean and Turkish under /es/, /de/, /fr/, /pt/, /it/, /ru/, /zh/, /ja/, /ko/ and /tr/
 - [Changelog](https://github.com/halitsever/claude-code-vps/blob/main/CHANGELOG.md): release notes
 - [Source](https://github.com/halitsever/claude-code-vps): repository
 - [HaltOS](https://github.com/halitsever/haltos): an optional monochrome desktop layer that installs on top of claude-code-vps
