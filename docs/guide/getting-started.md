@@ -14,7 +14,7 @@ claude-vps turns a fresh Ubuntu server into the machine I run Claude Code on: a 
 | **CPU / RAM** | 2 vCPU and 4 GB is the floor for Plasma. 4 vCPU / 8 GB feels like a real desktop |
 | **Disk** | 25 GB or more |
 | **Access** | Root over SSH, ideally with your SSH key already on the box |
-| **Arch** | amd64 gets everything. arm64 works but skips Chrome |
+| **Arch** | amd64 and arm64 both get everything |
 
 A Claude Pro or Max plan, or an Anthropic API key, for logging in to Claude Code afterwards.
 

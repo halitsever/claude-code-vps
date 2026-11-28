@@ -47,3 +47,19 @@ test_summary_survives_tailscale_down() {
   FIREWALL=tailscale TARGET_USER=dev RDP_PORT=53389
   assert_ok summary
 }
+
+test_apps_installs_chrome_on_arm64() {
+  stub dpkg 'echo arm64'
+  stub apt-cache 'exit 1'
+  has() { return 1; }
+  DRY_RUN=1 TARGET_USER=dev assert_ok step_apps
+  assert_ok grep -q 'apt-get install -y -q google-chrome-stable' "$TMP/out"
+}
+
+test_apps_skips_chrome_on_other_arches() {
+  stub dpkg 'echo riscv64'
+  stub apt-cache 'exit 1'
+  has() { return 1; }
+  DRY_RUN=1 TARGET_USER=dev assert_ok step_apps
+  assert_fail grep -q google-chrome-stable "$TMP/out"
+}

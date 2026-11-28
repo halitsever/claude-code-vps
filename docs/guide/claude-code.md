@@ -22,6 +22,8 @@ Prefer an API key? Export it before starting:
 echo 'export ANTHROPIC_API_KEY=sk-ant-...' >> ~/.bashrc
 ```
 
+Claude Code works with an API key, but [Remote Control](https://code.claude.com/docs/en/remote-control) (driving the session from the Claude app or claude.ai) needs the claude.ai login. [Remote Control vs a server](/blog/claude-code-remote-control) covers the setup.
+
 ## Keep it running with tmux
 
 An agent that works for an hour should not die because your laptop went to sleep. Run it inside tmux and detach:

@@ -76,7 +76,7 @@ export default {
     items: [
       { q: "Claude Code VPS'te çalışır mı?", a: "Evet. Claude Code bir terminal uygulaması, her Linux sunucuda çalışır. Girişi kendi cihazında açtığın bir linkle bir kere yaparsın. tmux içinde çalıştırırsan SSH bağlantısını kapatsan da çalışmaya devam eder." },
       { q: "Claude Code için nasıl bir sunucu gerekir?", a: "Sadece terminal kullanacaksan 2 vCPU ve 4 GB RAM yeterli. KDE Plasma masaüstünü de kullanacaksan 4 vCPU ve 8 GB RAM ile rahat çalışırsın." },
-      { q: "Hangi Ubuntu sürümleri destekleniyor?", a: "Ubuntu 24.04 LTS ve sonrası, 26.04 LTS dahil. amd64'te her şey kurulur. arm64'te de çalışır, sadece Chrome kurulmaz." },
+      { q: "Hangi Ubuntu sürümleri destekleniyor?", a: "Ubuntu 24.04 LTS ve sonrası, 26.04 LTS dahil. amd64'te de arm64'te de her şey kurulur." },
       { q: "Claude aboneliği gerekiyor mu?", a: "Claude Code içeren bir plan (Pro ya da Max) ya da bir Anthropic API anahtarı lazım. claude-vps'in kendisi ücretsiz ve MIT lisanslı." },
       { q: "RDP portunu internete açmak güvenli mi?", a: "xrdp bağlantıyı şifreler ve standart dışı bir portta çalışır. Portu hiç açmak istemiyorsan --rdp-private ile kur ve SSH tüneliyle bağlan." },
       { q: "Kendi KDE ve Claude ayarlarımı kullanabilir miyim?", a: "Evet. Repoyu fork'la, kendi bilgisayarında claude-vps capture çalıştır ve kurulumu fork'una yönlendir. Sonra yayınladığın her değişiklik sunucuya da gelir." },

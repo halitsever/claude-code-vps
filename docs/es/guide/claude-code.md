@@ -20,6 +20,8 @@ Claude Code muestra un enlace para iniciar sesión. Ábrelo en tu navegador, ace
 echo 'export ANTHROPIC_API_KEY=sk-ant-...' >> ~/.bashrc
 ```
 
+Con una clave de API Claude Code funciona, pero [Remote Control](https://code.claude.com/docs/es/remote-control), es decir, manejar la sesión desde la app de Claude o desde claude.ai, necesita el inicio de sesión de claude.ai.
+
 ## Mantenerlo en marcha con tmux
 
 Un agente que trabaja una hora no debería pararse porque tu portátil se ha suspendido. Ejecútalo dentro de tmux y sal de la sesión sin cerrarla:

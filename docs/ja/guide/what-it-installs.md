@@ -53,7 +53,7 @@ xrdp が扱うのは Xorg のセッションです。Ubuntu 24.04 から 26.04 �
 
 - Docker（`docker.io`、compose v2、buildx）。ユーザーを `docker` グループに追加
 - GitHub CLI（`gh`）
-- Google の apt リポジトリから Google Chrome（amd64 のみ）。Claude が本物のブラウザを必要とするときに便利です
+- Google の apt リポジトリから Google Chrome（amd64 と arm64）。Claude が本物のブラウザを必要とするときに便利です
 
 ## 8. claude
 

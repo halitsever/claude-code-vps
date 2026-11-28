@@ -20,6 +20,8 @@ Lieber mit API-Schlüssel? Exportiere ihn vor dem Start:
 echo 'export ANTHROPIC_API_KEY=sk-ant-...' >> ~/.bashrc
 ```
 
+Mit einem API-Schlüssel funktioniert Claude Code, aber [Remote Control](https://code.claude.com/docs/de/remote-control), also die Steuerung der Sitzung aus der Claude-App oder über claude.ai, braucht die Anmeldung über claude.ai.
+
 ## Mit tmux weiterlaufen lassen
 
 Ein Agent, der eine Stunde arbeitet, soll nicht abbrechen, nur weil dein Laptop in den Ruhezustand geht. Starte ihn in tmux und trenne dich dann:

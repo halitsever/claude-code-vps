@@ -55,7 +55,7 @@ xrdp drives an Xorg session. Plasma 6 still ships an X11 session on Ubuntu 24.04
 
 - Docker (`docker.io`, compose v2, buildx), your user in the `docker` group
 - GitHub CLI (`gh`)
-- Google Chrome from Google's apt repo (amd64 only), handy when Claude needs a real browser
+- Google Chrome from Google's apt repo (amd64 and arm64), handy when Claude needs a real browser
 
 ## 8. claude
 

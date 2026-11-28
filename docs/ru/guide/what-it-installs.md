@@ -53,7 +53,7 @@ xrdp работает с сессией Xorg. В Ubuntu с 24.04 по 26.04 у P
 
 - Docker (`docker.io`, compose v2, buildx), ваш пользователь добавляется в группу `docker`
 - GitHub CLI (`gh`)
-- Google Chrome из apt-репозитория Google (только amd64). Пригодится, когда Claude нужен настоящий браузер
+- Google Chrome из apt-репозитория Google (amd64 и arm64). Пригодится, когда Claude нужен настоящий браузер
 
 ## 8. claude
 

@@ -20,6 +20,8 @@ Prefere usar uma chave de API? Exporte antes de iniciar:
 echo 'export ANTHROPIC_API_KEY=sk-ant-...' >> ~/.bashrc
 ```
 
+Com uma chave de API o Claude Code funciona, mas o [Remote Control](https://code.claude.com/docs/pt/remote-control), que permite controlar a sessão pelo app do Claude ou pelo claude.ai, precisa do login pelo claude.ai.
+
 ## Mantendo tudo rodando com tmux
 
 Um agente que trabalha por uma hora não deveria parar porque o seu notebook entrou em suspensão. Rode dentro do tmux e saia da sessão sem fechar:

@@ -14,7 +14,7 @@ claude-vps boş bir Ubuntu sunucusunu benim Claude Code için kullandığım mak
 | **CPU / RAM** | Plasma için en az 2 vCPU ve 4 GB. 4 vCPU / 8 GB ile gerçek bir masaüstü gibi hissettirir |
 | **Disk** | 25 GB veya daha fazla |
 | **Erişim** | SSH ile root erişimi. SSH anahtarının sunucuda önceden ekli olması en iyisi |
-| **Mimari** | amd64'te her şey kurulur. arm64'te de çalışır ama Chrome kurulmaz |
+| **Mimari** | amd64'te de arm64'te de her şey kurulur |
 
 Kurulumdan sonra Claude Code'a giriş yapmak için bir Claude Pro ya da Max planı veya bir Anthropic API anahtarı gerekir.
 

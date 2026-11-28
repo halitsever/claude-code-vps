@@ -20,6 +20,8 @@ API anahtarı mı kullanmak istiyorsun? Claude'u başlatmadan önce anahtarı ta
 echo 'export ANTHROPIC_API_KEY=sk-ant-...' >> ~/.bashrc
 ```
 
+Claude Code API anahtarıyla da çalışır, ama oturumu Claude uygulamasından veya claude.ai'den yönetmeni sağlayan [Remote Control](https://code.claude.com/docs/en/remote-control) için claude.ai ile giriş yapman gerekir.
+
 ## tmux ile çalışır halde tut
 
 Bir saattir çalışan Claude, laptopun uyku moduna geçti diye kapanmamalı. Claude'u tmux içinde çalıştır ve oturumdan ayrıl:

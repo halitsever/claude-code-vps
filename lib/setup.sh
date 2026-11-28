@@ -250,17 +250,19 @@ step_apps() {
 
   apt_install gh
 
-  if [[ $(dpkg --print-architecture) == amd64 ]]; then
+  local arch
+  arch=$(dpkg --print-architecture)
+  if [[ $arch == amd64 || $arch == arm64 ]]; then
     if ! has google-chrome; then
       run install -d -m 755 /etc/apt/keyrings
       run sh -c 'curl -fsSL https://dl.google.com/linux/linux_signing_key.pub | gpg --dearmor --yes -o /etc/apt/keyrings/google-chrome.gpg'
       if [[ $DRY_RUN != 1 ]]; then
-        cat >/etc/apt/sources.list.d/google-chrome.sources <<'EOF'
+        cat >/etc/apt/sources.list.d/google-chrome.sources <<EOF
 Types: deb
 URIs: https://dl.google.com/linux/chrome/deb/
 Suites: stable
 Components: main
-Architectures: amd64
+Architectures: $arch
 Signed-By: /etc/apt/keyrings/google-chrome.gpg
 EOF
       fi
@@ -268,7 +270,7 @@ EOF
       apt_install google-chrome-stable
     fi
   else
-    info "Chrome has no arm64 build, skipping it"
+    info "Chrome has no $arch build, skipping it"
   fi
   ok "Docker, gh and browser ready"
 }

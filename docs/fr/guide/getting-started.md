@@ -14,7 +14,7 @@ claude-vps prend un serveur Ubuntu tout neuf et en fait la machine sur laquelle 
 | **CPU / RAM** | 2 vCPU et 4 Go au minimum pour Plasma. Avec 4 vCPU et 8 Go, on travaille comme sur un vrai PC |
 | **Disque** | 25 Go ou plus |
 | **Accès** | root en SSH, idéalement avec votre clé SSH déjà sur le serveur |
-| **Architecture** | En amd64, tout est installé. En arm64, tout marche sauf Chrome |
+| **Architecture** | En amd64 comme en arm64, tout est installé |
 
 Il vous faut aussi un abonnement Claude Pro ou Max, ou une clé API Anthropic, pour vous connecter ensuite à Claude Code.
 

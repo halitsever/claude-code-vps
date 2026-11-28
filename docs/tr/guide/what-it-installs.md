@@ -53,7 +53,7 @@ xrdp bir Xorg oturumu çalıştırır. Plasma 6, Ubuntu 24.04 ile 26.04 arasınd
 
 - Docker (`docker.io`, compose v2, buildx). Kullanıcın `docker` grubuna eklenir
 - GitHub CLI (`gh`)
-- Google'ın apt deposundan Google Chrome (sadece amd64). Claude'un gerçek bir tarayıcıya ihtiyacı olduğunda işe yarar
+- Google'ın apt deposundan Google Chrome (amd64 ve arm64). Claude'un gerçek bir tarayıcıya ihtiyacı olduğunda işe yarar
 
 ## 8. claude
 

@@ -14,7 +14,7 @@ claude-vps 会把一台全新的 Ubuntu 服务器配置成我平时运行 Claude
 | **CPU / 内存** | 跑 Plasma 最少要 2 vCPU 和 4 GB。4 vCPU / 8 GB 用起来才像真正的桌面 |
 | **磁盘** | 25 GB 或以上 |
 | **访问方式** | 能用 SSH 以 root 登录，最好已经放好了你的 SSH 密钥 |
-| **架构** | amd64 上所有组件都会安装。arm64 也能用，但不装 Chrome |
+| **架构** | amd64 和 arm64 上所有组件都会安装 |
 
 之后登录 Claude Code 还需要 Claude Pro 或 Max 套餐，或者一个 Anthropic API 密钥。
 

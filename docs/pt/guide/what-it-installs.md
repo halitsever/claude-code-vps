@@ -53,7 +53,7 @@ O xrdp trabalha com uma sessão Xorg. O Plasma 6 ainda traz uma sessão X11 do U
 
 - Docker (`docker.io`, compose v2, buildx), com o seu usuário no grupo `docker`
 - GitHub CLI (`gh`)
-- Google Chrome pelo repositório apt do Google (só amd64). Útil quando o Claude precisa de um navegador de verdade
+- Google Chrome pelo repositório apt do Google (amd64 e arm64). Útil quando o Claude precisa de um navegador de verdade
 
 ## 8. claude
 

@@ -14,7 +14,7 @@ claude-vps macht aus einem frischen Ubuntu-Server den Rechner, auf dem ich Claud
 | **CPU / RAM** | Mindestens 2 vCPU und 4 GB für Plasma. Mit 4 vCPU / 8 GB fühlt es sich wie ein richtiger Desktop an |
 | **Festplatte** | 25 GB oder mehr |
 | **Zugang** | root per SSH, am besten mit deinem SSH-Schlüssel schon auf dem Server |
-| **Architektur** | Auf amd64 wird alles installiert. arm64 geht auch, nur ohne Chrome |
+| **Architektur** | Auf amd64 und arm64 wird alles installiert |
 
 Für die Anmeldung bei Claude Code brauchst du danach einen Claude-Pro- oder Max-Plan oder einen Anthropic-API-Schlüssel.
 

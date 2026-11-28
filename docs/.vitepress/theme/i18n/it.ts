@@ -76,7 +76,7 @@ export default {
     items: [
       { q: "Claude Code funziona su un VPS?", a: "Sì. Claude Code è un programma da terminale e gira su qualsiasi server Linux. Accedi una volta con un link che apri sul tuo dispositivo. Dentro tmux continua a lavorare anche quando chiudi la connessione." },
       { q: "Che server serve per Claude Code?", a: "Per il solo terminale bastano 2 vCPU e 4 GB di RAM. Con il desktop KDE Plasma, con 4 vCPU e 8 GB di RAM lavori come su un vero computer da scrivania." },
-      { q: "Quali versioni di Ubuntu sono supportate?", a: "Ubuntu 24.04 LTS e successive, compresa la 26.04 LTS. Su amd64 viene installato tutto. Su arm64 funziona tutto tranne Chrome." },
+      { q: "Quali versioni di Ubuntu sono supportate?", a: "Ubuntu 24.04 LTS e successive, compresa la 26.04 LTS. Viene installato tutto, sia su amd64 sia su arm64." },
       { q: "Serve un abbonamento a Claude?", a: "Sì, un piano che includa Claude Code (Pro o Max) oppure una chiave API Anthropic. claude-vps invece è gratuito e con licenza MIT." },
       { q: "È sicuro aprire RDP su internet?", a: "xrdp cifra la sessione e usa una porta non standard. Se preferisci, con --rdp-private la porta resta chiusa e ti colleghi tramite un tunnel SSH." },
       { q: "Posso usare le mie impostazioni di KDE e Claude?", a: "Sì. Fai un fork del repository, esegui claude-vps capture sul tuo computer e fai puntare l'installazione al tuo fork. Poi il server scarica ogni modifica che pubblichi." },

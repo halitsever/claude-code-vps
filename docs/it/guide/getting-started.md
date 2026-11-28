@@ -14,7 +14,7 @@ claude-vps prende un server Ubuntu appena creato e lo trasforma nella macchina s
 | **CPU / RAM** | Almeno 2 vCPU e 4 GB per Plasma. Con 4 vCPU e 8 GB lavori come su un vero computer |
 | **Disco** | 25 GB o più |
 | **Accesso** | root via SSH, meglio se la tua chiave SSH è già sul server |
-| **Architettura** | Su amd64 viene installato tutto. Su arm64 funziona tutto tranne Chrome |
+| **Architettura** | Su amd64 e su arm64 viene installato tutto |
 
 Ti serve anche un piano Claude Pro o Max, oppure una chiave API Anthropic, per accedere poi a Claude Code.
 

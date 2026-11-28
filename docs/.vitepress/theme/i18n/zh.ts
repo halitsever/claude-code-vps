@@ -76,7 +76,7 @@ export default {
     items: [
       { q: "Claude Code 能在 VPS 上运行吗？", a: "可以。Claude Code 是终端程序，任何 Linux 服务器都能跑。在自己的设备上打开一个链接登录一次即可，断开连接后它会在 tmux 里继续运行。" },
       { q: "运行 Claude Code 需要什么配置的服务器？", a: "只用终端的话，2 vCPU 加 4 GB 内存就够了。如果要用 KDE Plasma 桌面，4 vCPU 加 8 GB 内存用起来才像一台真正的工作站。" },
-      { q: "支持哪些 Ubuntu 版本？", a: "Ubuntu 24.04 LTS 及以上，包括 26.04 LTS。amd64 上所有组件都会安装，arm64 上除了 Chrome 都能用。" },
+      { q: "支持哪些 Ubuntu 版本？", a: "Ubuntu 24.04 LTS 及以上，包括 26.04 LTS。amd64 和 arm64 上所有组件都会安装。" },
       { q: "需要订阅 Claude 吗？", a: "需要一个包含 Claude Code 的套餐（Pro 或 Max），或者一个 Anthropic API 密钥。claude-vps 本身免费，采用 MIT 许可证。" },
       { q: "把 RDP 暴露在公网上安全吗？", a: "xrdp 会加密会话，并且运行在非默认端口上。你也可以用 --rdp-private 不开放这个端口，改为通过 SSH 隧道连接。" },
       { q: "可以用我自己的 KDE 和 Claude 配置吗？", a: "可以。fork 这个仓库，在自己电脑上运行 claude-vps capture，再让安装脚本指向你的 fork。之后你发布的每次更改都会同步到服务器。" },

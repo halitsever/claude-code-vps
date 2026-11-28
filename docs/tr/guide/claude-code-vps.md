@@ -112,6 +112,8 @@ Pro veya Max planı yerine Anthropic API anahtarı kullanıyorsan anahtarı shel
 echo 'export ANTHROPIC_API_KEY=sk-ant-...' >> ~/.bashrc
 ```
 
+Claude Code API anahtarıyla da çalışır, ama oturumu Claude uygulamasından veya claude.ai'den yönetmeni sağlayan [Remote Control](https://code.claude.com/docs/en/remote-control) için claude.ai ile giriş yapman gerekir.
+
 ## 7. tmux ile oturumu açık tut
 
 Claude doğrudan SSH oturumunda çalışırsa laptopun kapağını kapattığında o da kapanır. Bu yüzden tmux içinde çalıştır:
