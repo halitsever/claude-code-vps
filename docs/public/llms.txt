@@ -26,6 +26,12 @@ Install on a fresh server, as root: `curl -fsSL https://raw.githubusercontent.co
 - [ntfy vs Gotify](https://projects.halit.org/claude-code-vps/blog/ntfy-vs-gotify): two push servers compared
 - [Install Docker on Ubuntu Server](https://projects.halit.org/claude-code-vps/blog/install-docker-ubuntu-server): docker.io or docker-ce, the docker group and ufw
 - [Install Google Chrome on Ubuntu](https://projects.halit.org/claude-code-vps/blog/install-chrome-ubuntu-server): apt repository, .deb, ARM64 and headless mode
+- [claude --dangerously-skip-permissions](https://projects.halit.org/claude-code-vps/blog/claude-dangerously-skip-permissions): what bypass mode skips, the root error and where to use it
+- [Stop Claude Code asking for permission](https://projects.halit.org/claude-code-vps/blog/claude-code-stop-asking-permission): allow rules, acceptEdits and auto mode
+- [How to update Claude Code](https://projects.halit.org/claude-code-vps/blog/update-claude-code): claude update, npm, apt, dnf, Homebrew, channels and pinning
+- [Claude Code statusline](https://projects.halit.org/claude-code-vps/blog/claude-code-statusline): usage limits, context and git branch in the status line
+- [Claude Code settings.json](https://projects.halit.org/claude-code-vps/blog/claude-code-settings-json): the settings files, precedence and a real example
+- [Resume a Claude Code session](https://projects.halit.org/claude-code-vps/blog/claude-code-resume-session): --continue, --resume, /resume and transcripts
 
 ## Optional
 

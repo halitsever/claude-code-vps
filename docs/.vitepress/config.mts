@@ -36,6 +36,12 @@ const BLOG: [string, string][] = [
   ["ntfy-vs-gotify", "ntfy vs Gotify"],
   ["install-docker-ubuntu-server", "Install Docker on Ubuntu Server"],
   ["install-chrome-ubuntu-server", "Install Chrome on Ubuntu"],
+  ["claude-dangerously-skip-permissions", "--dangerously-skip-permissions"],
+  ["claude-code-stop-asking-permission", "Stop permission prompts"],
+  ["update-claude-code", "Update Claude Code"],
+  ["claude-code-statusline", "Claude Code statusline"],
+  ["claude-code-settings-json", "Claude Code settings.json"],
+  ["claude-code-resume-session", "Resume a session"],
 ];
 const EN_ONLY = (path: string) => path === "blog/" || path.startsWith("blog/") || path === "claude-code-on-your-phone";
 

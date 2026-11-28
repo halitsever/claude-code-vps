@@ -148,3 +148,4 @@ It runs the native installer as your workstation user, so Claude Code lands in t
 - [Install Docker on Ubuntu Server](/blog/install-docker-ubuntu-server): the other tool most agents need
 - [Run Claude Code on a remote server](/guide/claude-code): first login, tmux and notifications
 - [Troubleshooting](/reference/troubleshooting): `claude` not found and other server problems
+- [How to update Claude Code](/blog/update-claude-code): auto-updates, channels and package manager upgrades

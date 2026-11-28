@@ -106,3 +106,4 @@ Most failures come with a message that names the cause. From the [troubleshootin
 - [Claude Code over SSH](/blog/claude-code-ssh): keys, sessions that survive a disconnect, clipboard limits
 - [Run Claude Code on a remote server](/guide/claude-code): first login on a headless box
 - [How to run Claude Code on a VPS](/guide/claude-code-vps): every setup step by hand
+- [claude --dangerously-skip-permissions](/blog/claude-dangerously-skip-permissions): what bypass mode means on a server
