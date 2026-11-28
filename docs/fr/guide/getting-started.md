@@ -1,4 +1,6 @@
 ---
+title: "Installer claude-vps sur Ubuntu : prérequis et étapes"
+titleTemplate: false
 description: "Installez claude-vps sur un VPS Ubuntu 24.04 ou 26.04 en une commande. Claude Code, KDE Plasma en RDP et SSH sécurisé sont prêts en dix minutes environ."
 ---
 

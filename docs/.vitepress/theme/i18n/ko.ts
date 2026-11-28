@@ -6,8 +6,8 @@ export default {
     lang: "ko-KR",
     og: "ko_KR",
     prefix: "/ko",
-    homeTitle: "명령어 하나로 VPS에서 Claude Code 실행하기",
-    description: "VPS에서 Claude Code를 실행하는 가장 쉬운 방법입니다. 명령어 하나로 빈 Ubuntu 서버에 Claude Code, KDE Plasma 데스크톱, RDP, 내 설정이 설치됩니다.",
+    homeTitle: "Claude Code 설치: VPS에 명령어 하나로 설치하기",
+    description: "Claude Code 설치(install)를 명령어 하나로 끝내세요. 빈 Ubuntu VPS에 Claude Code, tmux, KDE Plasma 데스크톱, RDP, 안전한 SSH가 약 10분 만에 설치되고, 서버에서 로그인하는 방법까지 단계별로 안내합니다.",
     nav: { vps: "VPS 가이드", docs: "문서" },
     sidebar: {
       guide: "가이드",
@@ -70,6 +70,21 @@ export default {
     ],
     ctaTitle: "새 서버가 10분이면 준비됩니다.",
     ctaText: "Hetzner, DigitalOcean, 집에 남는 컴퓨터 등 Ubuntu 24.04 이상이면 어디서나 동작합니다.",
+    install: {
+      kicker: "설치",
+      title: "Claude Code 설치 방법",
+      text: "빈 Ubuntu VPS에서 Claude Code에 로그인하기까지 네 단계면 됩니다.",
+      steps: [
+        { t: "Ubuntu 서버 준비", d: "Ubuntu 24.04 LTS 이상, amd64 또는 arm64 서버에 SSH로 root 접속만 되면 됩니다. 터미널만 쓴다면 2 vCPU, 4 GB RAM으로 충분하고, KDE 데스크톱까지 쓰려면 4 vCPU, 8 GB를 권장합니다." },
+        { t: "설치 스크립트 실행", d: "claude-vps를 /opt/claude-vps에 내려받은 뒤 사용자 이름과 비밀번호를 묻습니다. Claude Code는 Anthropic의 공식 네이티브 설치 프로그램으로 설치되므로 자동으로 업데이트됩니다." },
+        { t: "새 사용자로 접속", d: "root의 SSH 키가 그대로 복사되므로 같은 키로 접속할 수 있습니다. 설치가 끝나면 SSH와 RDP 접속 주소가 요약으로 출력됩니다." },
+        { t: "tmux 안에서 Claude Code 시작", d: "tmux 안에서 claude를 실행하고 c를 눌러 로그인 링크를 복사합니다. 노트북이나 휴대폰에서 링크를 열어 로그인한 뒤 코드를 붙여 넣으면 끝입니다. Pro 또는 Max 요금제나 Anthropic API 키가 필요합니다." },
+      ],
+      manualTitle: "Claude Code만 설치하고 싶다면",
+      manualText: "Linux, macOS, WSL에서는 Anthropic의 공식 설치 명령어 한 줄이면 됩니다. 설치 후 claude --version으로 확인하세요.",
+      docs: "Anthropic 설치 문서",
+      more: "전체 설치 가이드",
+    },
   },
   faq: {
     title: "자주 묻는 질문",

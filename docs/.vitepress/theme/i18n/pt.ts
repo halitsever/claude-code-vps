@@ -70,6 +70,21 @@ export default {
     ],
     ctaTitle: "Seu próximo servidor fica pronto em dez minutos.",
     ctaText: "Hetzner, DigitalOcean ou um computador sobrando em casa: funciona em qualquer máquina com Ubuntu 24.04 ou mais recente.",
+    install: {
+      kicker: "Instalação",
+      title: "Como instalar o Claude Code em um servidor",
+      text: "Quatro passos para sair de uma VPS Ubuntu vazia e chegar a uma sessão do Claude Code já logada.",
+      steps: [
+        { t: "Tenha um servidor Ubuntu", d: "Ubuntu 24.04 LTS ou mais recente, amd64 ou arm64, com acesso root por SSH. Para o terminal, 2 vCPU e 4 GB de RAM bastam; para o desktop KDE, o ideal são 4 vCPU e 8 GB." },
+        { t: "Rode o instalador", d: "Ele clona o claude-vps em /opt/claude-vps e pede um nome de usuário e uma senha. O Claude Code vem do instalador nativo da Anthropic, então se atualiza sozinho." },
+        { t: "Entre com o novo usuário", d: "As chaves SSH do root são copiadas, então a mesma chave funciona. O resumo no final mostra os endereços exatos de SSH e RDP." },
+        { t: "Abra o Claude Code dentro do tmux", d: "Rode claude dentro do tmux, aperte c para copiar o link de login, abra no notebook ou no celular e cole o código de volta. Você precisa de um plano Pro ou Max, ou de uma chave de API da Anthropic." },
+      ],
+      manualTitle: "Só quer o Claude Code?",
+      manualText: "No Linux, macOS ou WSL, o instalador nativo da Anthropic é um único comando. Confira o resultado com claude --version.",
+      docs: "Documentação de instalação da Anthropic",
+      more: "Guia de instalação completo",
+    },
   },
   faq: {
     title: "Perguntas frequentes",

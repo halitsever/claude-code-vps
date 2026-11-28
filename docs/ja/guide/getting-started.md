@@ -1,4 +1,5 @@
 ---
+title: "claude-vps のインストール手順: Ubuntu サーバーの準備から"
 description: "新しい Ubuntu 24.04 / 26.04 の VPS にコマンド1つで claude-vps を入れ、約10分で Claude Code、RDP で使える KDE Plasma、安全な SSH を用意します。"
 ---
 

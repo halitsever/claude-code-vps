@@ -22,6 +22,10 @@ const STEP_OUT = [
   "Claude Code installed to ~/.local/bin/claude",
   "31 files updated",
 ];
+/** Example address from the installer's own summary, so the commands read like what it prints. */
+const INSTALL_CMDS = [["ssh root@203.0.113.7"], [INSTALL], ["ssh dev@203.0.113.7"], ["tmux", "claude"]];
+const NATIVE_INSTALL = "curl -fsSL https://claude.ai/install.sh | bash";
+const ANTHROPIC_SETUP = "https://code.claude.com/docs/en/setup";
 const STACK = ["Ubuntu 26.04", "KDE Plasma 6", "xrdp", "tmux", "Claude Code", "Docker", "GitHub CLI", "Chrome", "ntfy.sh", "ufw", "systemd timers", "VitePress"];
 
 
@@ -164,6 +168,36 @@ onBeforeUnmount(() => {
       <div v-for="[n, l] in s.stats" :key="l" class="num">
         <strong>{{ n }}</strong>
         <span>{{ l }}</span>
+      </div>
+    </section>
+
+    <!-- Install -->
+    <section id="install" class="lx-section lx-install">
+      <div class="lx-head" data-reveal>
+        <span class="lx-kicker">{{ s.install.kicker }}</span>
+        <h2 class="lx-h2">{{ s.install.title }}</h2>
+        <p>{{ s.install.text }}</p>
+      </div>
+      <ol class="lx-install-list">
+        <li v-for="(st, i) in s.install.steps" :key="st.t" class="node" data-reveal :style="{ '--d': i * 60 + 'ms' }" @pointermove="spotlight">
+          <span class="idx mono">0{{ i + 1 }}</span>
+          <h3>{{ st.t }}</h3>
+          <p>{{ st.d }}</p>
+          <div class="cmds">
+            <code v-for="c in INSTALL_CMDS[i]" :key="c">{{ c }}</code>
+          </div>
+        </li>
+      </ol>
+      <div class="lx-install-alt" data-reveal>
+        <div>
+          <h3>{{ s.install.manualTitle }}</h3>
+          <p>{{ s.install.manualText }}</p>
+        </div>
+        <code>{{ NATIVE_INSTALL }}</code>
+        <p class="links">
+          <a :href="ANTHROPIC_SETUP" target="_blank" rel="noreferrer">{{ s.install.docs }}</a>
+          <a :href="link('/guide/getting-started')">{{ s.install.more }}</a>
+        </p>
       </div>
     </section>
 
