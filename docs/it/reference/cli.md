@@ -1,4 +1,5 @@
 ---
+title: "CLI di claude-vps: comandi e opzioni"
 description: "Tutti i comandi e le opzioni di claude-vps: setup, sync, autosync, doctor, capture, publish e apply, con le variabili di install.sh."
 ---
 

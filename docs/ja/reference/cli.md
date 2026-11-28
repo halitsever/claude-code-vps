@@ -1,4 +1,5 @@
 ---
+title: "claude-vps CLI リファレンス：コマンドとオプション"
 description: "claude-vps の全コマンドとオプションのリファレンス。setup、sync、autosync、doctor、capture、publish、apply と install.sh の環境変数。"
 ---
 
