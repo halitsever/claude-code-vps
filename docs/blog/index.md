@@ -1,7 +1,7 @@
 ---
 title: "Claude Code VPS Blog: Remote Servers, SSH and Notifications"
 titleTemplate: false
-description: "Guides for running Claude Code on a remote server: Remote Control, installing on Linux, SSH, phone notifications with ntfy, Docker and Chrome on Ubuntu."
+description: "Guides for running Claude Code on a remote server: Remote Control, installing and updating, permissions, settings.json, the statusline, SSH and phone pushes."
 ---
 
 # Claude Code VPS blog
@@ -40,5 +40,29 @@ Notes on running Claude Code away from your laptop, written from the [claude-cod
   <li>
     <a href="./install-chrome-ubuntu-server">Install Google Chrome on Ubuntu 24.04 and Ubuntu Server</a>
     <p>Google's apt repository, the .deb, ARM64, headless mode and Claude Code's Chrome integration.</p>
+  </li>
+  <li>
+    <a href="./claude-dangerously-skip-permissions">claude --dangerously-skip-permissions, explained</a>
+    <p>What bypass mode skips, what still asks, the root error and where it belongs.</p>
+  </li>
+  <li>
+    <a href="./claude-code-stop-asking-permission">How to make Claude Code stop asking for permission</a>
+    <p>Allow rules, acceptEdits and auto mode, from the narrowest fix to the widest.</p>
+  </li>
+  <li>
+    <a href="./update-claude-code">How to update Claude Code</a>
+    <p>claude update, npm, apt, dnf and Homebrew, release channels and pinning a version.</p>
+  </li>
+  <li>
+    <a href="./claude-code-statusline">Claude Code statusline: show usage, context and git</a>
+    <p>/statusline, the settings block and tested scripts for usage limits.</p>
+  </li>
+  <li>
+    <a href="./claude-code-settings-json">Claude Code settings.json, explained</a>
+    <p>The four settings files, which one wins, and a real server file key by key.</p>
+  </li>
+  <li>
+    <a href="./claude-code-resume-session">How to resume a Claude Code session</a>
+    <p>--continue, --resume, /resume, session names and where transcripts live.</p>
   </li>
 </ul>

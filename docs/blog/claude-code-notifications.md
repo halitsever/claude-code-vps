@@ -149,3 +149,4 @@ In `notify-urgent.sh`, add `-H "Priority: high"` to the curl call. ntfy maps pri
 - [ntfy vs Gotify](/blog/ntfy-vs-gotify): which push server fits a script like this
 - [Control Claude Code from your phone](/claude-code-on-your-phone): the push plus an SSH app
 - [Run Claude Code on a remote server](/guide/claude-code): where the hook sits in the server setup
+- [Claude Code settings.json](/blog/claude-code-settings-json): where the `hooks` block lives and which file wins

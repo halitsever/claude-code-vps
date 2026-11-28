@@ -129,3 +129,4 @@ Then in the prompt: `look at screenshot.png`.
 - [Claude Code Remote Control vs a server](/blog/claude-code-remote-control): when the Claude app is enough
 - [Claude Code notifications](/blog/claude-code-notifications): a push when the agent waits
 - [How to run Claude Code on a VPS](/guide/claude-code-vps): the full manual setup
+- [Resume a Claude Code session](/blog/claude-code-resume-session): when the process ended and tmux cannot help
