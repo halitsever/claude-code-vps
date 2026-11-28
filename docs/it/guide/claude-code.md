@@ -20,6 +20,8 @@ Preferisci una chiave API? Esportala prima di avviare Claude:
 echo 'export ANTHROPIC_API_KEY=sk-ant-...' >> ~/.bashrc
 ```
 
+Con una chiave API Claude Code funziona, ma [Remote Control](https://code.claude.com/docs/it/remote-control), cioè guidare la sessione dall'app Claude o da claude.ai, richiede l'accesso con claude.ai.
+
 ## Tenere Claude attivo con tmux
 
 Un agente che lavora da un'ora non deve fermarsi perché il tuo portatile è andato in standby. Avvialo dentro tmux e poi staccati:

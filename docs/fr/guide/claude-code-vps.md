@@ -112,6 +112,8 @@ Si vous utilisez une clé API Anthropic au lieu d'un abonnement Pro ou Max, ajou
 echo 'export ANTHROPIC_API_KEY=sk-ant-...' >> ~/.bashrc
 ```
 
+Avec une clé API, Claude Code fonctionne, mais [Remote Control](https://code.claude.com/docs/fr/remote-control), qui permet de piloter la session depuis l'app Claude ou claude.ai, exige la connexion via claude.ai.
+
 ## 7. Garder les sessions actives avec tmux
 
 Si Claude tourne directement dans votre session SSH, il s'arrête quand vous fermez votre portable. Lancez-le dans tmux :

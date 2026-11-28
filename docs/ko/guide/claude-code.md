@@ -20,6 +20,8 @@ API 키를 쓰고 싶다면 실행하기 전에 환경 변수로 지정합니다
 echo 'export ANTHROPIC_API_KEY=sk-ant-...' >> ~/.bashrc
 ```
 
+API 키로도 Claude Code는 동작하지만, Claude 앱이나 claude.ai에서 세션을 조작하는 [Remote Control](https://code.claude.com/docs/ko/remote-control)을 쓰려면 claude.ai로 로그인해야 합니다.
+
 ## tmux로 계속 실행하기
 
 한 시간씩 일하는 에이전트가 노트북이 잠들었다고 멈추면 안 됩니다. tmux 안에서 실행하고 세션에서 빠져나오세요.

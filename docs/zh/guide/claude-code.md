@@ -20,6 +20,8 @@ Claude Code 会输出一个登录链接。在你自己的浏览器里打开，�
 echo 'export ANTHROPIC_API_KEY=sk-ant-...' >> ~/.bashrc
 ```
 
+用 API 密钥也能正常使用 Claude Code，但 [Remote Control](https://code.claude.com/docs/zh-CN/remote-control)（在 Claude 应用或 claude.ai 上操作会话）需要用 claude.ai 账号登录。
+
 ## 用 tmux 保持运行
 
 一个要跑一小时的 agent，不应该因为笔记本休眠就停掉。在 tmux 里运行，然后断开：

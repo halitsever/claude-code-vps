@@ -112,6 +112,8 @@ Pro や Max のプランではなく Anthropic の API キーを使う場合は�
 echo 'export ANTHROPIC_API_KEY=sk-ant-...' >> ~/.bashrc
 ```
 
+API キーでも Claude Code は使えますが、Claude アプリや claude.ai からセッションを操作する [Remote Control](https://code.claude.com/docs/ja/remote-control) には claude.ai でのログインが必要です。
+
 ## 7. tmux でセッションを保つ
 
 SSH のセッションで直接 Claude を動かすと、ノート PC を閉じた時点で止まってしまいます。tmux の中で動かしましょう。

@@ -20,6 +20,8 @@ Claude Code покажет ссылку для входа. Откройте её
 echo 'export ANTHROPIC_API_KEY=sk-ant-...' >> ~/.bashrc
 ```
 
+С ключом API Claude Code работает, но для [Remote Control](https://code.claude.com/docs/ru/remote-control), то есть управления сессией из приложения Claude или с claude.ai, нужен вход через claude.ai.
+
 ## tmux, чтобы работа не прерывалась
 
 Агент, который работает целый час, не должен остановиться из-за того, что ноутбук ушёл в сон. Запустите его в tmux и отключитесь:

@@ -112,6 +112,8 @@ Claude Code покажет ссылку. Откройте её на своём �
 echo 'export ANTHROPIC_API_KEY=sk-ant-...' >> ~/.bashrc
 ```
 
+С ключом API Claude Code работает, но для [Remote Control](https://code.claude.com/docs/ru/remote-control), то есть управления сессией из приложения Claude или с claude.ai, нужен вход через claude.ai.
+
 ## 7. Сессии, которые не обрываются: tmux
 
 Если Claude запущен прямо в SSH-сессии, он остановится, как только вы закроете ноутбук. Поэтому запускайте его в tmux:
