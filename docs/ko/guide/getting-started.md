@@ -1,6 +1,6 @@
 ---
 title: "claude-vps 설치 가이드: Ubuntu 서버 준비부터 로그인까지"
-description: "새 Ubuntu 24.04 또는 26.04 VPS에 명령어 하나로 claude-vps를 설치하면 약 10분 만에 Claude Code, RDP용 KDE Plasma, 안전한 SSH가 준비됩니다."
+description: "새 Ubuntu 24.04 또는 26.04 VPS에 명령어 하나로 claude-vps를 설치하면 약 10분 만에 Claude Code, RDP용 KDE Plasma, 안전한 SSH가 준비됩니다. 필요한 서버 사양, 설치 옵션, 설치 후 로그인 순서를 정리했습니다."
 ---
 
 # 시작하기
