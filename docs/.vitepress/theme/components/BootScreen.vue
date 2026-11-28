@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import { onBeforeUnmount, onMounted, ref } from "vue";
+import Icon from "./Icon.vue";
 
 const props = defineProps<{ toast: string }>();
 
@@ -115,7 +116,7 @@ onBeforeUnmount(() => {
       <template v-if="phase !== 'boot'">
         <div v-for="(s, i) in INSTALL.slice(0, done)" :key="s[0]" class="step">
           <span class="arrow">==&gt;</span> <span class="name">{{ s[0] }}</span>
-          <span class="ok">✓</span> <span class="dim">{{ s[1] }}</span>
+          <span class="ok"><Icon name="check" /></span> <span class="dim">{{ s[1] }}</span>
         </div>
         <div class="bar">
           <span :style="{ width: (done / INSTALL.length) * 100 + '%' }" />
@@ -131,11 +132,11 @@ onBeforeUnmount(() => {
       <div class="win konsole" :class="{ in: windows >= 1 }">
         <div class="bar-t"><span>claude ~ Konsole</span><i /><i /><i /></div>
         <div class="body mono">
-          <div class="banner"><span class="spark">✻</span> Claude Code <span class="dim">~/projects/api</span></div>
+          <div class="banner"><span class="spark"><Icon name="spark" /></span> Claude Code <span class="dim">~/projects/api</span></div>
           <template v-for="(l, i) in CLAUDE.slice(0, claudeLines)" :key="i">
             <div v-if="l.k === 'you'" class="you">&gt; {{ l.t }}</div>
-            <div v-else-if="l.k === 'tool'" class="tool"><span class="bullet">●</span> {{ l.t }}</div>
-            <div v-else class="okl"><span class="ok">✓</span> {{ l.t }}</div>
+            <div v-else-if="l.k === 'tool'" class="tool"><span class="bullet"><Icon name="dot" /></span> {{ l.t }}</div>
+            <div v-else class="okl"><span class="ok"><Icon name="check" /></span> {{ l.t }}</div>
           </template>
           <div class="prompt">&gt; <span class="caret" /></div>
         </div>
