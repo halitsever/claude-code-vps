@@ -1,8 +1,9 @@
 ---
+title: "Başlarken"
 description: "claude-vps'i boş bir Ubuntu 24.04 veya 26.04 VPS'e tek komutla kur. Claude Code, RDP ile KDE Plasma ve güvenli SSH yaklaşık on dakikada hazır."
 ---
 
-# Başlarken
+# claude-vps ile başlarken
 
 claude-vps boş bir Ubuntu sunucusunu benim Claude Code için kullandığım makineye çevirir. Kurulum sonunda şunlar hazır olur: sudo yetkili bir kullanıcı, sadece anahtarla girilen SSH, güvenlik duvarı, RDP ile bağlandığın bir KDE Plasma masaüstü, Docker, Chrome ve Claude Code. Claude Code benim ayarlarım, hook'larım ve KDE düzenimle birlikte gelir.
 

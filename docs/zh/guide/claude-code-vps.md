@@ -3,7 +3,7 @@ title: "如何在 VPS 上运行 Claude Code"
 description: "在 Ubuntu VPS 上运行 Claude Code 的完整教程：安全的 SSH、断线不丢的 tmux 会话、手机通知，以及通过 RDP 访问的 KDE Plasma 桌面。"
 ---
 
-# 如何在 VPS 上运行 Claude Code
+# 在 VPS 上运行 Claude Code 的完整步骤
 
 这一页是我这套环境的完整手动搭建过程。我用一台便宜的 Ubuntu 服务器全天候运行 Claude Code，平时在任何地方用 SSH 连上去，需要图形界面时再用 RDP 打开 KDE Plasma 桌面。
 

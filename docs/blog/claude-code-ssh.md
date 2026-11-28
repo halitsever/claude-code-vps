@@ -14,7 +14,7 @@ faq:
     a: "Over SSH Claude Code sends copied text as an OSC 52 escape sequence and your terminal decides what to do with it. iTerm2 needs a setting turned on, and macOS Terminal.app does not support OSC 52."
 ---
 
-# Claude Code over SSH: a working setup
+# Running Claude Code over SSH without the rough edges
 
 <p class="post-meta">Halit Sever · 28 November 2026</p>
 

@@ -3,7 +3,7 @@ title: "Cómo usar Claude Code en un VPS"
 description: "Guía paso a paso para montar Claude Code en un VPS con Ubuntu: SSH seguro, sesiones de tmux que no se cierran, avisos al móvil y escritorio KDE por RDP."
 ---
 
-# Cómo usar Claude Code en un VPS
+# Claude Code en un VPS, paso a paso
 
 Esta es mi instalación completa, hecha a mano. Un servidor Ubuntu barato que tiene Claude Code funcionando día y noche. Me conecto por SSH desde cualquier sitio y, cuando quiero una pantalla de verdad, entro a un escritorio KDE Plasma por RDP.
 

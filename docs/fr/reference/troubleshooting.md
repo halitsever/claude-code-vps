@@ -1,8 +1,9 @@
 ---
+title: "Dépannage"
 description: "Résoudre les problèmes courants d'un VPS Claude Code : écran RDP noir, demande colord, accès SSH bloqué, claude introuvable et erreurs de synchronisation."
 ---
 
-# Dépannage
+# Résoudre les problèmes courants
 
 Commencez par :
 

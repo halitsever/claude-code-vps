@@ -1,8 +1,9 @@
 ---
+title: "Claude Code 사용하기"
 description: "화면 없는 서버에서 Claude Code에 로그인하고, SSH가 끊겨도 tmux로 에이전트를 계속 실행하며, ntfy.sh로 휴대폰 알림을 받는 방법입니다."
 ---
 
-# Claude Code 사용하기
+# 원격 서버에서 Claude Code 사용하기
 
 ## 첫 로그인
 

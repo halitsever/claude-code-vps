@@ -1,8 +1,9 @@
 ---
+title: "远程桌面"
 description: "从 Windows、macOS、Linux、iOS 或 Android 通过 RDP 连接 Claude Code VPS 上的 KDE Plasma 桌面，可以直连，也可以走 SSH 隧道。"
 ---
 
-# 远程桌面
+# 通过 RDP 连接远程桌面
 
 服务器通过 RDP 提供完整的 KDE Plasma 会话。连接时启动，断开后继续运行，下次连上时窗口还在原来的位置。
 

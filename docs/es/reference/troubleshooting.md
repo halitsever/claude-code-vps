@@ -1,8 +1,9 @@
 ---
+title: "Solución de problemas"
 description: "Soluciona problemas de Claude Code en un VPS: pantalla negra en RDP, aviso de perfil de color, sin acceso SSH, claude no encontrado y fallos de sync."
 ---
 
-# Solución de problemas
+# Cómo resolver los problemas más comunes
 
 Empieza por aquí:
 

@@ -1,8 +1,9 @@
 ---
+title: "Erste Schritte"
 description: "claude-vps mit einem Befehl auf einem frischen Ubuntu-VPS installieren: Claude Code, KDE Plasma über RDP und abgesichertes SSH in etwa zehn Minuten."
 ---
 
-# Erste Schritte
+# Erste Schritte mit claude-vps
 
 claude-vps macht aus einem frischen Ubuntu-Server den Rechner, auf dem ich Claude Code nutze. Du bekommst einen Benutzer mit sudo-Rechten, SSH nur mit Schlüssel, eine Firewall, einen KDE-Plasma-Desktop über RDP, Docker und Chrome. Dazu kommt Claude Code selbst, mit meinen Einstellungen, Hooks und meinem KDE-Layout.
 

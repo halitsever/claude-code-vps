@@ -1,8 +1,9 @@
 ---
+title: "使用 Claude Code"
 description: "在没有图形界面的服务器上登录 Claude Code，用 tmux 让 agent 在 SSH 断开后继续运行，并通过 ntfy.sh 接收手机通知。"
 ---
 
-# 使用 Claude Code
+# 在远程服务器上使用 Claude Code
 
 ## 首次登录
 

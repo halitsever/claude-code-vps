@@ -1,8 +1,9 @@
 ---
+title: "Usando o Claude Code"
 description: "Faça login no Claude Code em um servidor sem tela, mantenha os agentes no tmux mesmo se o SSH cair e receba avisos no celular com o ntfy.sh."
 ---
 
-# Usando o Claude Code
+# Usando o Claude Code no servidor remoto
 
 ## Primeiro login
 

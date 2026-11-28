@@ -1,8 +1,9 @@
 ---
+title: "Быстрый старт"
 description: "Установка claude-vps на чистый VPS с Ubuntu 24.04 или 26.04 одной командой: Claude Code, KDE Plasma по RDP и защищённый SSH примерно за десять минут."
 ---
 
-# Быстрый старт
+# Начало работы с claude-vps
 
 claude-vps превращает чистый сервер на Ubuntu в машину, на которой я работаю с Claude Code. Вы получаете пользователя с sudo, SSH только по ключу, файрвол, рабочий стол KDE Plasma с доступом по RDP, Docker и Chrome. И сам Claude Code, уже с моими настройками, хуками и раскладкой KDE.
 

@@ -1,8 +1,9 @@
 ---
+title: "快速开始"
 description: "一条命令在全新的 Ubuntu 24.04 或 26.04 VPS 上安装 claude-vps，大约十分钟就能用上 Claude Code、通过 RDP 访问的 KDE Plasma 和加固过的 SSH。"
 ---
 
-# 快速开始
+# claude-vps 快速上手
 
 claude-vps 会把一台全新的 Ubuntu 服务器配置成我平时运行 Claude Code 的那种环境。它会创建一个有 sudo 权限的用户，把 SSH 设成只能用密钥登录，打开防火墙，装好可以用 RDP 连接的 KDE Plasma 桌面、Docker 和 Chrome。Claude Code 本身也会装好，我的设置、hook 和 KDE 布局都已经应用。
 

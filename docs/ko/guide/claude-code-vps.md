@@ -3,7 +3,7 @@ title: "VPS에서 Claude Code 실행하는 방법"
 description: "Ubuntu VPS에서 Claude Code를 실행하는 단계별 가이드입니다. 안전한 SSH, 끊기지 않는 tmux 세션, 휴대폰 알림, RDP로 접속하는 KDE Plasma 데스크톱까지 다룹니다."
 ---
 
-# VPS에서 Claude Code 실행하는 방법
+# VPS에서 Claude Code를 단계별로 실행하기
 
 이 페이지는 제 작업 환경을 직접 구성하는 전체 과정입니다. 저렴한 Ubuntu 서버에서 Claude Code를 하루 종일 돌리고, 어디서든 SSH로 접속합니다. 화면이 필요할 때는 RDP로 KDE Plasma 데스크톱에 접속합니다.
 

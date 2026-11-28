@@ -1,8 +1,9 @@
 ---
+title: "Escritorio remoto"
 description: "Conéctate por RDP al escritorio KDE Plasma de tu VPS con Claude Code desde Windows, macOS, Linux, iOS o Android, directamente o por un túnel SSH."
 ---
 
-# Escritorio remoto
+# Escritorio remoto por RDP
 
 El servidor tiene una sesión completa de KDE Plasma a la que entras por RDP. Se inicia cuando te conectas y sigue abierta cuando te desconectas, así que la próxima vez encuentras las ventanas donde las dejaste.
 

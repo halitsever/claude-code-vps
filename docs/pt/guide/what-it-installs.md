@@ -1,8 +1,9 @@
 ---
+title: "O que é instalado"
 description: "Cada etapa que o claude-vps roda no seu servidor Ubuntu: pacotes, swap, SSH, ufw, KDE Plasma, xrdp, Docker, Chrome, Claude Code e seus dotfiles."
 ---
 
-# O que é instalado
+# O que o claude-vps setup instala
 
 O `claude-vps setup` roda nove etapas em ordem. Cada uma é uma função bash comum em [`lib/setup.sh`](https://github.com/halitsever/claude-code-vps/blob/main/lib/setup.sh), então você pode ler exatamente o que roda no seu servidor. Pule qualquer etapa com `--skip`, ou rode só algumas com `--only`.
 

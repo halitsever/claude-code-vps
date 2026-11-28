@@ -1,8 +1,9 @@
 ---
+title: "Claude Code nutzen"
 description: "Claude Code auf einem Server ohne Bildschirm anmelden, Agenten in tmux nach SSH-Abbrüchen weiterlaufen lassen und per ntfy.sh Nachrichten aufs Handy bekommen."
 ---
 
-# Claude Code nutzen
+# Claude Code auf dem entfernten Server nutzen
 
 ## Erste Anmeldung
 

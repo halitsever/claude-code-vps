@@ -1,8 +1,9 @@
 ---
+title: "配置同步"
 description: "用 claude-vps publish、sync 和 autosync，在自己的电脑和 VPS 之间同步 KDE Plasma 和 Claude Code 配置。"
 ---
 
-# 配置同步
+# 在本机与服务器之间同步配置
 
 服务器的外观和行为全部由仓库里的配置决定。你在自己的电脑上修改，服务器随后跟着更新。
 

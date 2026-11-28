@@ -1,8 +1,9 @@
 ---
+title: "Einstellungen synchronisieren"
 description: "KDE-Plasma- und Claude-Code-Einstellungen zwischen deinem Rechner und dem VPS abgleichen, mit claude-vps publish, sync und autosync."
 ---
 
-# Einstellungen synchronisieren
+# Einstellungen zwischen deinem Rechner und dem Server synchronisieren
 
 Wie der Server aussieht und sich verhält, steht komplett im Repo. Du änderst etwas auf deinem eigenen Rechner, und der Server übernimmt es.
 

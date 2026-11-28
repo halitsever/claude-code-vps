@@ -1,8 +1,9 @@
 ---
+title: "Keeping config in sync"
 description: "Keep your KDE Plasma and Claude Code settings in sync between your own machine and your VPS with claude-vps publish, sync and autosync."
 ---
 
-# Keeping config in sync
+# Syncing config between your machine and the server
 
 The repo is the source of truth for how the server looks and behaves. You change things on your own machine, and the server catches up.
 

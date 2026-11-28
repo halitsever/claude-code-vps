@@ -1,8 +1,9 @@
 ---
+title: "常见问题排查"
 description: "解决 Claude Code VPS 的常见问题：RDP 黑屏、xrdp 颜色配置文件弹窗、SSH 登不上、找不到 claude 命令以及同步出错。"
 ---
 
-# 常见问题排查
+# 常见问题及解决方法
 
 先运行：
 

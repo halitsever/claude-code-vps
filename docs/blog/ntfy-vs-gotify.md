@@ -14,7 +14,7 @@ faq:
     a: "Yes. ntfy is a single Go binary with a Docker image, binwiederhier/ntfy. Self-hosted ntfy supports users and access tokens for private topics."
 ---
 
-# ntfy vs Gotify: which push server for your scripts?
+# Choosing between ntfy and Gotify for script notifications
 
 <p class="post-meta">Halit Sever · 28 November 2026</p>
 
