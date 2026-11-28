@@ -1,4 +1,5 @@
 ---
+title: "claude-vps CLI: komutlar ve seçenekler"
 description: "Claude Code VPS kurulumu için claude-vps komutları ve seçenekleri: setup, sync, autosync, doctor, capture, publish, apply ve install.sh değişkenleri."
 ---
 

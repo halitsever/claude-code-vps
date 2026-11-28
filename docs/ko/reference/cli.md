@@ -1,4 +1,5 @@
 ---
+title: "claude-vps CLI 레퍼런스: 명령어와 옵션"
 description: "claude-vps의 모든 명령어와 옵션 레퍼런스입니다. setup, sync, autosync, doctor, capture, publish, apply와 install.sh 환경 변수를 다룹니다."
 ---
 

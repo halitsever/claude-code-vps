@@ -1,4 +1,5 @@
 ---
+title: "CLI de claude-vps: comandos y opciones"
 description: "Referencia de todos los comandos y opciones de claude-vps para tu servidor con Claude Code: setup, sync, autosync, doctor, capture, publish y apply."
 ---
 

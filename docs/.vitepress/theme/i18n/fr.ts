@@ -7,7 +7,7 @@ export default {
     og: "fr_FR",
     prefix: "/fr",
     homeTitle: "Installer Claude Code sur un VPS en une commande",
-    description: "Le moyen le plus simple de faire tourner Claude Code sur un VPS. Une commande installe Claude Code, un bureau KDE Plasma en RDP et vos réglages sur un serveur Ubuntu vide.",
+    description: "Claude Code sur un VPS en une seule commande : elle installe Claude Code, un bureau KDE Plasma en RDP et vos réglages sur un serveur Ubuntu vide.",
     nav: { vps: "Guide VPS", docs: "Docs" },
     sidebar: {
       guide: "Guide",

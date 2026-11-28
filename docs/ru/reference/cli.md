@@ -1,4 +1,5 @@
 ---
+title: "CLI claude-vps: команды и параметры"
 description: "Справочник по всем командам и параметрам claude-vps для VPS с Claude Code: setup, sync, autosync, doctor, capture, publish, apply и переменные install.sh."
 ---
 

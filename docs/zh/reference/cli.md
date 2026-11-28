@@ -1,4 +1,5 @@
 ---
+title: "claude-vps CLI 参考：命令与选项"
 description: "claude-vps 所有命令和参数的参考：setup、sync、autosync、doctor、capture、publish、apply，以及 install.sh 的环境变量。"
 ---
 
