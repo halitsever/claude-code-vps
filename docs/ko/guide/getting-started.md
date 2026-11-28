@@ -14,7 +14,7 @@ claude-vps는 새 Ubuntu 서버를 제가 Claude Code를 돌리는 환경과 똑
 | **CPU / RAM** | Plasma를 쓰려면 최소 2 vCPU, 4 GB입니다. 4 vCPU, 8 GB면 일반 데스크톱처럼 쓸 수 있습니다 |
 | **디스크** | 25 GB 이상 |
 | **접속** | SSH root 접속. 서버에 SSH 키가 미리 등록되어 있으면 좋습니다 |
-| **아키텍처** | amd64는 모든 항목이 설치됩니다. arm64도 되지만 Chrome은 빠집니다 |
+| **아키텍처** | amd64와 arm64 모두 모든 항목이 설치됩니다 |
 
 설치가 끝난 뒤 Claude Code에 로그인하려면 Claude Pro 또는 Max 요금제나 Anthropic API 키가 필요합니다.
 

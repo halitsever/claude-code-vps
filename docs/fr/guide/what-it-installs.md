@@ -53,7 +53,7 @@ xrdp pilote une session Xorg. Plasma 6 fournit encore une session X11 sur Ubuntu
 
 - Docker (`docker.io`, compose v2, buildx), avec votre utilisateur dans le groupe `docker`
 - GitHub CLI (`gh`)
-- Google Chrome depuis le dépôt apt de Google (amd64 seulement). Utile quand Claude a besoin d'un vrai navigateur
+- Google Chrome depuis le dépôt apt de Google (amd64 et arm64). Utile quand Claude a besoin d'un vrai navigateur
 
 ## 8. claude
 

@@ -53,7 +53,7 @@ xrdp 驱动的是 Xorg 会话。在 Ubuntu 24.04 到 26.04 上，Plasma 6 仍然
 
 - Docker（`docker.io`、compose v2、buildx），并把你的用户加入 `docker` 组
 - GitHub CLI（`gh`）
-- 从 Google 的 apt 源安装 Google Chrome（仅 amd64）。Claude 需要真正的浏览器时很有用
+- 从 Google 的 apt 源安装 Google Chrome（amd64 和 arm64）。Claude 需要真正的浏览器时很有用
 
 ## 8. claude
 

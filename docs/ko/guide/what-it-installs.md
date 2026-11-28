@@ -53,7 +53,7 @@ xrdp는 Xorg 세션을 사용합니다. Ubuntu 24.04부터 26.04까지 Plasma 6�
 
 - Docker(`docker.io`, compose v2, buildx). 사용자를 `docker` 그룹에 추가합니다
 - GitHub CLI(`gh`)
-- Google apt 저장소의 Google Chrome(amd64 전용). Claude가 실제 브라우저를 써야 할 때 유용합니다
+- Google apt 저장소의 Google Chrome(amd64, arm64). Claude가 실제 브라우저를 써야 할 때 유용합니다
 
 ## 8. claude
 

@@ -76,7 +76,7 @@ export default {
     items: [
       { q: "Claude Code は VPS で動きますか？", a: "動きます。Claude Code はターミナルアプリなので、どの Linux サーバーでも使えます。手元の端末でリンクを開いて一度ログインすれば、接続を切っても tmux の中で動き続けます。" },
       { q: "Claude Code にはどのくらいのサーバーが必要ですか？", a: "ターミナルだけなら 2 vCPU、メモリ 4 GB で足ります。KDE Plasma デスクトップも使うなら、4 vCPU、メモリ 8 GB あると普段使いの PC と同じ感覚で使えます。" },
-      { q: "対応している Ubuntu のバージョンは？", a: "Ubuntu 24.04 LTS 以降で、26.04 LTS にも対応しています。amd64 ではすべて入り、arm64 では Chrome 以外が動きます。" },
+      { q: "対応している Ubuntu のバージョンは？", a: "Ubuntu 24.04 LTS 以降で、26.04 LTS にも対応しています。amd64 でも arm64 でも、すべてインストールされます。" },
       { q: "Claude の有料プランは必要ですか？", a: "Claude Code が使えるプラン（Pro または Max）か、Anthropic の API キーが必要です。claude-vps 自体は無料で、MIT ライセンスです。" },
       { q: "RDP をインターネットに公開しても安全ですか？", a: "xrdp は通信を暗号化し、標準とは違うポートで動きます。--rdp-private でポートを閉じたまま、SSH トンネル経由で接続することもできます。" },
       { q: "自分の KDE や Claude の設定を使えますか？", a: "使えます。リポジトリを fork し、手元の PC で claude-vps capture を実行して、インストーラーの参照先を自分の fork にします。あとは publish した変更がすべてサーバーに反映されます。" },

@@ -76,7 +76,7 @@ export default {
     items: [
       { q: "VPS에서 Claude Code를 실행할 수 있나요?", a: "네. Claude Code는 터미널 앱이라 어떤 Linux 서버에서도 동작합니다. 내 기기에서 링크를 열어 한 번만 로그인하면 되고, 접속을 끊어도 tmux 안에서 계속 실행됩니다." },
       { q: "Claude Code용 서버 사양은 어느 정도가 필요한가요?", a: "터미널만 쓴다면 2 vCPU, 4 GB RAM이면 충분합니다. KDE Plasma 데스크톱까지 쓰려면 4 vCPU, 8 GB RAM은 되어야 쾌적합니다." },
-      { q: "어떤 Ubuntu 버전을 지원하나요?", a: "Ubuntu 24.04 LTS 이상이며 26.04 LTS도 지원합니다. amd64에서는 모든 항목이 설치되고, arm64에서는 Chrome을 제외하고 동작합니다." },
+      { q: "어떤 Ubuntu 버전을 지원하나요?", a: "Ubuntu 24.04 LTS 이상이며 26.04 LTS도 지원합니다. amd64와 arm64 모두에서 모든 항목이 설치됩니다." },
       { q: "Claude 구독이 필요한가요?", a: "Claude Code가 포함된 요금제(Pro 또는 Max)나 Anthropic API 키가 필요합니다. claude-vps 자체는 무료이며 MIT 라이선스입니다." },
       { q: "RDP 포트를 인터넷에 열어도 안전한가요?", a: "xrdp는 세션을 암호화하고 기본값이 아닌 포트를 씁니다. 더 안전하게 하려면 --rdp-private로 포트를 닫아 두고 SSH 터널로 접속하면 됩니다." },
       { q: "내 KDE와 Claude 설정을 쓸 수 있나요?", a: "네. 저장소를 포크하고, 내 컴퓨터에서 claude-vps capture를 실행한 뒤, 설치 스크립트가 포크한 저장소를 쓰도록 지정하면 됩니다. 이후 올리는 모든 변경 사항이 서버에 반영됩니다." },

@@ -2,6 +2,10 @@
 
 Servers pick up a new version with `sudo claude-vps update`.
 
+## Unreleased
+
+- Google Chrome is installed on arm64 servers too, from Google's apt repository.
+
 ## 0.4.0
 
 - Setup ends by offering [Tailscale](https://tailscale.com), and `sudo claude-vps tailscale` runs the same flow on an existing server. Once a connection over Tailscale is seen, it offers to close SSH and RDP to the internet.

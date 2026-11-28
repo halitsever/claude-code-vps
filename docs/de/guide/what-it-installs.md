@@ -53,7 +53,7 @@ xrdp steuert eine Xorg-Sitzung. Plasma 6 hat unter Ubuntu 24.04 bis 26.04 noch e
 
 - Docker (`docker.io`, compose v2, buildx), dein Benutzer kommt in die Gruppe `docker`
 - GitHub CLI (`gh`)
-- Google Chrome aus Googles apt-Quelle (nur amd64). Praktisch, wenn Claude einen echten Browser braucht
+- Google Chrome aus Googles apt-Quelle (amd64 und arm64). Praktisch, wenn Claude einen echten Browser braucht
 
 ## 8. claude
 

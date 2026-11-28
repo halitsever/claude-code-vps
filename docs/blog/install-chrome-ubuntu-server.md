@@ -59,7 +59,7 @@ sudo apt install ./google-chrome-stable_current_amd64.deb
 
 Google's repository index lists `google-chrome-stable` for both `amd64` and `arm64`, checked on 28 November 2026. On an ARM64 server, set `Architectures: arm64` in the source file, or download `google-chrome-stable_current_arm64.deb`.
 
-claude-code-vps currently installs Chrome only on amd64 and skips it on arm64 with the message "Chrome has no arm64 build". That message predates Google's ARM64 packages.
+claude-code-vps installs Chrome on both amd64 and arm64, and writes the server's architecture into the `Architectures:` line for you.
 
 ## Check it
 

@@ -14,7 +14,7 @@ claude-vps convierte un servidor Ubuntu recién creado en la máquina donde uso 
 | **CPU / RAM** | 2 vCPU y 4 GB es el mínimo para Plasma. Con 4 vCPU / 8 GB va como un escritorio de verdad |
 | **Disco** | 25 GB o más |
 | **Acceso** | root por SSH, mejor si tu clave SSH ya está en el servidor |
-| **Arquitectura** | En amd64 se instala todo. arm64 funciona, pero sin Chrome |
+| **Arquitectura** | En amd64 y en arm64 se instala todo |
 
 Para iniciar sesión en Claude Code después, necesitas un plan Claude Pro o Max, o una clave de API de Anthropic.
 
