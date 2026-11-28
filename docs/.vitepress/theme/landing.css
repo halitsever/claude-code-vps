@@ -1311,14 +1311,16 @@ html:not(.dark) .lx {
 .lx-faq summary::-webkit-details-marker {
   display: none;
 }
-.lx-faq summary::after {
-  content: "+";
+.lx-faq summary .faq-ic {
   flex-shrink: 0;
-  font: 400 24px "JetBrains Mono", monospace;
+  /* Same footprint as a 24px mono glyph, so questions wrap and size as before. */
+  font-size: 14.4px;
+  box-sizing: content-box;
+  padding-block: 8.3px;
   color: var(--acc);
   transition: transform 0.3s;
 }
-.lx-faq details[open] summary::after {
+.lx-faq details[open] summary .faq-ic {
   transform: rotate(45deg);
 }
 .lx-faq p {

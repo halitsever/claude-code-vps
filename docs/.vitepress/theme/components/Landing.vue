@@ -3,6 +3,7 @@ import { computed, onBeforeUnmount, onMounted, ref } from "vue";
 import { useData, withBase } from "vitepress";
 import AuroraCanvas from "./AuroraCanvas.vue";
 import BootScreen from "./BootScreen.vue";
+import Icon from "./Icon.vue";
 import { LOCALES } from "../i18n";
 
 const props = defineProps<{ lang?: string }>();
@@ -140,7 +141,7 @@ onBeforeUnmount(() => {
         </div>
 
         <div class="lx-actions">
-          <a class="lx-btn primary" :href="link('/guide/claude-code-vps')">{{ s.start }}<span class="arr">→</span></a>
+          <a class="lx-btn primary" :href="link('/guide/claude-code-vps')">{{ s.start }}<span class="arr"><Icon name="arrow" /></span></a>
           <a class="lx-btn ghost" :href="REPO" target="_blank" rel="noreferrer">
             <svg viewBox="0 0 16 16" width="16" height="16" aria-hidden="true"><path fill="currentColor" d="M8 .2a8 8 0 0 0-2.5 15.6c.4 0 .5-.2.5-.4v-1.5c-2.2.5-2.7-1-2.7-1-.4-.9-.9-1.2-.9-1.2-.7-.5.1-.5.1-.5.8.1 1.2.8 1.2.8.7 1.3 1.9.9 2.3.7.1-.5.3-.9.5-1.1-1.8-.2-3.6-.9-3.6-4 0-.9.3-1.6.8-2.1-.1-.2-.4-1 .1-2.1 0 0 .7-.2 2.2.8a7.5 7.5 0 0 1 4 0c1.5-1 2.2-.8 2.2-.8.4 1.1.2 1.9.1 2.1.5.6.8 1.3.8 2.1 0 3.1-1.9 3.8-3.6 4 .3.3.6.8.6 1.5v2.2c0 .2.1.5.6.4A8 8 0 0 0 8 .2Z" /></svg>
             {{ s.github }}
@@ -159,7 +160,7 @@ onBeforeUnmount(() => {
     <!-- Stack marquee -->
     <section class="lx-marquee" aria-label="Stack">
       <div class="track mono">
-        <span v-for="(t, i) in [...STACK, ...STACK]" :key="i">{{ t }}<i>✦</i></span>
+        <span v-for="(t, i) in [...STACK, ...STACK]" :key="i">{{ t }}<i><Icon name="sep" /></i></span>
       </div>
     </section>
 
@@ -215,9 +216,9 @@ onBeforeUnmount(() => {
         </div>
         <div class="lx-steps-term mono">
           <span class="arrow">==&gt;</span> {{ STEP_NAMES[activeStep] }}<br />
-          <span class="ok">✓</span> {{ STEP_OUT[activeStep] }}
+          <span class="ok"><Icon name="check" /></span> {{ STEP_OUT[activeStep] }}
         </div>
-        <a class="lx-link" :href="link('/guide/what-it-installs')">{{ s.stepsLink }} →</a>
+        <a class="lx-link" :href="link('/guide/what-it-installs')">{{ s.stepsLink }} <Icon name="arrow" /></a>
       </div>
       <ol class="lx-steps-list">
         <li
@@ -246,7 +247,7 @@ onBeforeUnmount(() => {
         <article v-for="(b, i) in s.bento" :key="b.tag" :class="['card', `c${i}`]" data-reveal :style="{ '--d': i * 60 + 'ms' }" @pointermove="spotlight">
           <div class="viz" aria-hidden="true">
             <div v-if="i === 0" class="v-tmux mono">
-              <div class="v-line"><span class="spark">✻</span> refactoring auth module<span class="caret" /></div>
+              <div class="v-line"><span class="spark"><Icon name="spark" /></span> refactoring auth module<span class="caret" /></div>
               <div class="v-bar"><span class="on">0:claude*</span><span>1:tests</span><span>2:logs</span><em>up 14d 3h</em></div>
             </div>
             <div v-else-if="i === 1" class="v-swatch">
@@ -303,7 +304,7 @@ onBeforeUnmount(() => {
       </div>
       <div class="lx-faq" data-reveal>
         <details v-for="(f, i) in faq.items" :key="f.q" :open="i === 0">
-          <summary>{{ f.q }}</summary>
+          <summary>{{ f.q }}<Icon name="plus" class="faq-ic" /></summary>
           <p>{{ f.a }}</p>
         </details>
       </div>
