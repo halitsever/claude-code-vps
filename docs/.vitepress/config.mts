@@ -133,7 +133,7 @@ export default defineConfig({
     const localeDesc = siteConfig.site.locales[locale]?.description ?? siteConfig.site.description;
     const title = pageData.frontmatter.title ?? pageData.title ?? siteName;
     const desc = pageData.frontmatter.description || pageData.description || localeDesc;
-    const fullTitle = pageData.frontmatter.titleTemplate === false ? title : path === "" ? `${siteName}: ${title}` : `${title} | ${siteName}`;
+    const fullTitle = pageData.frontmatter.titleTemplate === false ? title : `${title} | ${siteName}`;
 
     const head: HeadConfig[] = [
       ["link", { rel: "canonical", href: url }],

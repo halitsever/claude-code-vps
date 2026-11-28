@@ -45,6 +45,17 @@ export type Locale = {
     flow: { cmd: string; t: string; d: string }[];
     ctaTitle: string;
     ctaText: string;
+    /** Four steps, matched by index to the commands in Landing.vue. */
+    install: {
+      kicker: string;
+      title: string;
+      text: string;
+      steps: { t: string; d: string }[];
+      manualTitle: string;
+      manualText: string;
+      docs: string;
+      more: string;
+    };
   };
   faq: { title: string; items: { q: string; a: string }[] };
 };

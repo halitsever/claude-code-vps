@@ -70,6 +70,21 @@ export default {
     ],
     ctaTitle: "十分钟后，新服务器就能用了。",
     ctaText: "Hetzner、DigitalOcean，或者家里闲置的电脑：只要是 Ubuntu 24.04 及以上都可以。",
+    install: {
+      kicker: "安装",
+      title: "如何在服务器上安装 Claude Code",
+      text: "从一台空白的 Ubuntu VPS 到登录好的 Claude Code，只需要四步。",
+      steps: [
+        { t: "准备一台 Ubuntu 服务器", d: "Ubuntu 24.04 LTS 及以上，amd64 或 arm64 均可，能用 SSH 以 root 登录即可。只用终端的话 2 vCPU、4 GB 内存就够；要用 KDE 桌面，建议 4 vCPU、8 GB。" },
+        { t: "运行安装脚本", d: "脚本会把 claude-vps 克隆到 /opt/claude-vps，然后询问用户名和密码。Claude Code 本身通过 Anthropic 官方的原生安装程序安装，所以会自动更新。" },
+        { t: "用新用户登录", d: "root 的 SSH 密钥会被复制过去，所以用同一把密钥就能登录。安装结束时的摘要会列出确切的 SSH 和 RDP 地址。" },
+        { t: "在 tmux 里启动 Claude Code", d: "在 tmux 里运行 claude，按 c 复制登录链接，在笔记本或手机上打开并登录，再把验证码粘贴回来。需要 Pro 或 Max 订阅，或者 Anthropic API 密钥。" },
+      ],
+      manualTitle: "只想装 Claude Code 本身？",
+      manualText: "在 Linux、macOS 或 WSL 上，Anthropic 的原生安装程序只需一条命令。装好后用 claude --version 检查。",
+      docs: "Anthropic 安装文档",
+      more: "完整安装指南",
+    },
   },
   faq: {
     title: "常见问题",

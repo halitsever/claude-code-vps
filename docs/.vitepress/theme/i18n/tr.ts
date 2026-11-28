@@ -70,6 +70,21 @@ export default {
     ],
     ctaTitle: "Yeni sunucun on dakikada hazır.",
     ctaText: "Hetzner, DigitalOcean ya da evdeki boş bir bilgisayar: Ubuntu 24.04 veya üstü olan her makinede çalışır.",
+    install: {
+      kicker: "Kurulum",
+      title: "Claude Code sunucuya nasıl kurulur?",
+      text: "Boş bir Ubuntu VPS'ten giriş yapılmış bir Claude Code oturumuna dört adımda gidersin.",
+      steps: [
+        { t: "Bir Ubuntu sunucusu hazırla", d: "Ubuntu 24.04 LTS veya üstü, amd64 ya da arm64, SSH ile root erişimi olan bir sunucu yeterli. Sadece terminal için 2 vCPU ve 4 GB RAM yeter, KDE masaüstü için 4 vCPU ve 8 GB önerilir." },
+        { t: "Kurulum betiğini çalıştır", d: "claude-vps'i /opt/claude-vps klasörüne indirir, sonra kullanıcı adı ve şifre sorar. Claude Code, Anthropic'in resmi yerel kurulum aracıyla kurulduğu için kendini günceller." },
+        { t: "Yeni kullanıcıyla bağlan", d: "root'un SSH anahtarları kopyalanır, yani aynı anahtar çalışır. Kurulumun sonundaki özet, SSH ve RDP adreslerini tam olarak yazar." },
+        { t: "Claude Code'u tmux içinde başlat", d: "tmux içinde claude komutunu çalıştır, giriş bağlantısını kopyalamak için c'ye bas, bağlantıyı bilgisayarında ya da telefonunda açıp kodu geri yapıştır. Pro veya Max planı ya da bir Anthropic API anahtarı gerekir." },
+      ],
+      manualTitle: "Sadece Claude Code mu lazım?",
+      manualText: "Linux, macOS ve WSL'de Anthropic'in yerel kurulum aracı tek bir komut. Sonucu claude --version ile kontrol edebilirsin.",
+      docs: "Anthropic kurulum belgeleri",
+      more: "Kurulum rehberinin tamamı",
+    },
   },
   faq: {
     title: "Sık sorulan sorular",

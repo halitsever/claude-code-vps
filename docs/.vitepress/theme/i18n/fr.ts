@@ -6,8 +6,8 @@ export default {
     lang: "fr-FR",
     og: "fr_FR",
     prefix: "/fr",
-    homeTitle: "Installer Claude Code sur un VPS en une commande",
-    description: "Claude Code sur un VPS en une seule commande : elle installe Claude Code, un bureau KDE Plasma en RDP et vos réglages sur un serveur Ubuntu vide.",
+    homeTitle: "Claude Code : installation sur un VPS en une commande",
+    description: "Installation de Claude Code sur un VPS Ubuntu en une commande : Claude Code, tmux, KDE Plasma en RDP et SSH sécurisé en 10 minutes, puis la connexion pas à pas.",
     nav: { vps: "Guide VPS", docs: "Docs" },
     sidebar: {
       guide: "Guide",
@@ -70,6 +70,21 @@ export default {
     ],
     ctaTitle: "Votre nouveau serveur est prêt en dix minutes.",
     ctaText: "Hetzner, DigitalOcean ou un vieil ordinateur chez vous : ça marche sur toute machine sous Ubuntu 24.04 ou plus récent.",
+    install: {
+      kicker: "Installation",
+      title: "Installer Claude Code sur un serveur",
+      text: "Quatre étapes séparent un VPS Ubuntu vide d'une session Claude Code connectée.",
+      steps: [
+        { t: "Préparez un serveur Ubuntu", d: "Ubuntu 24.04 LTS ou plus récent, en amd64 ou arm64, avec un accès root en SSH. 2 vCPU et 4 Go de RAM suffisent pour le terminal, comptez 4 vCPU et 8 Go pour le bureau KDE." },
+        { t: "Lancez l'installateur", d: "Il clone claude-vps dans /opt/claude-vps, puis vous demande un nom d'utilisateur et un mot de passe. Claude Code lui-même vient de l'installateur natif d'Anthropic et se met donc à jour tout seul." },
+        { t: "Connectez-vous avec le nouvel utilisateur", d: "Les clés SSH de root sont recopiées, la même clé fonctionne donc. Le résumé final affiche les adresses SSH et RDP exactes." },
+        { t: "Lancez Claude Code dans tmux", d: "Lancez claude dans tmux, appuyez sur c pour copier le lien de connexion, ouvrez-le sur votre ordinateur ou votre téléphone, puis recollez le code. Il faut un abonnement Pro ou Max, ou une clé API Anthropic." },
+      ],
+      manualTitle: "Vous voulez seulement Claude Code ?",
+      manualText: "Sous Linux, macOS ou WSL, l'installateur natif d'Anthropic tient en une commande. Vérifiez ensuite le résultat avec claude --version.",
+      docs: "Documentation d'installation d'Anthropic",
+      more: "Guide d'installation complet",
+    },
   },
   faq: {
     title: "Questions fréquentes",

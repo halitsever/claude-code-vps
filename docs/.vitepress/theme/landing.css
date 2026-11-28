@@ -1207,6 +1207,78 @@ html:not(.dark) .lx {
   }
 }
 
+/* ───── Install ───── */
+.lx-install-list {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 16px;
+  margin: 0 !important;
+  padding: 0 !important;
+  list-style: none !important;
+}
+.lx-install-list li {
+  margin: 0 !important;
+  display: flex;
+  flex-direction: column;
+}
+.lx-install-list .cmds {
+  margin-top: auto;
+  padding-top: 18px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+.lx-install-list code,
+.lx-install-alt code {
+  font-family: "JetBrains Mono", monospace;
+  white-space: normal;
+  overflow-wrap: anywhere;
+}
+.lx-install-alt {
+  margin-top: 16px;
+  padding: 28px;
+  border-radius: 22px;
+  border: 1px dashed var(--line-2);
+  display: grid;
+  gap: 14px;
+}
+.lx-install-alt h3 {
+  margin: 0 0 6px;
+  font-size: 19px;
+  font-weight: 700;
+  color: var(--fg);
+}
+.lx-install-alt p {
+  margin: 0;
+  font-size: 15px;
+  line-height: 1.6;
+  color: var(--muted);
+}
+.lx-install-alt code {
+  justify-self: start;
+  padding: 8px 12px;
+  border-radius: 9px;
+  font-size: 13px;
+  color: var(--acc);
+  background: color-mix(in srgb, var(--acc) 11%, transparent);
+}
+.lx-install-alt .links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 18px;
+}
+.lx-install-alt .links a {
+  color: var(--fg);
+  font-weight: 600;
+  text-decoration: underline;
+  text-underline-offset: 4px;
+}
+@media (max-width: 760px) {
+  .lx-install-list {
+    grid-template-columns: 1fr;
+  }
+}
+
 /* ───── FAQ ───── */
 .lx-faq {
   max-width: 840px;
