@@ -33,3 +33,43 @@
 .vp-doc table {
   font-size: 14px;
 }
+
+.vp-doc .post-meta {
+  margin-top: -8px;
+  color: var(--vp-c-text-2);
+  font-size: 14px;
+}
+.vp-doc .post-list {
+  list-style: none;
+  padding-left: 0;
+}
+.vp-doc .post-list li {
+  margin: 0 0 20px;
+}
+.vp-doc .post-list a {
+  font-weight: 600;
+}
+.vp-doc .post-list p {
+  margin: 4px 0 0;
+  color: var(--vp-c-text-2);
+}
+.vp-doc .phone-flow {
+  margin: 24px 0;
+  padding: 16px;
+  border: 1px solid var(--vp-c-divider);
+  border-radius: 12px;
+  color: var(--vp-c-text-1);
+  background: var(--vp-c-bg-soft);
+}
+.vp-doc .phone-flow svg {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+.vp-doc .vs-box {
+  margin: 24px 0;
+  padding: 4px 20px;
+  border-left: 3px solid var(--vp-c-brand-1);
+  border-radius: 8px;
+  background: var(--vp-c-brand-soft);
+}
