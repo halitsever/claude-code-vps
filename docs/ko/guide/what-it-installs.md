@@ -1,8 +1,9 @@
 ---
+title: "설치되는 항목"
 description: "claude-vps가 Ubuntu 서버에서 실행하는 모든 단계를 설명합니다. 패키지, swap, SSH 보안, ufw, KDE Plasma, xrdp, Docker, Chrome, Claude Code, dotfiles."
 ---
 
-# 설치되는 항목
+# claude-vps setup이 설치하는 항목
 
 `claude-vps setup`은 9단계를 순서대로 실행합니다. 각 단계는 [`lib/setup.sh`](https://github.com/halitsever/claude-code-vps/blob/main/lib/setup.sh)에 있는 평범한 bash 함수라서, 서버에서 무엇이 실행되는지 그대로 읽어 볼 수 있습니다. `--skip`으로 원하는 단계를 건너뛰거나 `--only`로 일부 단계만 실행할 수 있습니다.
 

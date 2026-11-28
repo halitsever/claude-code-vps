@@ -1,8 +1,9 @@
 ---
+title: "Fehlerbehebung"
 description: "Typische Probleme mit Claude Code auf dem VPS lösen: schwarzer RDP-Bildschirm, Farbprofil-Abfragen, SSH-Aussperrung, claude nicht gefunden, Sync-Fehler."
 ---
 
-# Fehlerbehebung
+# Häufige Probleme beheben
 
 Fang hiermit an:
 

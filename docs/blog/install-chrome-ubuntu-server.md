@@ -14,7 +14,7 @@ faq:
     a: "Through apt. Installing the package adds or uses Google's repository, so sudo apt update && sudo apt upgrade picks up new Chrome versions."
 ---
 
-# Install Google Chrome on Ubuntu 24.04 and Ubuntu Server
+# Getting Google Chrome onto Ubuntu 24.04, desktop or server
 
 <p class="post-meta">Halit Sever · 28 November 2026</p>
 

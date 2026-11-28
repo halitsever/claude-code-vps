@@ -3,7 +3,7 @@ title: "How to run Claude Code on a VPS"
 description: "Step-by-step guide to running Claude Code on an Ubuntu VPS. Secure SSH, tmux sessions that never die, phone notifications and a full KDE Plasma desktop over RDP."
 ---
 
-# How to run Claude Code on a VPS
+# Run Claude Code on a VPS, step by step
 
 This is the full, manual version of my setup: a cheap Ubuntu server that runs Claude Code around the clock, which I reach over SSH from anywhere and, when I want a real screen, through a KDE Plasma desktop over RDP.
 

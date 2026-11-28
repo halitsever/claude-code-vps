@@ -3,7 +3,7 @@ title: "VPS で Claude Code を動かす方法"
 description: "Ubuntu VPS で Claude Code を動かす手順を順に解説。安全な SSH、切れない tmux セッション、スマホ通知、RDP で使える KDE Plasma デスクトップまで。"
 ---
 
-# VPS で Claude Code を動かす方法
+# VPS で Claude Code を動かす手順
 
 このページでは、私が使っている環境を手作業で組む手順をすべて紹介します。安い Ubuntu サーバーで Claude Code を24時間動かし、ふだんはどこからでも SSH でつなぎます。画面が欲しいときは RDP で KDE Plasma デスクトップを開きます。
 

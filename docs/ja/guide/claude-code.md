@@ -1,8 +1,9 @@
 ---
+title: "Claude Code の使い方"
 description: "画面のないサーバーで Claude Code にログインし、tmux で SSH が切れても agent を動かし続け、ntfy.sh でスマホに通知を送る方法。"
 ---
 
-# Claude Code の使い方
+# サーバー上で Claude Code を使う
 
 ## 初回ログイン
 

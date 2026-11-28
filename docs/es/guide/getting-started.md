@@ -1,8 +1,9 @@
 ---
+title: "Primeros pasos"
 description: "Instala claude-vps en un VPS con Ubuntu 24.04 o 26.04 con un solo comando. En unos diez minutos tienes Claude Code, KDE Plasma por RDP y SSH seguro."
 ---
 
-# Primeros pasos
+# Primeros pasos con claude-vps
 
 claude-vps convierte un servidor Ubuntu recién creado en la máquina donde uso Claude Code. Crea un usuario con sudo, deja SSH solo con clave, activa un firewall e instala un escritorio KDE Plasma al que entras por RDP, Docker, Chrome y el propio Claude Code con mi configuración, mis hooks y mi distribución de KDE ya aplicados.
 

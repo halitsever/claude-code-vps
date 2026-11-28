@@ -14,7 +14,7 @@ faq:
     a: "No. ntfy.sh has no sign-up, so the topic name works like a password. Anyone who knows it can read and send messages, so pick a long random name and keep it out of git."
 ---
 
-# Claude Code notifications: get a push when it needs you
+# Claude Code notifications on your phone, desktop or terminal
 
 <p class="post-meta">Halit Sever · 28 November 2026</p>
 

@@ -1,8 +1,9 @@
 ---
+title: "Sorun giderme"
 description: "Claude Code VPS'inde sık görülen sorunların çözümü: RDP'de siyah ekran, xrdp renk profili sorusu, SSH'a girememek, claude bulunamadı ve sync hataları."
 ---
 
-# Sorun giderme
+# Sık karşılaşılan sorunlar ve çözümleri
 
 İlk olarak şunu çalıştır:
 

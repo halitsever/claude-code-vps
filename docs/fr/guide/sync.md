@@ -1,8 +1,9 @@
 ---
+title: "Synchroniser la config"
 description: "Gardez vos réglages KDE Plasma et Claude Code identiques sur votre ordinateur et votre VPS avec claude-vps publish, sync et autosync."
 ---
 
-# Synchroniser la config
+# Synchroniser la config entre votre ordinateur et le serveur
 
 Tous les réglages du serveur sont stockés dans le dépôt. Vous faites vos changements sur votre propre ordinateur, puis le serveur les récupère.
 

@@ -1,8 +1,9 @@
 ---
+title: "リモートデスクトップ"
 description: "Windows、macOS、Linux、iOS、Android から RDP で Claude Code 用 VPS の KDE Plasma デスクトップに接続する方法。直接接続と SSH トンネルの両方を解説。"
 ---
 
-# リモートデスクトップ
+# RDP でリモートデスクトップに接続する
 
 サーバーでは、RDP 経由で KDE Plasma のフルセッションが使えます。接続すると起動し、切断しても動き続けるので、次に接続したときもウィンドウはそのままです。
 

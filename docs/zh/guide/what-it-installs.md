@@ -1,8 +1,9 @@
 ---
+title: "安装了哪些东西"
 description: "claude-vps 在你的 Ubuntu 服务器上执行的每一步：软件包、swap、SSH 加固、ufw、KDE Plasma、xrdp、Docker、Chrome、Claude Code 和 dotfiles。"
 ---
 
-# 安装了哪些东西
+# claude-vps setup 会安装什么
 
 `claude-vps setup` 按顺序执行九个步骤。每一步都是 [`lib/setup.sh`](https://github.com/halitsever/claude-code-vps/blob/main/lib/setup.sh) 里的一个普通 bash 函数，服务器上到底执行了什么，你都能直接看到。用 `--skip` 可以跳过某些步骤，用 `--only` 可以只运行其中几步。
 

@@ -1,8 +1,9 @@
 ---
+title: "設定の同期"
 description: "claude-vps の publish、sync、autosync を使って、手元の PC と VPS の間で KDE Plasma と Claude Code の設定を同期する方法。"
 ---
 
-# 設定の同期
+# 手元のマシンとサーバーの設定を同期する
 
 サーバーの見た目や動作は、すべてリポジトリの内容で決まります。手元の PC で設定を変えると、サーバーもあとからそれに合わせて更新されます。
 

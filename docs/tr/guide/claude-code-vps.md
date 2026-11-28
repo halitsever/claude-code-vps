@@ -3,7 +3,7 @@ title: "Claude Code VPS'te nasıl çalıştırılır"
 description: "Claude Code'u Ubuntu VPS'te adım adım çalıştırma rehberi: güvenli SSH, kapanmayan tmux oturumları, telefon bildirimleri ve RDP ile KDE Plasma masaüstü."
 ---
 
-# Claude Code VPS'te nasıl çalıştırılır
+# Claude Code'u VPS'te adım adım çalıştırmak
 
 Bu sayfa kendi kurulumumun elle yapılan hali. Ucuz bir Ubuntu sunucusunda Claude Code gece gündüz çalışıyor. Her yerden SSH ile bağlanıyorum. Ekran gerektiğinde de RDP ile KDE Plasma masaüstüne giriyorum.
 

@@ -12,7 +12,7 @@ faq:
     a: "claude-code-vps turns password logins off, so only your key can log in. To keep SSH off the internet entirely, run sudo claude-vps tailscale and connect from the Tailscale app on the phone."
 ---
 
-# Control Claude Code from your phone
+# Run Claude Code from your phone over SSH
 
 Start a task at your desk, close the laptop, and answer Claude's next question from the phone in your pocket. The setup is three pieces: Claude Code running in tmux on a server that never sleeps, an SSH app on the phone, and a push notification that tells you when Claude is waiting.
 

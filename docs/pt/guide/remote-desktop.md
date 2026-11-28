@@ -1,8 +1,9 @@
 ---
+title: "Área de trabalho remota"
 description: "Conecte por RDP ao desktop KDE Plasma da sua VPS com Claude Code a partir do Windows, macOS, Linux, iOS ou Android, direto ou por um túnel SSH."
 ---
 
-# Área de trabalho remota
+# Área de trabalho remota via RDP
 
 O servidor tem uma sessão completa do KDE Plasma que você acessa por RDP. Ela abre quando você conecta e continua rodando quando você desconecta, então na próxima vez as janelas estão onde você deixou.
 

@@ -1,8 +1,9 @@
 ---
+title: "Ayarları senkron tutmak"
 description: "KDE Plasma ve Claude Code ayarlarını claude-vps publish, sync ve autosync ile kendi bilgisayarın ve VPS sunucun arasında senkron tut."
 ---
 
-# Ayarları senkron tutmak
+# Ayarları bilgisayarınla sunucu arasında senkron tutmak
 
 Sunucunun bütün ayarları repoda durur. Değişikliği kendi bilgisayarında yaparsın, sunucu repodan çekip aynısını uygular.
 

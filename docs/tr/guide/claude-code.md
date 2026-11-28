@@ -1,8 +1,9 @@
 ---
+title: "Claude Code'u çalıştırmak"
 description: "Ekransız bir sunucuda Claude Code'a giriş yap, SSH bağlantısı kopsa da tmux içinde çalışmaya devam etsin ve ntfy.sh ile telefonuna bildirim gelsin."
 ---
 
-# Claude Code'u çalıştırmak
+# Claude Code'u uzak sunucuda kullanmak
 
 ## İlk giriş
 

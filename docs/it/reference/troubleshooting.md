@@ -1,8 +1,9 @@
 ---
+title: "Risoluzione problemi"
 description: "Risolvi i problemi più comuni di un VPS con Claude Code: schermo RDP nero, richiesta di colord, SSH bloccato, claude non trovato ed errori di sincronizzazione."
 ---
 
-# Risoluzione problemi
+# Risolvere i problemi più comuni
 
 Inizia con:
 

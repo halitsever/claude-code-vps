@@ -1,8 +1,9 @@
 ---
+title: "Remote-Desktop"
 description: "Per RDP von Windows, macOS, Linux, iOS oder Android auf den KDE-Plasma-Desktop deines Claude Code VPS zugreifen, direkt oder über einen SSH-Tunnel."
 ---
 
-# Remote-Desktop
+# Remote-Desktop über RDP
 
 Auf dem Server läuft eine vollständige KDE-Plasma-Sitzung, die du per RDP erreichst. Sie startet, wenn du dich verbindest, und läuft weiter, wenn du dich trennst. Beim nächsten Mal sind alle Fenster noch da, wo du sie gelassen hast.
 

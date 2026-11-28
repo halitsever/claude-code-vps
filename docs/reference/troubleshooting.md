@@ -1,8 +1,9 @@
 ---
+title: "Troubleshooting"
 description: "Fix common Claude Code VPS problems: black RDP screen, xrdp color profile prompts, SSH lockout, claude not found and sync errors."
 ---
 
-# Troubleshooting
+# Fixing common claude-vps problems
 
 Start with:
 

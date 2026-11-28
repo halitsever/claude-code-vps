@@ -1,8 +1,9 @@
 ---
+title: "원격 데스크톱"
 description: "Windows, macOS, Linux, iOS, Android에서 RDP로 Claude Code VPS의 KDE Plasma 데스크톱에 접속하는 방법입니다. SSH 터널 접속도 다룹니다."
 ---
 
-# 원격 데스크톱
+# RDP로 원격 데스크톱 접속하기
 
 서버에서는 RDP로 접속하는 KDE Plasma 세션이 돌아갑니다. 접속하면 세션이 시작되고, 연결을 끊어도 계속 실행됩니다. 그래서 다음에 접속하면 창이 그대로 남아 있습니다.
 

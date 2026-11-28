@@ -14,7 +14,7 @@ faq:
     a: "Docker's install page lists 64-bit Ubuntu 22.04 LTS, 24.04 LTS, 26.04 LTS and 26.10."
 ---
 
-# Install Docker on Ubuntu Server 24.04: two ways
+# Two ways to install Docker on Ubuntu Server 24.04
 
 <p class="post-meta">Halit Sever · 28 November 2026</p>
 

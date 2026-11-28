@@ -1,8 +1,9 @@
 ---
+title: "Sincronizar la configuración"
 description: "Mantén sincronizada tu configuración de KDE Plasma y Claude Code entre tu ordenador y tu VPS con claude-vps publish, sync y autosync."
 ---
 
-# Sincronizar la configuración
+# Sincronizar la configuración entre tu ordenador y el servidor
 
 Toda la configuración del servidor vive en el repo. Tú haces los cambios en tu ordenador y el servidor los recibe después.
 

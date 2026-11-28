@@ -14,7 +14,7 @@ faq:
     a: "Yes. ntfy has apps for Android, on Google Play and F-Droid, and for iOS on the App Store, plus a web app."
 ---
 
-# Send push notifications from any script with ntfy
+# Using ntfy to push alerts from your scripts to your phone
 
 <p class="post-meta">Halit Sever · 28 November 2026</p>
 

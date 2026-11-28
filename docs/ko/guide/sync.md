@@ -1,8 +1,9 @@
 ---
+title: "설정 동기화"
 description: "claude-vps publish, sync, autosync로 내 컴퓨터와 VPS 사이에서 KDE Plasma와 Claude Code 설정을 똑같이 유지하는 방법입니다."
 ---
 
-# 설정 동기화
+# 내 컴퓨터와 서버의 설정 동기화하기
 
 서버의 모양과 동작을 정하는 설정은 모두 저장소에 있습니다. 내 컴퓨터에서 설정을 바꾸면 서버가 그 변경 사항을 가져옵니다.
 

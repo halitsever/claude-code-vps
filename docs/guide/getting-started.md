@@ -1,8 +1,9 @@
 ---
+title: "Getting started"
 description: "Install claude-vps on a fresh Ubuntu 24.04 or 26.04 VPS with one command and get Claude Code, KDE Plasma over RDP and hardened SSH in about ten minutes."
 ---
 
-# Getting started
+# Getting started with claude-vps
 
 claude-vps turns a fresh Ubuntu server into the machine I run Claude Code on: a sudo user, key-only SSH, a firewall, a KDE Plasma desktop you reach over RDP, Docker, Chrome, and Claude Code itself with my settings, hooks and KDE layout already applied.
 
