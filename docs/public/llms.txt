@@ -15,6 +15,18 @@ Install on a fresh server, as root: `curl -fsSL https://raw.githubusercontent.co
 - [CLI](https://projects.halit.org/claude-code-vps/reference/cli): every claude-vps command and option, plus install.sh variables
 - [Troubleshooting](https://projects.halit.org/claude-code-vps/reference/troubleshooting): black RDP screen, SSH lockout, claude not found and sync errors
 
+## Blog
+
+- [Control Claude Code from your phone](https://projects.halit.org/claude-code-vps/claude-code-on-your-phone): SSH app, tmux on the server and an ntfy push
+- [Claude Code Remote Control vs running it on a server](https://projects.halit.org/claude-code-vps/blog/claude-code-remote-control): what Remote Control needs and where an always-on server helps
+- [How to install Claude Code on Linux](https://projects.halit.org/claude-code-vps/blog/install-claude-code-linux): native installer, apt, dnf, Alpine, Arch and npm
+- [Claude Code notifications](https://projects.halit.org/claude-code-vps/blog/claude-code-notifications): the Notification hook and a phone push through ntfy.sh
+- [Claude Code over SSH](https://projects.halit.org/claude-code-vps/blog/claude-code-ssh): key-only login, tmux, port forwarding, clipboard limits
+- [Send push notifications with ntfy](https://projects.halit.org/claude-code-vps/blog/ntfy-notifications): curl, topics, priorities, limits, Docker
+- [ntfy vs Gotify](https://projects.halit.org/claude-code-vps/blog/ntfy-vs-gotify): two push servers compared
+- [Install Docker on Ubuntu Server](https://projects.halit.org/claude-code-vps/blog/install-docker-ubuntu-server): docker.io or docker-ce, the docker group and ufw
+- [Install Google Chrome on Ubuntu](https://projects.halit.org/claude-code-vps/blog/install-chrome-ubuntu-server): apt repository, .deb, ARM64 and headless mode
+
 ## Optional
 
 - [Docs home](https://projects.halit.org/claude-code-vps/): overview and FAQ. The docs are also available in Spanish, German, French, Portuguese, Italian, Russian, Chinese, Japanese, Korean and Turkish under /es/, /de/, /fr/, /pt/, /it/, /ru/, /zh/, /ja/, /ko/ and /tr/

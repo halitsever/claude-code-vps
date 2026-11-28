@@ -1,3 +1,4 @@
+import { fileURLToPath } from "node:url";
 import { defineConfig, type DefaultTheme, type HeadConfig } from "vitepress";
 import { LOCALES as I18N } from "./theme/i18n";
 
@@ -25,6 +26,19 @@ const PAGES = [
   "reference/troubleshooting",
 ];
 
+/** English-only pages: the blog and the phone landing page. They get no hreflang alternates. */
+const BLOG: [string, string][] = [
+  ["claude-code-remote-control", "Remote Control vs a server"],
+  ["install-claude-code-linux", "Install Claude Code on Linux"],
+  ["claude-code-notifications", "Claude Code notifications"],
+  ["claude-code-ssh", "Claude Code over SSH"],
+  ["ntfy-notifications", "Push notifications with ntfy"],
+  ["ntfy-vs-gotify", "ntfy vs Gotify"],
+  ["install-docker-ubuntu-server", "Install Docker on Ubuntu Server"],
+  ["install-chrome-ubuntu-server", "Install Chrome on Ubuntu"],
+];
+const EN_ONLY = (path: string) => path === "blog/" || path.startsWith("blog/") || path === "claude-code-on-your-phone";
+
 function sidebar(prefix: string, t: Labels): DefaultTheme.SidebarItem[] {
   const link = (i: number) => ({ text: t.pages[i], link: `${prefix}/${PAGES[i]}` });
   return [
@@ -33,11 +47,20 @@ function sidebar(prefix: string, t: Labels): DefaultTheme.SidebarItem[] {
   ];
 }
 
+const blogSidebar: DefaultTheme.SidebarItem[] = [
+  {
+    text: "Blog",
+    items: [{ text: "All posts", link: "/blog/" }, ...BLOG.map(([slug, text]) => ({ text, link: `/blog/${slug}` }))],
+  },
+  { text: "Guides", items: [{ text: "Claude Code on your phone", link: "/claude-code-on-your-phone" }, { text: "Claude Code on a VPS", link: "/guide/claude-code-vps" }, { text: "Getting started", link: "/guide/getting-started" }] },
+];
+
 function nav(prefix: string, guide: string, vps: string): DefaultTheme.NavItem[] {
   return [
     { text: vps, link: `${prefix}/guide/claude-code-vps` },
     { text: guide, link: `${prefix}/guide/getting-started` },
     { text: "CLI", link: `${prefix}/reference/cli` },
+    ...(prefix ? [] : [{ text: "Blog", link: "/blog/" }]),
   ];
 }
 
@@ -62,6 +85,14 @@ export default defineConfig({
   metaChunk: true,
   appearance: "dark",
   sitemap: { hostname: siteUrl },
+  vite: {
+    resolve: {
+      alias: [
+        /** Swaps in theme/langs.ts so English-only pages do not link to translations that do not exist. */
+        { find: /^\.\.?\/composables\/langs(\.js)?$/, replacement: fileURLToPath(new URL("./theme/langs.ts", import.meta.url)) },
+      ],
+    },
+  },
   head: [
     /** Cloudflare Web Analytics, one token for every page on projects.halit.org. */
     ["script", { defer: "", src: "https://static.cloudflareinsights.com/beacon.min.js", "data-cf-beacon": '{"token": "dd7e54d3f48841c187d72d9dbb92a6b6"}' }],
@@ -102,7 +133,7 @@ export default defineConfig({
     const localeDesc = siteConfig.site.locales[locale]?.description ?? siteConfig.site.description;
     const title = pageData.frontmatter.title ?? pageData.title ?? siteName;
     const desc = pageData.frontmatter.description || pageData.description || localeDesc;
-    const fullTitle = path === "" ? `${siteName}: ${title}` : `${title} | ${siteName}`;
+    const fullTitle = pageData.frontmatter.titleTemplate === false ? title : path === "" ? `${siteName}: ${title}` : `${title} | ${siteName}`;
 
     const head: HeadConfig[] = [
       ["link", { rel: "canonical", href: url }],
@@ -113,10 +144,12 @@ export default defineConfig({
       ["meta", { name: "twitter:title", content: fullTitle }],
       ["meta", { name: "twitter:description", content: desc }],
     ];
-    for (const key of Object.keys(LOCALES)) {
-      head.push(["link", { rel: "alternate", hreflang: LOCALES[key].lang.startsWith("zh") ? "zh-Hans" : LOCALES[key].lang.slice(0, 2), href: urlFor(key, path) }]);
+    if (!EN_ONLY(path)) {
+      for (const key of Object.keys(LOCALES)) {
+        head.push(["link", { rel: "alternate", hreflang: LOCALES[key].lang.startsWith("zh") ? "zh-Hans" : LOCALES[key].lang.slice(0, 2), href: urlFor(key, path) }]);
+      }
+      head.push(["link", { rel: "alternate", hreflang: "x-default", href: urlFor("root", path) }]);
     }
-    head.push(["link", { rel: "alternate", hreflang: "x-default", href: urlFor("root", path) }]);
 
     const graph: Record<string, unknown>[] = [];
     if (path === "") {
@@ -142,6 +175,32 @@ export default defineConfig({
           })),
         },
       );
+    } else if (path.startsWith("blog/") && path !== "blog/") {
+      graph.push(
+        {
+          "@type": "BlogPosting",
+          headline: title,
+          description: desc,
+          inLanguage: "en-US",
+          url,
+          mainEntityOfPage: url,
+          image: siteUrl + "og.png",
+          datePublished: pageData.frontmatter.date,
+          dateModified: pageData.lastUpdated ? new Date(pageData.lastUpdated).toISOString() : pageData.frontmatter.date,
+          author: { "@type": "Person", name: "Halit Sever", url: "https://halit.org" },
+          publisher: { "@type": "Person", name: "Halit Sever", url: "https://halit.org" },
+        },
+        {
+          "@type": "BreadcrumbList",
+          itemListElement: [
+            { "@type": "ListItem", position: 1, name: siteName, item: siteUrl },
+            { "@type": "ListItem", position: 2, name: "Blog", item: siteUrl + "blog/" },
+            { "@type": "ListItem", position: 3, name: title, item: url },
+          ],
+        },
+      );
+    } else if (path === "blog/") {
+      graph.push({ "@type": "Blog", name: `${siteName} blog`, description: desc, url, inLanguage: "en-US", author: { "@type": "Person", name: "Halit Sever", url: "https://halit.org" } });
     } else {
       graph.push({
         "@type": "TechArticle",
@@ -152,6 +211,10 @@ export default defineConfig({
         author: { "@type": "Person", name: "Halit Sever", url: "https://github.com/halitsever" },
         ...(pageData.lastUpdated ? { dateModified: new Date(pageData.lastUpdated).toISOString() } : {}),
       });
+    }
+    const faq = pageData.frontmatter.faq as { q: string; a: string }[] | undefined;
+    if (faq?.length) {
+      graph.push({ "@type": "FAQPage", mainEntity: faq.map((f) => ({ "@type": "Question", name: f.q, acceptedAnswer: { "@type": "Answer", text: f.a } })) });
     }
     head.push(["script", { type: "application/ld+json" }, JSON.stringify({ "@context": "https://schema.org", "@graph": graph })]);
 
@@ -172,7 +235,7 @@ export default defineConfig({
           description: l.meta.description,
           themeConfig: {
             nav: nav(p, l.meta.nav.docs, l.meta.nav.vps),
-            sidebar: sidebar(p, l.meta.sidebar),
+            sidebar: p ? sidebar(p, l.meta.sidebar) : { "/blog/": blogSidebar, "/claude-code-on-your-phone": blogSidebar, "/": sidebar(p, l.meta.sidebar) },
             editLink: { pattern: `${repo}/edit/main/docs/:path`, text: u.editLink },
             outline: { label: u.outline },
             docFooter: { prev: u.prev, next: u.next },
